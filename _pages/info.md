@@ -4,12 +4,7 @@ title: Course Info
 classes: wide
 ---
 
-Deep learning is widely used in many market segments ranging from mobile devices
-to supercomputers. Recently many software packages as well as special hardware
-accelerators were developed to support deep learning. The course will focus on
-algorithms, programming frameworks and new software/hardware interfaces that aim
-to allow execution of deep learning algorithms in a productive and efficient
-way. 
+The purpose of this course is a self-contained introduction to modern techniques in image processing. We will understand concepts involved in acquiring, sampling, representing, compressing, and processing of multi-dimensional signals (images and videos). We will discuss the notion of inverse problems and ways to solve them -- from traditional prior-based methods to modern learning-based methods. Finally, apart from the standard image acquisition model, we will also look at more exotic computational and medical imaging schemes and understand the challenges and applications involved there within.
 
 ## Learning Outcomes
 
@@ -26,7 +21,7 @@ At the end of the course, the student will:
 
 ## Administration
 
-**Evaluation**: 40% Homework assignments, 60% final project.
+**Evaluation**: 60% Homework assignments, 40% final project. (tentative)
 
 **Language**: The course will be taught in English.
 
