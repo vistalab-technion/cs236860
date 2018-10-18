@@ -10,12 +10,8 @@ The purpose of this course is a self-contained introduction to modern techniques
 
 At the end of the course, the student will:
 
-1.	Understand and be able to apply notions in deep learning.
-1.	Know how to effectively use leading python machine-learning and deep
-    learning frameworks such as PyTorch.
-1.	Know how to optimize software and hardware performance in deep neural
-    network applications.
-1.	Know how to program GPUs using CUDA.
+1.	Understand the evolution of ideas in image processing: 
+1.	Know how to implement these leading image processing algorithms in Python.
 1.	Perform a small research project using the studied notions and techniques.
 
 
@@ -31,9 +27,9 @@ At the end of the course, the student will:
 
 {% include course_staff.html %}
 
-## Literature
+<!-- ## Literature
 
-{% include literature.html %}
+{% include literature.html %} -->
 
 ## Detailed Syllabus
 
