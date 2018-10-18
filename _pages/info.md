@@ -46,8 +46,7 @@ At the end of the course, the student will:
 | 5    | `18/11/2018` | Inverse problems, ML & MAP estimators                             | ML vs. MAP on image denoising                                  |
 | 6    | `25/11/2018` | Patch-based priors                                                | Image denoising using NLM and BM3D                             |
 | 7    | `09/12/2018` | L1-L2 optimization (ISTA)                                         | L1-L2 implementation                                           |
-|      |              | Final project: list of papers released                            |                                         |
-
+|      |              | Final project: list of papers released                            |                                                                | 
 | 8    | `16/12/2018` | Shift-invariant dictionaries, LISTA                               | LISTA using autograd                                           |
 | 9    | `23/12/2018` | From parsimonious models to deep learning                         | Practical introduction to deep learning                        |
 | 10   | `30/12/2018` | CNNs for image restoration                                        | Image denoising and super-resolution with CNNs                 |
