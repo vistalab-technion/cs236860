@@ -10,9 +10,9 @@ alex:
       icon: "fas fa-fw fa-link"
       url: "https://www.cs.technion.ac.il/~bron/"
 
-aviv:
+sanketh:
   name: Sanketh Vedula
-  bio: Teaching Assistant
+  bio: TA
   avatar: "/assets/images/bio-photo-generic.jpg"
   links:
     - label: "Email"
