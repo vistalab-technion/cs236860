@@ -6,7 +6,9 @@ toc_label: Contents
 toc_sticky: true
 ---
 
-This document will help you get started with the course homework assignments.
+ We are planning on releasing 3-4 home assignments spanning evenly throughout the semester which will add up to $60$\% of the final grade.  
+
+<!-- This document will help you get started with the course homework assignments.
 Please read it carefully as it contains crucial information.
 
 ## General
@@ -254,3 +256,4 @@ all outputs are present. Note that if some of the outputs are missing from your
 submission you'll lose marks.
 
 
+ -->
