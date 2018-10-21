@@ -17,9 +17,9 @@ An operator acting on a function will be denoted by $\mathcal{H}(f)$ or simply $
 
 
 A $d$-dimensional \emph{signal} is a real- (or sometimes complex-) valued function $f : \RR^d \rightarrow \RR$. In the case of $d=2$, 
-we will refer to such signals as ``images'' and interpret the argument of the function, $\bb{x} = (x_1,x_2)$ as 
+we will refer to such signals as ''images'' and interpret the argument of the function, $\bb{x} = (x_1,x_2)$ as 
 the spatial location of a point in an image; for $d=3$, we will refer to such signals as to images, interpreting 
-the additional third dimension as ``time''. In the one-dimensional case,  the scalar argument will be denoted by $t$ and interpreted as ``time''. 
+the additional third dimension as ''time''. In the one-dimensional case,  the scalar argument will be denoted by $t$ and interpreted as ''time''. 
 
 Denoting the space of real-valued signals as $\mathbb{F}(\RR^d,\RR) = \{f  :  f : \RR^d \rightarrow \RR \}$, a \emph{system} is an operator $\mathcal{H} : \mathbb{F}(\RR^d,\RR) \rightarrow \mathbb{F}(\RR^d,\RR)$. That is, a system $\mathcal{H}$ accepts a signal  as the input and produces another signal as the output.
 %
