@@ -122,9 +122,9 @@ $$
 We can write this result in the following convenient notation:
 
 $$
-\begin{align*}
+\begin{aligned}
 \Aboxed{  f_1 \otimes \cdots \otimes f_d & \fff  F_1 \cdots F_d  }
-\end{align*}
+\end{aligned}
 $$
 
 A useful example is the $d$-dimensional box function that can be defined as a tensor product of one-dimensional rectangular functions:
@@ -153,9 +153,9 @@ $$
 We can write this result as the duality between translation and **modulation** (i.e., multiplication by a harmonic)
 
 $$
-\begin{align*}
+\begin{aligned}
 \Aboxed{ \tau_{\bb{p}} f & \fff  \phi_{-\bb{p}} F   }
-\end{align*}
+\end{aligned}
 $$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
@@ -178,9 +178,9 @@ $$
 In other words, convolution is dual to multiplication
 
 $$
-\begin{align*}
+\begin{aligned}
 \Aboxed{h \ast f & \fff  H \cdot F   }
-\end{align*}
+\end{aligned}
 $$
 
 Obviously, the relation $h \cdot f \fff H \ast F$ also holds.
@@ -211,9 +211,9 @@ $$
 In other words, 
 
 $$
-\begin{align*}
+\begin{aligned}
 \Aboxed{\mathcal{S}_{\bb{A}} f & \fff \frac{\mathcal{S}_{\bb{A}^{-\Tr }} F }{ | \det \bb{A} | }     }
-\end{align*}
+\end{aligned}
 $$
 
 This identity will reappear when talking about dual lattices in relation to sampling.
@@ -221,9 +221,9 @@ This identity will reappear when talking about dual lattices in relation to samp
 A useful example of the stretching property is the multi-dimensional Gaussian. Let us first remind ourselves (or accept without a proof) that in the one-dimensional case $e^{-x^2} \fff e^{-\pi \xi^2}$. The tensor product property immediately yields $e^{-\bb{x}^\Tr \bb{x} } \fff e^{-\pi \bb{\xi}^\Tr \bb{\xi} }$ in the case of unit covariance (a.k.a. normal) multidimensional Gaussian. A general Gaussian $e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x} }$ with the covariance matrix 
 $\bb{C}$ can be obtained by stretching the normal Gaussian with the symmetric inverse square root matrix $\bb{A} = \bb{C}^{-\frac{1}{2}}$, since $(\bb{A} \bb{x})^\Tr (\bb{A} \bb{x}) = \bb{x}^\Tr \bb{A}^\Tr \bb{A} \bb{x} = \bb{x}^\Tr \bb{C}^{-1} \bb{x}$. The stretching property of the Fourier transform tells us that the corresponding stretch in frequency is by $\bb{A}^{-\Tr} = \bb{C}^{\frac{1}{2}}$ with furher scaling of the transform by the determinant of $\bb{C}^{\frac{1}{2}}$:
 
-\begin{align*}
+\begin{aligned}
  e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} & \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} }. 
-\end{align*}
+\end{aligned}
 
 The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in various spatial directions; its determinant can be used to quantify this spread: when $\det \bb{C}$ is small, the signal is localized in space. In the frequency domain, the signal remains Gaussian with the inverse covariance. Since both $\bb{C}$ and $\bb{C}^{-1}$ have the same eigenbasis but reciprocal eigenvalues, observe that the more the signal is concentrated in space in a certain direction, the more it is spread in frequency in the corresponding direction, and vice versa. The quantity $\pi  \det \bb{C}^{-1}$ measures the spread of the signal in frequency. Since $\det \bb{C} \cdot \pi  \det \bb{C}^{-1} = \pi$, we conclude that the Gaussian cannot be simultaneously localized both in space and frequency. This conclusion holds for every signal\footnote{Actually, the Gaussian achieves the best possible simultaneous localization in both domains.} -- a result known as the **uncertainty principle** with profound implications on why the Universe looks like it looks.  
 
@@ -232,9 +232,9 @@ The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in v
 
  An important particular case of the stretching property is when $\bb{A}$ is an orthonormal matrix representing rotations (and, possibly, reflections). Let us define the **rotation** operator as $\mathcal{R}_{\bb{R}} : f(\bb{x}) \mapsto f(\bb{R}\bb{x})$, where $\bb{R}$ is a rotation matrix. Since orthonormal matrices satisfy $\bb{R}^{-1} = \bb{R}^\Tr$ and $ \det \bb{R} = \pm 1$, the stretching property reduces to $\mathcal{R}_{\bb{R}} f \fff \mathcal{R}_{\bb{R}} F$. In other words, the Fourier transform commutes with rotation:
 
-\begin{align*}
+\begin{aligned}
 \Aboxed{ \mathcal{F} \mathcal{R}_{\bb{R}}   = \mathcal{R}_{\bb{R}} \mathcal{F}  }.
-\end{align*}
+\end{aligned}
   
 ### Projection
 
@@ -249,10 +249,12 @@ $\mathbb{F}(\RR^{d-1},\RR)$. Interpreting $f$ as a $d$-dimensional probability d
 %
 Invoking the $(d-1)$-dimensional Fourier transform on $\mathcal{P} f$ yields
 
+$$
 \begin{eqnarray*}
 (\mathcal{F}( \mathcal{P} f))( \bb{\xi} ) &=& \int_{\RR^{d-1}}  \left(   \int_{\RR} f(x_1,\cdots,x_{d-1}, x_d) dx_d  \right)  e^{-2\pi \ii \, (x_1 \xi_1 + \cdots x_{d-1}\xi_{d-1} )} dx_1 \cdots dx_{d-1} \\
 &=&\left. \int_{\RR^d} f(\bb{x})  e^{-2\pi \ii \, \bb{x}^\Tr \bb{\xi} } d\bb{x} \right|_{\xi_d = 0} = (\mathcal{F}f)(\xi_1,\dots, \xi_{d-1}, 0).
 \end{eqnarray*}
+$$
 
 Defining the **slice** operator $Q : f(\bb{x}) \mapsto f(x_1,\dots, x_{d-1},0)$ from $\mathbb{F}(\RR^d,\RR)$ to $\mathbb{F}(\RR^{d-1},\RR)$ we can express the latter result more compactly as $\mathcal{F}\mathcal{P} = \mathcal{Q}\mathcal{F}$. Note that while on the right hand side $\mathcal{F}$ denotes a $d$-dimensional Fourier transform, on the left hand side it stands for the $(d-1)$-dimensional counterpart. 
 
@@ -262,9 +264,11 @@ $\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R
 where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R}_{\bb{R}}$ as a general projection operator,  $\mathcal{P}_{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
 This general result is known as the **slice-projection theorem** that in our notation can be expressed as
 
-\begin{align*}
+$$
+\begin{aligned}
 \Aboxed{ \mathcal{F} \mathcal{P}_{\bb{R}}   = \mathcal{Q}_{\bb{R}} \mathcal{F}  }.
-\end{align*}
+\end{aligned}
+$$
 
 An extremely important example where this result is used is computerized tomography (CT). In an idealized scenario, let us assume a $d=2$ dimensional world, in which we are interested in measuring the density of a slice of the human body, denoted by the function $f(x,y)$. Being unable to actually slice it (without going to jail), the next best thing we can do is to irradiate it with penetrating radiation (x-rays) from the side. Let us assume that an x-ray source sends parallel rays from one side of the body to the other side along the vertical ($y$) direction, where a linear detector measures the intensity profile $I(x)$. According to the Beer-Lambert law of light attenuation, the measured intensity is given by
 
