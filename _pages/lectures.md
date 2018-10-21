@@ -3,7 +3,7 @@ layout: collection
 title: "Lecture Notes"
 collection: lectures
 permalink: /lectures/
-author_profile: false
+author_profile: true
 supp: supplements
 ---
 

@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Lecture 3: Multi-layer Perceptron"
 excerpt: MLP, Backpropagation, Gradient Descent, CNNs
 ---
@@ -644,3 +644,4 @@ $$
 In practice, each filter $w^{ij}$ is supported on some small fixed
 domain.
 
+ -->
