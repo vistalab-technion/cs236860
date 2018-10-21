@@ -5,15 +5,17 @@ author: alex
 ---
 
 ## Notation 
+
 In our course, we will deal almost exclusively with real functions. 
 A scalar function will be denoted as $f : \RR^d \rightarrow \RR$, $f(\bb{x})$,
 or simply $f$, with $d$ denoting the domain dimension. 
 $d$-dimensional multi-indices will be denoted by $\bb{n} = (n_1,\dots,n_d) \in \bb{Z}^d$.
 An operator acting on a function will be denoted by $\mathcal{H}(f)$ or simply $\mathcal{H}f$.
 
-In what follows, we formalize the supervised learning problem.
 
 ## Multidimensional signals and systems
+
+
 A $d$-dimensional \emph{signal} is a real- (or sometimes complex-) valued function $f : \RR^d \rightarrow \RR$. In the case of $d=2$, 
 we will refer to such signals as ``images'' and interpret the argument of the function, $\bb{x} = (x_1,x_2)$ as 
 the spatial location of a point in an image; for $d=3$, we will refer to such signals as to images, interpreting 
