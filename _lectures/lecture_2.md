@@ -233,26 +233,34 @@ Note that projection maps functions from $\mathbb{F}(\RR^d,\RR)$ to
 $\mathbb{F}(\RR^{d-1},\RR)$. Interpreting $f$ as a $d$-dimensional probability density function, the latter operation can be interpreted as \emph{marginalization} with respect to $x_d$. 
 %
 Invoking the $(d-1)$-dimensional Fourier transform on $\mathcal{P} f$ yields
+
 \begin{eqnarray*}
 (\mathcal{F}( \mathcal{P} f))( \bb{\xi} ) &=& \int_{\RR^{d-1}}  \left(   \int_{\RR} f(x_1,\cdots,x_{d-1}, x_d) dx_d  \right)  e^{-2\pi \ii \, (x_1 \xi_1 + \cdots x_{d-1}\xi_{d-1} )} dx_1 \cdots dx_{d-1} \\
 &=&\left. \int_{\RR^d} f(\bb{x})  e^{-2\pi \ii \, \bb{x}^\Tr \bb{\xi} } d\bb{x} \right|_{\xi_d = 0} = (\mathcal{F}f)(\xi_1,\dots, \xi_{d-1}, 0).
 \end{eqnarray*}
-%
+
 Defining the \emph{slice} operator $Q : f(\bb{x}) \mapsto f(x_1,\dots, x_{d-1},0)$ from $\mathbb{F}(\RR^d,\RR)$ to $\mathbb{F}(\RR^{d-1},\RR)$ we can express the latter result more compactly as $\mathcal{F}\mathcal{P} = \mathcal{Q}\mathcal{F}$. Note that while on the right hand side $\mathcal{F}$ denotes a $d$-dimensional Fourier transform, on the left hand side it stands for the $(d-1)$-dimensional counterpart. 
 
 Applying a rotation operator on the right to both sides of the identity yields
-$\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R}_{\bb{R}} = \mathcal{Q} \mathcal{R}_{\bb{R}} \mathcal{F}$, where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R}_{\bb{R}}$ as a general projection operator,  $\mathcal{P}_{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
+$\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R}_{\bb{R}} = \mathcal{Q} \mathcal{R}_{\bb{R}} \mathcal{F}$, 
+
+where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R}_{\bb{R}}$ as a general projection operator,  $\mathcal{P}_{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
 This general result is known as the \emph{slice-projection theorem} that in our notation can be expressed as
+
 \begin{align*}
 \Aboxed{ \mathcal{F} \mathcal{P}_{\bb{R}}   = \mathcal{Q}_{\bb{R}} \mathcal{F}  }.
 \end{align*}
 
 An extremely important example where this result is used is computerized tomography (CT). In an idealized scenario, let us assume a $d=2$ dimensional world, in which we are interested in measuring the density of a slice of the human body, denoted by the function $f(x,y)$. Being unable to actually slice it (without going to jail), the next best thing we can do is to irradiate it with penetrating radiation (x-rays) from the side. Let us assume that an x-ray source sends parallel rays from one side of the body to the other side along the vertical ($y$) direction, where a linear detector measures the intensity profile $I(x)$. According to the Beer-Lambert law of light attenuation, the measured intensity is given by
+
 $$
 I(x) = I_0\, \exp\left(-\int_\RR f(x,y) dy \right),
 $$
+
 where $I_0$ is the emitted intensity. Taking the logarithm yields
+
 $$
 p(x) = -\log \frac{I(x)}{I_0} = \int_\RR f(x,y) dy = \mathcal{P} f.
 $$
-Rotating the emitter-detector setup around the body yields a collection of projections $\mathcal{P}_\theta f$ (note that in two dimensions, the rotation matrix is parameterized by a single angle $\theta$). The function $(x,\theta) \mapsto (\mathcal{P}_\theta f)(x)$ is often referred to as the \emph{Radon transform} or the \emph{sinogram} of $f$. The slice projection theorem tells us that the one-dimensional Fourier transform of each such projection $\mathcal{P}_\theta f$ yields a correspondingly directed slice $\mathcal{Q}_\theta f$ of the two-dimension Fourier transform of the unknown function $f$. Collecting enough projections, it is ``just'' a matter of numerics to estimate the said transform and invert it, yielding what we see on the screen as a slice of a CT scan. 
+
+Rotating the emitter-detector setup around the body yields a collection of projections $\mathcal{P}_\theta f$ (note that in two dimensions, the rotation matrix is parameterized by a single angle $\theta$). The function $(x,\theta) \mapsto (\mathcal{P}_\theta f)(x)$ is often referred to as the \emph{Radon transform} or the \emph{sinogram} of $f$. The slice projection theorem tells us that the one-dimensional Fourier transform of each such projection $\mathcal{P}_\theta f$ yields a correspondingly directed slice $\mathcal{Q}_\theta f$ of the two-dimension Fourier transform of the unknown function $f$. Collecting enough projections, it is ''just'' a matter of numerics to estimate the said transform and invert it, yielding what we see on the screen as a slice of a CT scan. 
