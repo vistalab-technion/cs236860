@@ -151,7 +151,7 @@ $$
 We can write this result as the duality between translation and **modulation** (i.e., multiplication by a harmonic)
 
 $$
-\Aboxed{ \tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F   }
+\boxed{ \tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F   }
 $$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
@@ -175,7 +175,7 @@ In other words, convolution is dual to multiplication
 
 $
 \begin{aligned}
-\Aboxed{h \ast f & \fff  H \cdot F   }
+\boxed{h \ast f \fff  H \cdot F   }
 \end{aligned}
 $
 
