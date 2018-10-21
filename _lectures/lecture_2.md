@@ -61,10 +61,12 @@ In other words, the output of the system given a shifted input is the same as th
 Substituting a specific input $f$ and shift $\bb{p}$, we have the identity
 
 
-\begin{eqnarray*}
+<!-- \begin{eqnarray*} -->
+$$
 \int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' &=& (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
 &=& \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
-\end{eqnarray*}
+$$
+<!-- \end{eqnarray*} -->
 
 
 Since the latter holds for every $h$ and $\bb{p}$, we have $h(\bb{x}-\bb{p}, \bb{x}') = h(\bb{x}, \bb{x}'+\bb{p})$ at every $\bb{x}$. In other words, $h(\bb{x},\bb{x}')$ is effectively only a function of $\bb{x}-\bb{x}'$, which we will continue denoting as ''h'' with some abuse of notation. This particular structure is called Toeplitz and is the multidimensional infinite support equivalent of a circulant matrix.  The response of an LSI system can be therefore represented as
