@@ -220,7 +220,7 @@ The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in v
 
 ### Rotation
 
- An important particular case of the stretching property is when $\bb{A}$ is an orthonormal matrix representing rotations (and, possibly, reflections). Let us define the **rotation** operator as $\mathcal{R}_{\bb{R}} : f(\bb{x}) \mapsto f(\bb{R}\bb{x})$, where $\bb{R}$ is a rotation matrix. Since orthonormal matrices satisfy $\bb{R}^{-1} = \bb{R}^\Tr$ and $ \det \bb{R} = \pm 1$, the stretching property reduces to $\mathcal{R}_{\bb{R}} f \fff \mathcal{R}_{\bb{R}} F$. In other words, the Fourier transform commutes with rotation:
+ An important particular case of the stretching property is when $\bb{A}$ is an orthonormal matrix representing rotations (and, possibly, reflections). Let us define the **rotation** operator as $\mathcal{R} _{\bb{R}} : f(\bb{x}) \mapsto f(\bb{R}\bb{x})$, where $\bb{R}$ is a rotation matrix. Since orthonormal matrices satisfy $\bb{R}^{-1} = \bb{R}^\Tr$ and $ \det \bb{R} = \pm 1$, the stretching property reduces to $\mathcal{R} _{\bb{R}} f \fff \mathcal{R} _{\bb{R}} F$. In other words, the Fourier transform commutes with rotation:
 
 $$
 \mathcal{F} \mathcal{R}_{\bb{R}}   = \mathcal{R}_{\bb{R}} \mathcal{F}
@@ -272,4 +272,4 @@ $$
 p(x) = -\log \frac{I(x)}{I_0} = \int_\RR f(x,y) dy = \mathcal{P} f.
 $$
 
-Rotating the emitter-detector setup around the body yields a collection of projections $\mathcal{P}_\theta f$ (note that in two dimensions, the rotation matrix is parameterized by a single angle $\theta$). The function $(x,\theta) \mapsto (\mathcal{P}_\theta f)(x)$ is often referred to as the **Radon transform** or the **sinogram** of $f$. The slice projection theorem tells us that the one-dimensional Fourier transform of each such projection $\mathcal{P}_\theta f$ yields a correspondingly directed slice $\mathcal{Q}_\theta f$ of the two-dimension Fourier transform of the unknown function $f$. Collecting enough projections, it is ''just'' a matter of numerics to estimate the said transform and invert it, yielding what we see on the screen as a slice of a CT scan. 
+Rotating the emitter-detector setup around the body yields a collection of projections $\mathcal{P} _\theta f$ (note that in two dimensions, the rotation matrix is parameterized by a single angle $\theta$). The function $(x,\theta) \mapsto (\mathcal{P} _\theta f)(x)$ is often referred to as the **Radon transform** or the **sinogram** of $f$. The slice projection theorem tells us that the one-dimensional Fourier transform of each such projection $\mathcal{P} _\theta f$ yields a correspondingly directed slice $\mathcal{Q} _\theta f$ of the two-dimension Fourier transform of the unknown function $f$. Collecting enough projections, it is ''just'' a matter of numerics to estimate the said transform and invert it, yielding what we see on the screen as a slice of a CT scan. 
