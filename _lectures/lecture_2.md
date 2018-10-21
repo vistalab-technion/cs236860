@@ -250,15 +250,14 @@ Defining the **slice** operator $Q : f(\bb{x}) \mapsto f(x_1,\dots, x_{d-1},0)$ 
 Applying a rotation operator on the right to both sides of the identity yields
 
 $$
-\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R}_{\bb{R}} = \mathcal{Q} \mathcal{R}_{\bb{R}} \mathcal{F}
+\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R} _{\bb{R}} = \mathcal{Q} \mathcal{R}_{\bb{R}} \mathcal{F}
 $$
 
-
-where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R} _\bb{R}$ as a general projection operator,  $\mathcal{P} _{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
+where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R} _\bb{R}$ as a general projection operator,  $\mathcal{P}  _{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R} _{\bb{R}}$ as a general slice operator, $\mathcal{Q} _{\bb{R}}$, slicing the function along an arbitrary direction. 
 This general result is known as the **slice-projection theorem** that in our notation can be expressed as
 
 $$
-\mathcal{F} \mathcal{P}_{\bb{R}}   = \mathcal{Q}_{\bb{R}} \mathcal{F}
+\mathcal{F} \mathcal{P} _{\bb{R}}   = \mathcal{Q}_{\bb{R}} \mathcal{F}
 $$
 
 An extremely important example where this result is used is computerized tomography (CT). In an idealized scenario, let us assume a $d=2$ dimensional world, in which we are interested in measuring the density of a slice of the human body, denoted by the function $f(x,y)$. Being unable to actually slice it (without going to jail), the next best thing we can do is to irradiate it with penetrating radiation (x-rays) from the side. Let us assume that an x-ray source sends parallel rays from one side of the body to the other side along the vertical ($y$) direction, where a linear detector measures the intensity profile $I(x)$. According to the Beer-Lambert law of light attenuation, the measured intensity is given by
