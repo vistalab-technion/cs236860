@@ -63,7 +63,7 @@ Substituting a specific input $f$ and shift $\bb{p}$, we have the identity
 
 <!-- \begin{eqnarray*} -->
 $$
-\int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' &=& (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
+\int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' = (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
 = \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
 $$
 <!-- \end{eqnarray*} -->
