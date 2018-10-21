@@ -212,7 +212,7 @@ A useful example of the stretching property is the multi-dimensional Gaussian. L
 $\bb{C}$ can be obtained by stretching the normal Gaussian with the symmetric inverse square root matrix $\bb{A} = \bb{C}^{-\frac{1}{2}}$, since $(\bb{A} \bb{x})^\Tr (\bb{A} \bb{x}) = \bb{x}^\Tr \bb{A}^\Tr \bb{A} \bb{x} = \bb{x}^\Tr \bb{C}^{-1} \bb{x}$. The stretching property of the Fourier transform tells us that the corresponding stretch in frequency is by $\bb{A}^{-\Tr} = \bb{C}^{\frac{1}{2}}$ with furher scaling of the transform by the determinant of $\bb{C}^{\frac{1}{2}}$:
 
 $$
- e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} & \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} } 
+ e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} } 
 $$
 
 The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in various spatial directions; its determinant can be used to quantify this spread: when $\det \bb{C}$ is small, the signal is localized in space. In the frequency domain, the signal remains Gaussian with the inverse covariance. Since both $\bb{C}$ and $\bb{C}^{-1}$ have the same eigenbasis but reciprocal eigenvalues, observe that the more the signal is concentrated in space in a certain direction, the more it is spread in frequency in the corresponding direction, and vice versa. The quantity $\pi  \det \bb{C}^{-1}$ measures the spread of the signal in frequency. Since $\det \bb{C} \cdot \pi  \det \bb{C}^{-1} = \pi$, we conclude that the Gaussian cannot be simultaneously localized both in space and frequency. This conclusion holds for every signal\footnote{Actually, the Gaussian achieves the best possible simultaneous localization in both domains.} -- a result known as the **uncertainty principle** with profound implications on why the Universe looks like it looks.  
@@ -222,11 +222,9 @@ The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in v
 
  An important particular case of the stretching property is when $\bb{A}$ is an orthonormal matrix representing rotations (and, possibly, reflections). Let us define the **rotation** operator as $\mathcal{R}_{\bb{R}} : f(\bb{x}) \mapsto f(\bb{R}\bb{x})$, where $\bb{R}$ is a rotation matrix. Since orthonormal matrices satisfy $\bb{R}^{-1} = \bb{R}^\Tr$ and $ \det \bb{R} = \pm 1$, the stretching property reduces to $\mathcal{R}_{\bb{R}} f \fff \mathcal{R}_{\bb{R}} F$. In other words, the Fourier transform commutes with rotation:
 
-$
-\begin{aligned}
-\boxed{ \mathcal{F} \mathcal{R}_{\bb{R}}   = \mathcal{R}_{\bb{R}} \mathcal{F}  }.
-\end{aligned}
-$ 
+$$
+\mathcal{F} \mathcal{R}_{\bb{R}}   = \mathcal{R}_{\bb{R}} \mathcal{F}
+$$ 
 
 ### Projection
 
