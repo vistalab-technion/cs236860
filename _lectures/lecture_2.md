@@ -60,14 +60,12 @@ $$
 In other words, the output of the system given a shifted input is the same as the output of the system shifted by the same amount. 
 Substituting a specific input $f$ and shift $\bb{p}$, we have the identity
 
-
-<!-- \begin{eqnarray*} -->
 $$
-\int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' = (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
-= \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
+\begin{eqnarray*}
+\int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' &=& (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
+&=& \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
+\end{eqnarray*}
 $$
-<!-- \end{eqnarray*} -->
-
 
 Since the latter holds for every $h$ and $\bb{p}$, we have $h(\bb{x}-\bb{p}, \bb{x}') = h(\bb{x}, \bb{x}'+\bb{p})$ at every $\bb{x}$. In other words, $h(\bb{x},\bb{x}')$ is effectively only a function of $\bb{x}-\bb{x}'$, which we will continue denoting as ''h'' with some abuse of notation. This particular structure is called Toeplitz and is the multidimensional infinite support equivalent of a circulant matrix.  The response of an LSI system can be therefore represented as
 
@@ -113,17 +111,21 @@ In what follows, we prove several very useful properties of the Fourier transfor
 
 Let $f_1,\dots, f_d : \RR \rightarrow \RR$ be functions of a single variable, and let us define the tensor product $(f_1 \otimes \cdots \otimes f_d)(\bb{x}) = f_1(x_1) \cdots f_d(x_d)$. Applying the Fourier transform yields
 
+$$
 \begin{eqnarray*}
 (\mathcal{F}(f_1 \otimes \cdots \otimes f_d))( \bb{\xi} ) &=& \int_{\RR^d} f_1(x_1) \cdots f_d(x_d) e^{-2\pi \ii (x_1 \xi_1 + \cdots + x_d \xi_d) } dx_1 \cdots dx_d \nonumber\\
 &=&  \int_\RR f_1(x_1) e^{-2\pi \ii x_1 \xi_1} dx_1 \cdots  \int_\RR f_d(x_d) e^{-2\pi \ii x_d \xi_d} dx_d \nonumber\\
 &=&(\mathcal{F} f_1) (\xi_1) \cdots (\mathcal{F} f_d) (\xi_d).
 \end{eqnarray*}
+$$
 
 We can write this result in the following convenient notation:
 
+$$
 \begin{align*}
 \Aboxed{  f_1 \otimes \cdots \otimes f_d & \fff  F_1 \cdots F_d  }
 \end{align*}
+$$
 
 A useful example is the $d$-dimensional box function that can be defined as a tensor product of one-dimensional rectangular functions:
 $\mathrm{box} = \mathrm{rect} \otimes \cdots \otimes \mathrm{rect}$, where
@@ -141,16 +143,20 @@ Since $(\mathcal{F} \mathrm{rect})(\xi) = \mathrm{sinc}(\xi) = \frac{\sin(\pi \x
 
  Let $\bb{p} \in \RR^d$ and $f : \RR^d \rightarrow \RR$. Then,
 
+$$
 \begin{eqnarray*}
 (\mathcal{F}( \tau_{\bb{p}} f))( \bb{\xi} ) &=& \int_{\RR^d}  f(\bb{x}-\bb{p}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x} =  \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr (\bb{y}+\bb{p})} d\bb{y} \\
 &=& e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{p}} \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{y}} d\bb{y} = e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{p}} (\mathcal{F}f)( \bb{\xi} )
 \end{eqnarray*}
+$$
 
 We can write this result as the duality between translation and \emph{modulation} (i.e., multiplication by a harmonic)
 
+$$
 \begin{align*}
 \Aboxed{ \tau_{\bb{p}} f & \fff  \phi_{-\bb{p}} F   }
 \end{align*}
+$$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
 %$\phi_{\bb{p}} f \fff  \tau_{\bb{p}} F$.
@@ -160,30 +166,34 @@ In other words, shift in the space domain results in modulation (the addition of
 
 Let $\bb{p} \in \RR^d$ and $f,h : \RR^d \rightarrow \RR$. Then,
 
+$$
 \begin{eqnarray*}
 (\mathcal{F}( h \ast f))( \bb{\xi} ) &=& \int_{\RR^d} \left(  \int_{\RR^d}  h(\bb{x}-\bb{y}) f(\bb{y}) d\bb{y} \right) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x}  \\
 &=& \int_{\RR^d}  \int_{\RR^d}  h(\bb{x}') f(\bb{y})  e^{-2\pi \ii \, \bb{\xi}^\Tr (\bb{x}' + \bb{y})} d\bb{x}' d\bb{y} \\
 &=&  \int_{\RR^d} h(\bb{x}')   e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}'} d\bb{x}'  \cdot \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr  \bb{y}} d\bb{y}  = 
 (\mathcal{F} h )( \bb{\xi} )  \cdot (\mathcal{F} f )( \bb{\xi} ) 
 \end{eqnarray*}
+$$
 
 In other words, convolution is dual to multiplication
 
+$$
 \begin{align*}
 \Aboxed{h \ast f & \fff  H \cdot F   }
 \end{align*}
+$$
 
 Obviously, the relation $h \cdot f \fff H \ast F$ also holds.
 
 The fact that convolution (a Toeplitz operator) becomes a pointwise product (a diagonal operator) under the Fourier transform is the manifestation of the fact that the harmonics form an eigenbasis for every linear shift invariant system (or, equivalently, the Fourier transform diagonalizes every linear shift invariant operator). To see that, observe that when a harmonic $\phi_{\bb{\xi}}$ is given as the input to a system described by the impulse response $h$, the output,
 
-
+$$
 \begin{eqnarray*}
 (h \ast \phi_{\bb{\xi}}) (\bb{x}) &=& (\phi_{\bb{\xi}} \ast h) (\bb{x}) = \int_{\RR^d}   \phi_{\bb{\xi}}( \bb{x} - \bb{x}' )  h(\bb{x}')  d\bb{x}' = 
 \int_{\RR^d}  h(\bb{x}') e^{2\pi \ii \, \bb{\xi}^\Tr  (\bb{x}-\bb{x}')}  d\bb{x}' \\
 &=& \int_{\RR^d}  h(\bb{x}') e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}'}  d\bb{x}' \cdot  e^{2\pi \ii \, \bb{\xi}^\Tr  \bb{x} } = F(\bb{\xi}) \phi_{\bb{\xi}} (\bb{x}),
 \end{eqnarray*}
-
+$$
 
 meaning that $\phi_{\bb{\xi}}$ is an eigenfunction of the system corresponding to the eigenvalue $F(\bb{\xi})$. Note that the spectrum is continuous and depends on the specific $h$, while the eigenfunctions are independent of $h$.\footnote{It is a general fact from linear algebra that operators can be jointly diagonalized if and only if they commute with each other.} 
 
@@ -191,17 +201,20 @@ meaning that $\phi_{\bb{\xi}}$ is an eigenfunction of the system corresponding t
 
  Let $\bb{A} \in \RR^{d \times d}$ be a regular (i.e., non-singular) matrix and let us define the \emph{stretching} operator $\mathcal{S}_{\bb{A}} : f(\bb{x}) \mapsto f(\bb{A}\bb{x})$. Then,
 
+$$
 \begin{eqnarray*}
 (\mathcal{F}(  \mathcal{S}_{\bb{A}}  f))( \bb{\xi} ) &=& \int_{\RR^d}  f(\bb{A}\bb{x}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x} = 
 \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{A}^{-1} \bb{y}} \frac{d\bb{y} }{| \det \bb{A} |} = \frac{(\mathcal{F}f)(\bb{A}^{-\Tr} \bb{\xi} ) }{| \det \bb{A} |}.
 \end{eqnarray*}
-
+$$
 
 In other words, 
 
+$$
 \begin{align*}
 \Aboxed{\mathcal{S}_{\bb{A}} f & \fff \frac{\mathcal{S}_{\bb{A}^{-\Tr }} F }{ | \det \bb{A} | }     }
 \end{align*}
+$$
 
 This identity will reappear when talking about dual lattices in relation to sampling.
 
