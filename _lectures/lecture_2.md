@@ -28,27 +28,35 @@ For example the system receiving $f(\bb{x})$ and producing $f(\bb{x}-\bb{p})$ wi
 ### Linearity
 
 A system $\mathcal{H}$ is said to be a \emph{linear system} is it is additive and homogenous, i.e., for every $f,g \in \mathbb{F}(\RR^d,\RR)$ and $a, b \in \RR$,
+
 $$
 \mathcal{H}(a f + b g) = a \mathcal{H}f + b \mathcal{H}g .
 $$
+
 The output of (almost) every linear system can be represented as a linear functional of the form
+
 $$
 (\mathcal{H}f)(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}') d\bb{x}',
 $$
+
 where the function (more generally, distribution -- see in the sequel)  $h(\bb{x},\bb{x}')$ is called the \emph{impulse response} of the system. Informally, $h(\bb{x},\bb{x}')$ tells what will be the output of the system at point $\bb{x}$ when the input is an impulse at $\bb{x}'$.  
 %
 An alternative way to view the above description is by defining the standard inner product on $L^2(\RR) \subset \mathbb{F}(\RR^d,\RR)$:
+
 $$
 \langle f,g \rangle = \int_{\RR^d} f(\bb{x}) g(\bb{x})^\ast d\bb{x};
 $$
+
 since most of the time we will be interested in real-valued functions, we will often omit the complex conjugate from the second argument.
 
 ### Shift invariance
 
 A linear system $\mathcal{H}$ is called \emph{shift invariant} (LSI for short) if it commutes with the translation operator, i.e., for every $\bb{p} \in \RR^d$
+
 $$
 \tau_{\bb{p}} \mathcal{H} = \mathcal{H}\tau_{\bb{p}}.
 $$
+
 In other words, the output of the system given a shifted input is the same as the output of the system shifted by the same amount. 
 %
 Substituting a specific input $f$ and shift $\bb{p}$, we have the identity
@@ -56,7 +64,7 @@ Substituting a specific input $f$ and shift $\bb{p}$, we have the identity
 \int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' &=& (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
 &=& \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
 \end{eqnarray*}
-Since the latter holds for every $h$ and $\bb{p}$, we have $h(\bb{x}-\bb{p}, \bb{x}') = h(\bb{x}, \bb{x}'+\bb{p})$ at every $\bb{x}$. In other words, $h(\bb{x},\bb{x}')$ is effectively only a function of $\bb{x}-\bb{x}'$, which we will continue denoting as ``h'' with some abuse of notation. This particular structure is called Toeplitz and is the multidimensional infinite support equivalent of a circulant matrix.  The response of an LSI system can be therefore represented as
+Since the latter holds for every $h$ and $\bb{p}$, we have $h(\bb{x}-\bb{p}, \bb{x}') = h(\bb{x}, \bb{x}'+\bb{p})$ at every $\bb{x}$. In other words, $h(\bb{x},\bb{x}')$ is effectively only a function of $\bb{x}-\bb{x}'$, which we will continue denoting as ''h'' with some abuse of notation. This particular structure is called Toeplitz and is the multidimensional infinite support equivalent of a circulant matrix.  The response of an LSI system can be therefore represented as
 $$
 (\mathcal{H}f)(\bb{x}) = \int_{\RR^d} h(\bb{x}-\bb{x}') f(\bb{x}') d\bb{x}'.
 $$
