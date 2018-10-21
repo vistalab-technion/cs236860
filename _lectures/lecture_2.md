@@ -120,9 +120,7 @@ $$
 We can write this result in the following convenient notation:
 
 $$
-\begin{aligned}
-\Aboxed{  f_1 \otimes \cdots \otimes f_d & \fff  F_1 \cdots F_d  }
-\end{aligned}
+f_1 \otimes \cdots \otimes f_d  \fff  F_1 \cdots F_d 
 $$
 
 A useful example is the $d$-dimensional box function that can be defined as a tensor product of one-dimensional rectangular functions:
@@ -151,7 +149,7 @@ $$
 We can write this result as the duality between translation and **modulation** (i.e., multiplication by a harmonic)
 
 $$
-\boxed{ \tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F   }
+\tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F  
 $$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
@@ -173,11 +171,9 @@ $$
 
 In other words, convolution is dual to multiplication
 
-$
-\begin{aligned}
-\boxed{h \ast f \fff  H \cdot F   }
-\end{aligned}
-$
+$$
+h \ast f \fff  H \cdot F   
+$$
 
 Obviously, the relation $h \cdot f \fff H \ast F$ also holds.
 
@@ -206,22 +202,18 @@ $$
 
 In other words, 
 
-$
-\begin{aligned}
-\boxed{\mathcal{S}_{\bb{A}} f & \fff \frac{\mathcal{S}_{\bb{A}^{-\Tr }} F }{ | \det \bb{A} | }     }
-\end{aligned}
-$
+$$
+ \mathcal{S}_{\bb{A}} f \fff \frac{\mathcal{S}_{\bb{A}^{-\Tr }} F }{ | \det \bb{A} | }  
+$$
 
 This identity will reappear when talking about dual lattices in relation to sampling.
 
 A useful example of the stretching property is the multi-dimensional Gaussian. Let us first remind ourselves (or accept without a proof) that in the one-dimensional case $e^{-x^2} \fff e^{-\pi \xi^2}$. The tensor product property immediately yields $e^{-\bb{x}^\Tr \bb{x} } \fff e^{-\pi \bb{\xi}^\Tr \bb{\xi} }$ in the case of unit covariance (a.k.a. normal) multidimensional Gaussian. A general Gaussian $e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x} }$ with the covariance matrix 
 $\bb{C}$ can be obtained by stretching the normal Gaussian with the symmetric inverse square root matrix $\bb{A} = \bb{C}^{-\frac{1}{2}}$, since $(\bb{A} \bb{x})^\Tr (\bb{A} \bb{x}) = \bb{x}^\Tr \bb{A}^\Tr \bb{A} \bb{x} = \bb{x}^\Tr \bb{C}^{-1} \bb{x}$. The stretching property of the Fourier transform tells us that the corresponding stretch in frequency is by $\bb{A}^{-\Tr} = \bb{C}^{\frac{1}{2}}$ with furher scaling of the transform by the determinant of $\bb{C}^{\frac{1}{2}}$:
 
-$
-\begin{aligned}
- e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} & \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} }. 
-\end{aligned}
-$
+$$
+ e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} & \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} } 
+$$
 
 The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in various spatial directions; its determinant can be used to quantify this spread: when $\det \bb{C}$ is small, the signal is localized in space. In the frequency domain, the signal remains Gaussian with the inverse covariance. Since both $\bb{C}$ and $\bb{C}^{-1}$ have the same eigenbasis but reciprocal eigenvalues, observe that the more the signal is concentrated in space in a certain direction, the more it is spread in frequency in the corresponding direction, and vice versa. The quantity $\pi  \det \bb{C}^{-1}$ measures the spread of the signal in frequency. Since $\det \bb{C} \cdot \pi  \det \bb{C}^{-1} = \pi$, we conclude that the Gaussian cannot be simultaneously localized both in space and frequency. This conclusion holds for every signal\footnote{Actually, the Gaussian achieves the best possible simultaneous localization in both domains.} -- a result known as the **uncertainty principle** with profound implications on why the Universe looks like it looks.  
 
