@@ -151,9 +151,9 @@ $$
 We can write this result as the duality between translation and **modulation** (i.e., multiplication by a harmonic)
 
 $$
-\begin{align}
-\Aboxed{ \tau_{\bb{p}} f & \fff  \phi_{-\bb{p}} F   }
-\end{align}
+\begin{equation}
+\Aboxed{ \tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F   }
+\end{equation}
 $$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
