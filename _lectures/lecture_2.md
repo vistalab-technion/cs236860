@@ -254,7 +254,7 @@ $$
 $$
 
 
-where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R}_\bb{R}$ as a general projection operator,  $\mathcal{P}_{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
+where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R} _\bb{R}$ as a general projection operator,  $\mathcal{P} _{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R}_{\bb{R}}$ as a general slice operator, $\mathcal{Q}_{\bb{R}}$, slicing the function along an arbitrary direction. 
 This general result is known as the **slice-projection theorem** that in our notation can be expressed as
 
 $$
