@@ -22,7 +22,6 @@ the spatial location of a point in an image; for $d=3$, we will refer to such si
 the additional third dimension as ''time''. In the one-dimensional case,  the scalar argument will be denoted by $t$ and interpreted as ''time''. 
 
 Denoting the space of real-valued signals as $\mathbb{F}(\RR^d,\RR) = \{f  :  f : \RR^d \rightarrow \RR \}$, a **system** is an operator $\mathcal{H} : \mathbb{F}(\RR^d,\RR) \rightarrow \mathbb{F}(\RR^d,\RR)$. That is, a system $\mathcal{H}$ accepts a signal  as the input and produces another signal as the output.
-%
 For example the system receiving $f(\bb{x})$ and producing $f(\bb{x}-\bb{p})$ will be called **translation** (or **shift**) and the corresponding operator will be denoted as $\tau_{\bb{p}}$. With this notation we can write $(\tau_{\bb{p}} f)(\bb{x}) = f(\bb{x}-\bb{p})$. 
 
 ### Linearity
@@ -40,7 +39,6 @@ $$
 $$
 
 where the function (more generally, distribution -- see in the sequel)  $h(\bb{x},\bb{x}')$ is called the **impulse response** of the system. Informally, $h(\bb{x},\bb{x}')$ tells what will be the output of the system at point $\bb{x}$ when the input is an impulse at $\bb{x}'$.  
-%
 An alternative way to view the above description is by defining the standard inner product on $L^2(\RR) \subset \mathbb{F}(\RR^d,\RR)$:
 
 $$
@@ -153,13 +151,13 @@ $$
 We can write this result as the duality between translation and **modulation** (i.e., multiplication by a harmonic)
 
 $$
-\begin{aligned}
+\begin{align}
 \Aboxed{ \tau_{\bb{p}} f & \fff  \phi_{-\bb{p}} F   }
-\end{aligned}
+\end{align}
 $$
 
 Obviously, the same relation holds when swapping the space and frequency domains.
-%$\phi_{\bb{p}} f \fff  \tau_{\bb{p}} F$.
+$\phi_{\bb{p}} f \fff  \tau_{\bb{p}} F$.
 In other words, shift in the space domain results in modulation (the addition of linear phase) in the frequency domain and modulation in the space domain results in shift in the frequency domain. 
 
 ### Convolution
@@ -246,7 +244,6 @@ $$
 
 Note that projection maps functions from $\mathbb{F}(\RR^d,\RR)$ to 
 $\mathbb{F}(\RR^{d-1},\RR)$. Interpreting $f$ as a $d$-dimensional probability density function, the latter operation can be interpreted as **marginalization** with respect to $x_d$. 
-%
 Invoking the $(d-1)$-dimensional Fourier transform on $\mathcal{P} f$ yields
 
 $$
