@@ -1,13 +1,12 @@
 ---
-title: "Convolution"
-excerpt: Convolution: implementation details, examples, applications
-author: aviv
+title: "Tutorial 1: Convolution in Python"
+author: sanketh
 ---
 
 ## Material
 
 The notebook from the tutorial can be downloaded from
-[the couse tutorials repo](https://github.com/vistalab-technion/cs236860-tutorials).
+[the course tutorials repo](https://github.com/vistalab-technion/cs236860-tutorials).
 
 We recommend cloning the repo with `git` and using `git pull` to update it next
 time.
