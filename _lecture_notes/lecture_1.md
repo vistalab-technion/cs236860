@@ -2,6 +2,7 @@
 title: "Lecture 1: Multidimensional signals and systems"
 excerpt: Notation, Multidimensional signals and systems, Fourier transform
 author: alex
+copyright: alex
 ---
 
 ## Notation 
