@@ -1,5 +1,6 @@
 ---
 title: "Tutorial 1: Convolution in Python"
+excerpt: "Convolution: implementation, examples, applications"
 author: sanketh
 ---
 

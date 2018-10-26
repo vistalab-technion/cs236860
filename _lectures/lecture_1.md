@@ -28,3 +28,5 @@ src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A
 Stay tuned.
 
 ## Lecture Notes
+
+Accompanying notes for this lecture can be found [here]({{ site.baseurl }}{% link _lecture_notes/lecture_1.md %}).
