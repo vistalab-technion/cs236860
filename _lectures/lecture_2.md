@@ -17,6 +17,12 @@ alt="" caption="" ref=""
 {% include ppt_embed.html
 src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21943&amp;authkey=APOFi8NDn74K1K4&amp;em=2&amp;wdAr=1.6" %}
 
+## Videos
+
+
+### Lecture 3: Sampling and Interpolation
+
+{% include video provider="youtube" id="YYb9KPlpRik" %}
 
 ## Lecture Notes
 

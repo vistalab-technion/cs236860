@@ -21,7 +21,24 @@ src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A
 {% include ppt_embed.html
 src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21945&amp;authkey=AIttbOdS2gQVSNo&amp;em=2&amp;wdAr=1.6" %}
 
+## Videos
+
+### Part I: Sampling and Interpolation
+
+{% include video provider="youtube" id="YYb9KPlpRik" %}
+
+### Part II: Discrete-domain signals and systems 
+
+Stay tuned.
 
 ## Lecture Notes
+
+
+### Part I: Sampling and Interpolation
+
+Accompanying notes for this part of the lecture can be found [here]({{ site.baseurl }}{% link _lecture_notes/lecture_2.md %}).
+
+
+### Part II: Discrete-domain signals and systems 
 
 Stay tuned. 

@@ -25,7 +25,13 @@ src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A
 
 ## Videos
 
-Stay tuned.
+### Part I: Introduction
+
+{% include video provider="youtube" id="d0Z4zRhK_Uo" %}
+
+### Part II: Multidimensional signals and systems
+
+{% include video provider="youtube" id="ATDNHzSmVcc" %}
 
 ## Lecture Notes
 
