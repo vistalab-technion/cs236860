@@ -6,7 +6,7 @@ copyright: alex
 ---
 
 Random variables
-================
+
 
 Probability measure
 -------------------
