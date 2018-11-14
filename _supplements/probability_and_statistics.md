@@ -218,9 +218,9 @@ $(\mathpzc{X} _2, \dots, \mathpzc{X} _n)$ is given by
 
 $$
 \begin{aligned}
-F _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) &=& P(\mathpzc{X} _2 \le x _2, \dots, \mathpzc{X} _n \le x _n) 
+F _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) =& P(\mathpzc{X} _2 \le x _2, \dots, \mathpzc{X} _n \le x _n) 
 = P(\mathpzc{X} _1 \le \infty, \mathpzc{X} _2 \le x _2, \dots, \mathpzc{X} _n \le x _n)  \\
-&=& F _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n } (\infty, x _2,\dots,x _n).
+=& F _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n } (\infty, x _2,\dots,x _n).
 \end{aligned}
 $$
 
@@ -231,7 +231,7 @@ in terms of the PDF consists of integration over $x _1$,
 
 $$
 \begin{aligned}
-f _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) &=& 
+f _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) =& 
 \int _\mathbb{R} f _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n } (x _1, x _2,\dots,x _n) dx _1.
 \end{aligned}
 $$
@@ -262,8 +262,8 @@ Then,
 
 $$
 \begin{aligned}
-F _\mathpzc{Z}(z) &=& P(\mathpzc{Z} \le z) = P(X+Y \le z) = \int _{\mathbb{R}} \int _{\infty}^{z-y} f _{\mathpzc{X}\mathpzc{Y}}(x,y) dxdy \\
-&=& \int _{\mathbb{R}} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy,
+F _\mathpzc{Z}(z) =& P(\mathpzc{Z} \le z) = P(X+Y \le z) = \int _{\mathbb{R}} \int _{\infty}^{z-y} f _{\mathpzc{X}\mathpzc{Y}}(x,y) dxdy \\
+=& \int _{\mathbb{R}} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy,
 \end{aligned}
 $$
 
@@ -271,7 +271,7 @@ where we changed the variable $x$ to $x' = x+y$. Differentiating w.r.t.
 $z$ yields
 
 $$\begin{aligned}
-f _\mathpzc{Z}(z)  &=& \frac{dF _\mathpzc{Z}(z)}{dz} = \int _{\mathbb{R}} \frac{\partial}{\partial z} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy = \int _{\mathbb{R}}  f _{\mathpzc{X}\mathpzc{Y}}(z-y,y)  dy.\end{aligned}
+f _\mathpzc{Z}(z)  =& \frac{dF _\mathpzc{Z}(z)}{dz} = \int _{\mathbb{R}} \frac{\partial}{\partial z} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy = \int _{\mathbb{R}}  f _{\mathpzc{X}\mathpzc{Y}}(z-y,y)  dy.\end{aligned}
 $$
 
 Since $\mathpzc{X}$ and $\mathpzc{Y}$ are statistically-independent, we
@@ -280,7 +280,7 @@ $f _{\mathpzc{X}\mathpzc{Y}} = f _{\mathpzc{X}} \otimes f _{\mathpzc{Y}}$
 yielding
 
 $$\begin{aligned}
-f _\mathpzc{Z}(z)  &=& \int _{\mathbb{R}}  f _{\mathpzc{X}}(z-y) f _{\mathpzc{Y}}(y)  dy = (f _{\mathpzc{X}} \ast f _{\mathpzc{Y}} )(z).\end{aligned}
+f _\mathpzc{Z}(z)  =& \int _{\mathbb{R}}  f _{\mathpzc{X}}(z-y) f _{\mathpzc{Y}}(y)  dy = (f _{\mathpzc{X}} \ast f _{\mathpzc{Y}} )(z).\end{aligned}
 $$
 
 This result is known as the *convolution theorem*.
@@ -397,8 +397,8 @@ $(\mathpzc{X},\mathpzc{Y})$,
 
 $$
 \begin{aligned}
-\sigma^2 _{\mathpzc{X}\mathpzc{Y}} &=& \int _{\mathbb{R}^2} (x-\mu _\mathpzc{X}) (y-\mu _\mathpzc{Y}) d((\mathpzc{X} \times \mathpzc{Y}) _\ast P) = \int _{\mathbb{R}} (x-\mu _\mathpzc{X}) d(\mathpzc{X} _\ast P) \, \int _{\mathbb{R}} (y-\mu _\mathpzc{Y}) d(\mathpzc{Y} _\ast P) \\
-&=& \mathbb{E} (\mathpzc{X} - \mathbb{E} \mathpzc{X} ) \cdot \mathbb{E} (\mathpzc{Y}  - \mathbb{E} \mathpzc{Y}) = 0.
+\sigma^2 _{\mathpzc{X}\mathpzc{Y}} =& \int _{\mathbb{R}^2} (x-\mu _\mathpzc{X}) (y-\mu _\mathpzc{Y}) d((\mathpzc{X} \times \mathpzc{Y}) _\ast P) = \int _{\mathbb{R}} (x-\mu _\mathpzc{X}) d(\mathpzc{X} _\ast P) \, \int _{\mathbb{R}} (y-\mu _\mathpzc{Y}) d(\mathpzc{Y} _\ast P) \\
+=& \mathbb{E} (\mathpzc{X} - \mathbb{E} \mathpzc{X} ) \cdot \mathbb{E} (\mathpzc{Y}  - \mathbb{E} \mathpzc{Y}) = 0.
 \end{aligned}
 $$
 
@@ -445,9 +445,9 @@ affine transformation of $\mathpzcb{X}$. Using linearity of the
 expectation operator, it is straightforward to show that
 
 $$\begin{aligned}
-\bb{\mu} _\mathpzcb{Y}  &=& \mathbb{E}(\bb{A} \mathpzcb{X} + \bb{b}) = \bb{A} \bb{\mu} _\mathpzcb{X} + \bb{b} \\
-\bb{C} _\mathpzcb{Y}  &=& \mathbb{E}(\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr = \bb{A} \bb{C} _\mathpzcb{X} \bb{A}^\Tr \\
-\bb{C} _{\mathpzcb{X} \mathpzcb{Y}}  &=& \mathbb{E}(\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr  = \bb{C} _\mathpzcb{X} \bb{A}^\Tr.\end{aligned}$$
+\bb{\mu} _\mathpzcb{Y}  =& \mathbb{E}(\bb{A} \mathpzcb{X} + \bb{b}) = \bb{A} \bb{\mu} _\mathpzcb{X} + \bb{b} \\
+\bb{C} _\mathpzcb{Y}  =& \mathbb{E}(\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr = \bb{A} \bb{C} _\mathpzcb{X} \bb{A}^\Tr \\
+\bb{C} _{\mathpzcb{X} \mathpzcb{Y}}  =& \mathbb{E}(\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr  = \bb{C} _\mathpzcb{X} \bb{A}^\Tr.\end{aligned}$$
 
 Estimation
 ==========
@@ -833,11 +833,11 @@ The minimization objective can be written explicitly as
 
 $$
 \begin{aligned}
- \mathbb{E} \, ( h( \mathpzcb{Y} ) - X _i  )^2 &=&   \mathbb{E} \, \left( \mathbb{E}\, (  h( \mathpzcb{Y} ) - X _i  )^2 | \mathpzcb{Y} \right) =
+ \mathbb{E} \, ( h( \mathpzcb{Y} ) - X _i  )^2 =&   \mathbb{E} \, \left( \mathbb{E}\, (  h( \mathpzcb{Y} ) - X _i  )^2 | \mathpzcb{Y} \right) =
   \mathbb{E} \, \left( \mathbb{E}\,  h^2 ( \mathpzcb{Y} ) | \mathpzcb{Y}  - 2 \mathbb{E}\,  h ( \mathpzcb{Y} ) X _i | \mathpzcb{Y}   + \mathbb{E}\, X^2 _i | \mathpzcb{Y}  \right)    \\
-  &=& 
+  =& 
     \mathbb{E} \, \left(  h^2 ( \mathpzcb{Y} )  - 2   \mathbb{E}\, X _i | \mathpzcb{Y} \cdot h ( \mathpzcb{Y} )   + \mathbb{E}\, X^2 _i | \mathpzcb{Y}  \right) \\
-    &=& \int _{\RR^m}  (  h^2 ( \bb{y} )  - 2   \mathbb{E} (X _i | \mathpzcb{Y}=\bb{y}) \cdot h ( \mathpzcb{Y} )   + \mathbb{E} ( X^2 _i | \mathpzcb{Y}=\bb{y})    )  f _{\mathpzcb{Y}} (\bb{y}) d\bb{y}.
+    =& \int _{\RR^m}  (  h^2 ( \bb{y} )  - 2   \mathbb{E} (X _i | \mathpzcb{Y}=\bb{y}) \cdot h ( \mathpzcb{Y} )   + \mathbb{E} ( X^2 _i | \mathpzcb{Y}=\bb{y})    )  f _{\mathpzcb{Y}} (\bb{y}) d\bb{y}.
 \end{aligned}
 $$
 
@@ -936,14 +936,14 @@ expectation operator, and moving the constants outside the expectation
 yields the following minimization objective:
 
 $$\begin{aligned}
-\varphi(\bb{A}) &=& \mathrm{tr} \left(   \bb{A} \mathbb{E}   (\mathpzcb{Y} -
+\varphi(\bb{A}) =& \mathrm{tr} \left(   \bb{A} \mathbb{E}   (\mathpzcb{Y} -
  \bb{\mu} _{\mathpzcb{Y}} )  (\mathpzcb{Y} -
  \bb{\mu} _{\mathpzcb{Y}} )^\Tr \bb{A}^\Tr 
  -2 \bb{A} \mathbb{E}   (\mathpzcb{X} -
  \bb{\mu} _{\mathpzcb{X}} )  (\mathpzcb{Y} -
  \bb{\mu} _{\mathpzcb{Y}} )^\Tr 
    \right) \\
-   &=&  \mathrm{tr} \left(   \bb{A} \bb{C} _{\mathpzcb{Y}}  \bb{A}^\Tr 
+   =&  \mathrm{tr} \left(   \bb{A} \bb{C} _{\mathpzcb{Y}}  \bb{A}^\Tr 
  -2 \bb{A}  \bb{C} _{\mathpzcb{X} \mathpzcb{Y}}
    \right).
 \end{aligned}
