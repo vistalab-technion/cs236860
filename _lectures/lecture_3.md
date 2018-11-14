@@ -41,4 +41,4 @@ Accompanying notes for this part of the lecture can be found [here]({{ site.base
 
 ### Part II: Discrete-domain signals and systems 
 
-Stay tuned. 
+Accompanying notes for this part of the lecture can be found [here]({{ site.baseurl }}{% link _lecture_notes/lecture_3.md %}).

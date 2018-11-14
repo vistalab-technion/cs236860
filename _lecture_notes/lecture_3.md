@@ -1,6 +1,6 @@
 ---
 title: "Lecture 3: Discrete-domain signals and systems"
-excerpt: Dirac's delta, Sampling Theorem, Interpolation
+excerpt: Discrete-domain Fourier transform, Sampling, Aliasing, Interpolation, Polyphase representation 
 author: alex
 copyright: alex
 ---
