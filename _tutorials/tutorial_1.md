@@ -15,6 +15,12 @@ time.
 Students are encouraged to install the provided `conda` environment and play
 with the examples from the notebook.
 
+
+
+## Video
+
+{% include video provider="youtube" id="4A1tqqVtlhY" %}
+
 ## Extra Resources
 
 - `conda` [download](https://conda.io/miniconda.html) and

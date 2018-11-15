@@ -29,7 +29,7 @@ src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A
 
 ### Part II: Discrete-domain signals and systems 
 
-Stay tuned.
+{% include video provider="youtube" id="qsdqhsTUa3c" %}
 
 ## Lecture Notes
 
