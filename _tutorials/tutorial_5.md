@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 4: Inverse filtering"
+title: "Tutorial 5: Inverse filtering"
 excerpt: "Image degradation models, Inverse filtering"
 author: sanketh
 ---
