@@ -8,6 +8,8 @@ toc_sticky: true
 
  We are planning on releasing 3-4 home assignments spanning evenly throughout the semester which will add up to $60$% of the final grade.  
 
+ Submission email: sanketh@cs.technion.ac.il
+
 <!-- This document will help you get started with the course homework assignments.
 Please read it carefully as it contains crucial information.
 

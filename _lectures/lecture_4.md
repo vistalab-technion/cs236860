@@ -11,12 +11,10 @@ alt="" caption="" ref=""
 
 ## Slides
 
-
 ### Discrete-domain signals and systems
 
 {% include ppt_embed.html
-src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21949&amp;authkey=AOHZPmvEBC8jWcA&amp;em=2&amp;wdAr=1.6" %}
-
+src="https://onedrive.live.com/embed?resid=7F01D020FE6A1B20%21949&amp;authkey=%21AOHZPmvEBC8jWcA&amp;em=2&amp;wdAr=1.6" %}
 
 ## Video 
 
