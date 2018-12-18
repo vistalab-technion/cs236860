@@ -1,5 +1,5 @@
 ---
-title: "Lecture 3: Sampling and interopolation"
+title: "Lecture 3: Sampling and interpolation"
 header:
     teaser: assets/images/lec2/sampling.png
 ---
