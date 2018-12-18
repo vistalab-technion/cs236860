@@ -1,11 +1,11 @@
 ---
 title: "Lecture 2: Multidimensional signals & systems"
 header:
-    teaser: assets/images/lec2/sampling.png
+    teaser: assets/images/lec2/lec2.png
 ---
 
 {% include figure
-image_path="assets/images/lec2/sampling.png"
+image_path="assets/images/lec2/lec2.png"
 alt="" caption="" ref=""
 %}
 

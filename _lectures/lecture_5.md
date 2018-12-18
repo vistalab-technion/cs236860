@@ -4,6 +4,11 @@ header:
     teaser: assets/images/lec5/lecture-5-teaser.png
 ---
 
+{% include figure
+image_path="assets/images/lec5/lecture-5-teaser.png"
+alt="" caption="" ref=""
+%}
+
 ## Slides
 
 {% include ppt_embed.html

@@ -1,11 +1,11 @@
 ---
 title: "Lecture 3: Sampling and interpolation"
 header:
-    teaser: assets/images/lec2/sampling.png
+    teaser: assets/images/lec3/sampling.png
 ---
 
 {% include figure
-image_path="assets/images/lec2/sampling.png"
+image_path="assets/images/lec3/sampling.png"
 alt="" caption="" ref=""
 %}
 

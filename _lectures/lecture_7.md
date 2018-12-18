@@ -1,8 +1,14 @@
 ---
 title: "Lecture 7: Sparsity-based priors"
 header:
-    teaser: assets/images/lec5/lecture-6-teaser.png
+    teaser: assets/images/lec7/lec7.png
 ---
+
+
+{% include figure
+image_path="assets/images/lec7/lec7.png"
+alt="" caption="" ref=""
+%}
 
 ## Slides
 

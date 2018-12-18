@@ -1,8 +1,14 @@
 ---
 title: "Lecture 6: Patch-based priors"
 header:
-    teaser: assets/images/lec5/lecture-6-teaser.png
+    teaser: assets/images/lec6/lec6.png
 ---
+
+
+{% include figure
+image_path="assets/images/lec6/lec6.png"
+alt="" caption="" ref=""
+%}
 
 ## Slides
 
