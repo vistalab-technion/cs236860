@@ -1,12 +1,12 @@
 ---
 title: "Lecture 8: Structured Sparsity"
 header:
-    teaser: assets/images/lec8/lec7.png
+    teaser: assets/images/lec8/lec8.png
 ---
 
 
 {% include figure
-image_path="assets/images/lec8/lec7.png"
+image_path="assets/images/lec8/lec8.png"
 alt="" caption="" ref=""
 %}
 
