@@ -1,6 +1,6 @@
 ---
-title: "Tutorial 4: Inverse filtering"
-excerpt: "Image degradation models, Inverse filtering"
+title: "Tutorial 4: Sampling and Interpolation"
+excerpt: "Polyphase resamplers, MRI aliasing, De-mosaicing"
 author: sanketh
 ---
 
