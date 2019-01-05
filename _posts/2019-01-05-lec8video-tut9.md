@@ -6,7 +6,7 @@ author: sanketh
 
 Dear students,
 
-The video of Lecture 8 (Structured sparse priors), and the Tutorial 9 (ISTA, BM3D) are online.
+The video of Lecture 8 (Structured sparsity), and the Tutorial 9 (ISTA, BM3D) are online.
 
 
 The course staff
