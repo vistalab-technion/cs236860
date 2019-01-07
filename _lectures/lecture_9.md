@@ -17,3 +17,9 @@ alt="" caption="" ref=""
 
 {% include ppt_embed.html
 src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21962&amp;authkey=AJdR6mimaNk_538&amp;em=2&amp;wdAr=1.6" %}
+
+
+### Guest lecture: Regularization by Denoising, Prof. Michael Elad
+
+{% include ppt_embed.html
+src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21966&amp;authkey=AGKsAcvKpFlv270&amp;em=2&amp;wdAr=1.7777777777777777" %}
