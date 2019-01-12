@@ -20,4 +20,5 @@ Dear students,
 1. Please keep your presentation short! Each group will be alloted 7 minutes of time.
 
 Best of luck!
+
 The course staff
