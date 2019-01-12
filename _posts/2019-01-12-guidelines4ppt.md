@@ -17,7 +17,7 @@ Dear students,
 	- Results
 	- Suggested improvements, pros/cons etc.
 
-1. Please keep your presentation short! Each group will be alloted 7 minutes of time.
+1. Please keep your presentation short! Each group will be alloted **5 minutes** of time.
 
 Best of luck!
 
