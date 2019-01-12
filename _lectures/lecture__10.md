@@ -1,12 +1,12 @@
 ---
 title: "Lecture 10: Rethinking sensing & sampling"
 header:
-    teaser: assets/images/lec10/lec9-1.png
+    teaser: assets/images/lec10/lec10.png
 ---
 
 
 {% include figure
-image_path="assets/images/lec10/lec9-2.png"
+image_path="assets/images/lec10/lec10.png"
 alt="" caption="" ref=""
 %}
 
