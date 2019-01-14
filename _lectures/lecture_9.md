@@ -1,5 +1,5 @@
 ---
-title: "Lecture 9: Learning image models"
+title: "Lecture 9: Learning image priors"
 header:
     teaser: assets/images/lec9/lec9-1.png
 ---
@@ -13,7 +13,7 @@ alt="" caption="" ref=""
 ## Slides
 
 
-### Learning image models
+### Learning image priors
 
 {% include ppt_embed.html
 src="https://onedrive.live.com/embed?cid=7F01D020FE6A1B20&amp;resid=7F01D020FE6A1B20%21962&amp;authkey=AJdR6mimaNk_538&amp;em=2&amp;wdAr=1.6" %}
