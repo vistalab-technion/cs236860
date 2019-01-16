@@ -6,9 +6,11 @@ toc_label: Contents
 toc_sticky: true
 ---
 
- We are planning on releasing 3-4 home assignments spanning evenly throughout the semester which will add up to $60$% of the final grade.  
+Homeworks 1 and 2 are available [here](https://github.com/vistalab-technion/cs236860-hw).
 
- Submission email: sanketh@cs.technion.ac.il
+Submission instructions are mentioned within the respective PDFs.
+
+Submission email: sanketh@cs.technion.ac.il
 
 <!-- This document will help you get started with the course homework assignments.
 Please read it carefully as it contains crucial information.
