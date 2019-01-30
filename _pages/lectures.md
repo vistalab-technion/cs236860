@@ -23,3 +23,5 @@ The accompanying material for each lecture is posted here.
 
 - Detailed notes will be available for most lectures on the
   [lecture notes]({{ site.baseurl }}{% link _pages/lecture_notes.md %}) page.
+
+- Videos of all the lectures and tutorials are available in this YouTube [playlist](https://www.youtube.com/watch?v=d0Z4zRhK_Uo&list=PLM0a6Z788YAZOxUyWda9y3N_i2upIj1Ep). 
