@@ -1,6 +1,6 @@
 ---
-title: HW2 & Project report: extended 
-excerpt: "extended submission date"
+title: HW2 & Project deadline extended
+excerpt: "final submission date"
 author: sanketh
 ---
 
