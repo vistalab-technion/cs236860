@@ -11,14 +11,14 @@ alex:
       url: "https://www.cs.technion.ac.il/~bron/"
 
 sanketh:
-  name: Sanketh Vedula
+  name: Omer Dahary
   bio: TA
-  avatar: "/assets/images/bio-photo-sanketh.jpg"
+  avatar: "/assets/images/bio-photo-omer.jpg"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:sanketh@cs.technion.ac.il"
+      url: "mailto:omerd@cs.technion.ac.il"
     - label: "Web"
       icon: "fas fa-fw fa-link"
-      url: ""
+      url: "https://vista.cs.technion.ac.il/people/?pn=2188"
 

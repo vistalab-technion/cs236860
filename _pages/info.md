@@ -36,19 +36,19 @@ At the end of the course, the student will:
 
 | #    | Date         | Lecture                                                                                                                                                                               | Tutorial                                                                            |
 | ---- | -----------  | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------   |
-| 1    | `22/10/2018` | Multi-dimensional signals and systems                             | Signal processing (convolution, translation) with Python 
-| 2    | `29/10/2018` | Sampling and interpolation                                        | FFT, convolution theorem, aliasing effects (e.g. in MRI)   |  |
-| 3    | `05/11/2018` | Discrete-domain systems                                           | Spatial & frequency domain filtering |
-| 4    | `12/11/2018` | Random signals                                                    | Auto-correlation, CCF, Wiener filter                           |
-| 5    | `19/11/2018` | Inverse problems, ML & MAP estimators                             | ML vs. MAP on image denoising                                  |
-| 6    | `26/11/2018` | Patch-based priors                                                | Image denoising using NLM and BM3D                             |
-| 7    | `10/12/2018` | L1-L2 optimization (ISTA)                                         | L1-L2 implementation                                           |
+| 1    | `24/10/2019` | Multi-dimensional signals and systems                             | Signal processing (convolution, translation) with Python 
+| 2    | `31/10/2019` | Sampling and interpolation                                        | FFT, convolution theorem, aliasing effects (e.g. in MRI)   |  |
+| 3    | `07/11/2019` | Discrete-domain systems                                           | Spatial & frequency domain filtering |
+| 4    | `14/11/2019` | Random signals                                                    | Auto-correlation, CCF, Wiener filter                           |
+| 5    | `21/11/2019` | Inverse problems, ML & MAP estimators                             | ML vs. MAP on image denoising                                  |
+| 6    | `28/11/2019` | Patch-based priors                                                | Image denoising using NLM and BM3D                             |
+| 7    | `05/12/2019` | L1-L2 optimization (ISTA)                                         | L1-L2 implementation                                           |
 |      |              | Final project: list of papers released                            |                                                                | 
-| 8    | `17/12/2018` | Shift-invariant dictionaries, LISTA                               | LISTA using autograd                                           |
-| 9    | `24/12/2018` | From parsimonious models to deep learning                         | Practical introduction to deep learning                        |
-| 10   | `31/12/2018` | CNNs for image restoration                                        | Image denoising and super-resolution with CNNs                 |
-| 11   | `06/01/2019` | Compressed sensing, Johnson-Lindenstrauss lemma                   | Perceptual & adversarial loss for image restoration, style-transfer  |
-| 12   | `13/01/2019` | Computational and medical imaging                                 | MRI and Ultrasound imaging                                                                |
-| 13   | `20/01/2019` | Project presentations                                             | ----|
+| 8    | `12/12/2018` | Shift-invariant dictionaries, LISTA                               | LISTA using autograd                                           |
+| 9    | `02/01/2018` | From parsimonious models to deep learning                         | Practical introduction to deep learning                        |
+| 10   | `09/01/2018` | CNNs for image restoration                                        | Image denoising and super-resolution with CNNs                 |
+| 11   | `16/01/2019` | Compressed sensing, Johnson-Lindenstrauss lemma                   | Perceptual & adversarial loss for image restoration, style-transfer  |
+| 12   | `23/01/2019` | Computational and medical imaging                                 | MRI and Ultrasound imaging                                                                |
+| 13   | `??/??/2019` | Project presentations                                             | ----|
 | ---- | -----------  | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------   |
 

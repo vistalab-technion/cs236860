@@ -5,8 +5,6 @@ main:
     url: /lectures/
   - title: "Tutorials"
     url: /tutorials/
-  - title: "Assignments"
-    url: /hw/
   - title: "Semesters"
     url: /semesters/
 
