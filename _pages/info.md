@@ -18,7 +18,7 @@ At the end of the course, the student will:
 
 ## Administration
 
-**Evaluation**: 60% Homework assignments, 40% final project. (tentative)
+**Evaluation**: 60% Homework assignments, 40% final project.
 
 **Language**: The course will be taught in English.
 
@@ -34,21 +34,18 @@ At the end of the course, the student will:
 
 ## Detailed Syllabus
 
-| #    | Date         | Lecture                                                                                                                                                                               | Tutorial                                                                            |
-| ---- | -----------  | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------   |
-| 1    | `24/10/2019` | Multi-dimensional signals and systems                             | Signal processing (convolution, translation) with Python 
-| 2    | `31/10/2019` | Sampling and interpolation                                        | FFT, convolution theorem, aliasing effects (e.g. in MRI)   |  |
-| 3    | `07/11/2019` | Discrete-domain systems                                           | Spatial & frequency domain filtering |
-| 4    | `14/11/2019` | Random signals                                                    | Auto-correlation, CCF, Wiener filter                           |
-| 5    | `21/11/2019` | Inverse problems, ML & MAP estimators                             | ML vs. MAP on image denoising                                  |
-| 6    | `28/11/2019` | Patch-based priors                                                | Image denoising using NLM and BM3D                             |
-| 7    | `05/12/2019` | L1-L2 optimization (ISTA)                                         | L1-L2 implementation                                           |
-|      |              | Final project: list of papers released                            |                                                                | 
-| 8    | `12/12/2018` | Shift-invariant dictionaries, LISTA                               | LISTA using autograd                                           |
-| 9    | `02/01/2018` | From parsimonious models to deep learning                         | Practical introduction to deep learning                        |
-| 10   | `09/01/2018` | CNNs for image restoration                                        | Image denoising and super-resolution with CNNs                 |
-| 11   | `16/01/2019` | Compressed sensing, Johnson-Lindenstrauss lemma                   | Perceptual & adversarial loss for image restoration, style-transfer  |
-| 12   | `23/01/2019` | Computational and medical imaging                                 | MRI and Ultrasound imaging                                                                |
-| 13   | `??/??/2019` | Project presentations                                             | ----|
-| ---- | -----------  | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------   |
-
+| # | Date | Pre-requisite | Lecture | Tutorial | Homework |
+| --- | --- | ---  | --- | --- | --- |
+| 1 | `24/10/2019` | | Introduction | Math background | |
+| 2 | `31/10/2019` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
+| 3 | `07/11/2019` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
+| 4 | `14/11/2019` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
+| 5 | `21/11/2019` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
+| 6 | `28/11/2019` | Lecture 5a | Introduction to random signals | Inverse filtering |
+| 7 | `05/12/2019` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | HW2 |
+| 8 | `12/12/2019` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | |
+| 9 | `22/11/2019` | Lecture 7 | Sparsity-based priors | PatchMatch | |
+| 10 | `02/01/2018` | Lecture 8 | Structured-based priors | L1-L2 optimization | |
+| 11 | `09/01/2019` | Lecture 9 | Learning image priors | Dictionary learning | HW3 |
+| 12 | `16/01/2019` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
+| 13 | `23/01/2019` | Lecture 11 | Computational imaging | Deep learning (part 2) | |
