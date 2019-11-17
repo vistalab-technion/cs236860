@@ -41,9 +41,9 @@ At the end of the course, the student will:
 | 3 | `07/11/2019` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
 | 4 | `14/11/2019` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
 | 5 | `21/11/2019` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
-| 6 | `28/11/2019` | Lecture 5a | Introduction to random signals | Inverse filtering |
-| 7 | `05/12/2019` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | HW2 |
-| 8 | `12/12/2019` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | |
+| 6 | `28/11/2019` | Lecture 5a | Introduction to random signals | Inverse filtering | |
+| 7 | `05/12/2019` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
+| 8 | `12/12/2019` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
 | 9 | `22/12/2019` | Lecture 7 | Sparsity-based priors | PatchMatch | |
 | 10 | `02/01/2020` | Lecture 8 | Structured-based priors | L1-L2 optimization | |
 | 11 | `09/01/2020` | Lecture 9 | Learning image priors | Dictionary learning | HW3 |
