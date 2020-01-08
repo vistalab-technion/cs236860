@@ -45,7 +45,7 @@ At the end of the course, the student will:
 | 7 | `05/12/2019` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
 | 8 | `12/12/2019` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
 | 9 | `22/12/2019` | Lecture 7 | Sparsity-based priors | PatchMatch | |
-| 10 | `02/01/2020` | Lecture 8 | Structured-based priors | L1-L2 optimization | |
+| 10 | `02/01/2020` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
 | 11 | `09/01/2020` | Lecture 9 | Learning image priors | Dictionary learning | |
 | 12 | `16/01/2020` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
 | 13 | `23/01/2020` | Lecture 11 | Computational imaging | Deep learning (part 2) | |

@@ -12,8 +12,7 @@ The goal of the project is to familiarize you with the state-of-the-art research
 ## Milestones
 
 - 1th Jan: The bidding of the papers end. The papers are assigned.
-- TBD: 10-15 minute presentations.
-- TBD: Turn in the final report.
+- 1th Mar: Turn in the final report.
 
 ## Choosing the project
 
@@ -36,15 +35,10 @@ The goal of the project is to familiarize you with the state-of-the-art research
 
 Try to do something beyond the MVP. For example, apply the method to a new problem, code the proposed improvements (even if it really doesn’t improve, the attempt is fine) and etc. It is not limited to this. Anything creative will be rewarded!
 
-### Presentations
-
-Prepare 10-15 minutes talk explaining the paper, contributions, limitations, results. The presentatios will be held in the last week of the semester.
-
 ### Evaluation
 
-- Presentation: 30%
-- MVP: 60%
-- Bonus: 10%
+- MVP: 80%
+- Bonus: 20%
 
 ## Submission
 
