@@ -40,6 +40,10 @@ Try to do something beyond the MVP. For example, apply the method to a new probl
 - MVP: 80%
 - Bonus: 20%
 
+### Example
+
+An example for a commendable project report can be found [here](https://drive.google.com/file/d/139vj3pPK9eQy54iZN1lKK3-eJq-N1TJz/view?usp=sharing).
+
 ## Submission
 
 Create a zip file titled `proj-id1_id2.zip` (replace `id1`/`id2` with your
