@@ -10,11 +10,10 @@ The purpose of this course is a self-contained introduction to modern techniques
 
 At the end of the course, the student will:
 
-1.  Get comfortable with the standard notions involved in acquiring, sampling, representing, compressing, and processing of images.  
+1.  Get comfortable with the standard notions involved in acquiring, sampling, representing, compressing, and processing of images.
 1.	Understand the evolution of ideas in image processing 
 1.	Know how to implement these state-of-the-art image processing algorithms in Python.
 1.	Perform a small research project using the studied notions and techniques.
-
 
 ## Administration
 
@@ -36,16 +35,16 @@ At the end of the course, the student will:
 
 | # | Date | Pre-requisite | Lecture | Tutorial | Homework |
 | --- | --- | ---  | --- | --- | --- |
-| 1 | `24/10/2019` | | Introduction | Math background | |
-| 2 | `31/10/2019` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
-| 3 | `07/11/2019` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
-| 4 | `14/11/2019` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
-| 5 | `21/11/2019` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
-| 6 | `28/11/2019` | Lecture 5a | Introduction to random signals | Inverse filtering | |
-| 7 | `05/12/2019` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
-| 8 | `12/12/2019` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
-| 9 | `22/12/2019` | Lecture 7 | Sparsity-based priors | PatchMatch | |
-| 10 | `02/01/2020` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
-| 11 | `09/01/2020` | Lecture 9 | Learning image priors | Dictionary learning | |
-| 12 | `16/01/2020` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
-| 13 | `23/01/2020` | Lecture 11 | Computational imaging | Deep learning (part 2) | |
+| 1 | `22/10/2020` | | Introduction | Math background | |
+| 2 | `29/10/2020` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
+| 3 | `05/11/2020` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
+| 4 | `12/11/2020` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
+| 5 | `19/11/2020` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
+| 6 | `26/11/2020` | Lecture 5a | Introduction to random signals | Inverse filtering | |
+| 7 | `03/12/2020` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
+| 8 | `10/12/2020` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
+| 9 | `24/12/2020` | Lecture 7 | Sparsity-based priors | PatchMatch | |
+| 10 | `31/12/2020` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
+| 11 | `07/01/2021` | Lecture 9 | Learning image priors | Dictionary learning | |
+| 12 | `14/01/2021` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
+| 13 | `21/01/2021` | Lecture 11 | Computational imaging | Deep learning (part 2) | |

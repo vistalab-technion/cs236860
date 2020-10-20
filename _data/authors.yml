@@ -9,6 +9,8 @@ alex:
     - label: "Web"
       icon: "fas fa-fw fa-link"
       url: "https://www.cs.technion.ac.il/~bron/"
+    - label: "Zoom"
+      url: "https://technion.zoom.us/j/6862788334"
 
 omer:
   name: Omer Dahary
@@ -21,15 +23,5 @@ omer:
     - label: "Web"
       icon: "fas fa-fw fa-link"
       url: "https://vista.cs.technion.ac.il/people/?pn=2188"
-
-elia:
-  name: Elia Turner
-  bio: HW Checker
-  avatar: "/assets/images/bio-photo-elia.jpg"
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:eliaturnercs.technion.ac.il"
-    - label: "Web"
-      icon: "fas fa-fw fa-link"
-      url: "https://barak.net.technion.ac.il/members/elia-turner/"
+    - label: "Zoom"
+      url: "https://technion.zoom.us/j/3836016858"

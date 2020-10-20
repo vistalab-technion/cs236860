@@ -4,7 +4,7 @@ permalink: tutorials/working-locally
 toc: true
 toc_label: Contents
 toc_sticky: true
-date: 2019-10-22
+date: 2020-10-21
 ---
 
 This document will help you install the required environment for working locally with the tutorial notebooks.
