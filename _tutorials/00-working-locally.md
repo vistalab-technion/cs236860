@@ -48,7 +48,7 @@ The repository's root directory contains the following files and folders:
 ## Environment set-up
 
 1. Install the python3 version of [miniconda](https://conda.io/miniconda.html).
-   Follow the [installation instructions](https://conda.io/docs/user-guide/install/index.html)
+   Follow the [installation instructions](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
    for your platform.
 
    For example, on linux you should do:
