@@ -28,3 +28,5 @@ This page contains links to the tutorial recordings (via Panopto). We will updat
 [Tutorial 8](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=fcc1ebbe-1254-4f7f-8e0f-ac8d00e0e32c)
 
 [Tutorial 9](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6ccb5dae-a3a5-4493-9ca6-ac9b00d6220b)
+
+[Tutorial 10](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=85a68bdf-4059-4bac-9ca5-aca200d13009)
