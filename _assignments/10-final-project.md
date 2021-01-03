@@ -12,7 +12,7 @@ The goal of the project is to familiarize you with the state-of-the-art research
 ## Milestones
 
 - 17th Dec: The bidding of the papers end. The papers are assigned.
-- 26th Jan: Turn in the final report.
+- 18th Mar: Turn in the final report.
 
 ## Choosing the project
 
