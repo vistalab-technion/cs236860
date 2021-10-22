@@ -12,10 +12,10 @@ alex:
     - label: "Zoom"
       url: "https://technion.zoom.us/j/6862788334"
 
-sanketh:
-  name: Sanketh Vedula
+omer:
+  name: Omer Dahary
   bio: TA
-  avatar: "/assets/images/bio-photo-generic.jpg"
+  avatar: "/assets/images/bio-photo-omer.jpg"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"

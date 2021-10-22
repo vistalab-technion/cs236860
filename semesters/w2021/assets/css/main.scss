@@ -1,0 +1,83 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+// $body-color: red;
+// $background-color: green;
+// $text-color: yellow;
+// $masthead-link-color: magenta;
+// $masthead-link-color-hover: black;
+// $muted-text-color: pink;
+// $border-color: orange;
+$primary-color: darkorange;
+$link-color: darkblue;
+
+.books_container {
+    .book div {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .book-cover {
+        width: 6em;
+        margin-right: 1em;
+        box-shadow: 3px 3px gray;
+    }
+    ul {
+        list-style: none;
+    }
+    .book-info h3 {
+        margin-top: 0;
+    }
+}
+
+.staff_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .staff {
+        flex-grow: 1;
+        vertical-align: top;
+        margin-top: 1em;
+    }
+}
+
+.technion-logo {
+    margin-right: 0.4em;
+    width: 14em;
+    height: auto;
+}
+
+.vista-logo {
+    float: inline-end; 
+    margin: 1em;
+    width: 170px;
+}
+
+.page__footer footer {
+    display: inline-block;
+}
+
+.ppt-embed {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+}
+
+.grid-collection-container {
+    display: inline-block;
+}
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
