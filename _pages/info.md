@@ -23,6 +23,23 @@ At the end of the course, the student will:
 
 **Credits**: 3.0.
 
+**Prerequisites**
+
+This course expects **both** mathematical maturity and programming competency. The recommended prerequisites are as follows:
+
+- A good background in linear algebra, probability and calculus. See the [supplementary material](../supplements/) page if you need a refresher on one of these.
+- Programming competency. The course will be hands-on. We will use Python exclusively; it is important to have experience with it.
+
+**Collaboration Policy and Honor Code**
+
+By enrolling in this course, you agree that you will strictly follow our collaboration policy as specified below. Any violation of this policy will result in an immediate failure in the course, and treatment by the Technion regulations committee.
+
+1. Submission of assignments is in singles or pairs. You are free to form study groups and discuss homeworks with other students. However, you must implement all the required code or derive all the required math independently of other groups (only with your submission partner).
+2. Submitted work must be your own. You must do your own thinking, coding, debugging, and write all the answers yourself. We will run automatic plagiarism-detection software on your submissions to ensure this policy.
+3. You may not use solutions from previous semesters' homeworks.
+4. You may not share your solutions with other students.
+5. You may not upload your homework solutions to any public website, such as Github. Private repos are OK, but they must remain so even after course completion.
+
 ## Course Staff
 
 {% include course_staff.html %}
@@ -32,6 +49,15 @@ At the end of the course, the student will:
 {% include literature.html %} -->
 
 ## Detailed Syllabus
+
+The lectures will follow a flipped-classroom approach. Students will be requested to watch recorded lecture videos as a **mandatory** course requirement. We provide videos and written material on the course [Lectures](../lectures/) page to facilitate self-learning of the core topics. THe in-class lectures will be short, optional, and cover more adavanced material. In addition, any questions from the lecture videos will be addressed.
+
+The [Tutorials](../tutorials) are based on detailed and self-contained Jupyter notebooks, which will guide you through full implementation of the concepts learned in the lecture. The in-class tutorials will cover all the material, no pre-requisite viewing is required.
+
+The course includes hands-on homework assignments in which you'll derive and implement different image processing algorithms.
+
+The course also includes a small research project that will require reading and presenting a research paper, implementing and improving the algorithms presented therewithin. A list of papers and further instructions will be released mid-semester.
+
 
 | # | Date | Pre-requisite | Lecture | Tutorial | Homework |
 | --- | --- | ---  | --- | --- | --- |
