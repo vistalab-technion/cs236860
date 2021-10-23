@@ -1,0 +1,821 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 7: Sparsity-based priors | CS236860: Digital Image Processing</title>
+<meta name="description" content="Patch-based denoising, NLM, Bilateral filter">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 7: Sparsity-based priors">
+<meta property="og:url" content="https://vistalab-technion.github.io/cs236860/semesters/w1920/lecture_notes/lecture_7/">
+
+
+  <meta property="og:description" content="Patch-based denoising, NLM, Bilateral filter">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://vistalab-technion.github.io/cs236860/semesters/w1920/lecture_notes/lecture_7/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "https://vistalab-technion.github.iocs236860/semesters/w1920",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/semesters/w1920/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/semesters/w1920/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/semesters/w1920/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1920/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1920/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1920/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1920/assignments/" >Assignments</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1920/semesters/" >Semesters</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 7: Sparsity-based priors">
+    <meta itemprop="description" content="Patch-based denoising, NLM, Bilateral filter">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 7: Sparsity-based priors
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  37 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#kurtosis-and-sparsity">Kurtosis and sparsity</a></li>
+  <li><a href="#bases-frames-and-dictionaries">Bases, frames and dictionaries</a></li>
+  <li><a href="#discrete-dictionaries">Discrete dictionaries</a></li>
+  <li><a href="#sparse-patch-priors">Sparse patch priors</a></li>
+  <li><a href="#map-estimation-with-a-sparse-patch-prior">MAP estimation with a sparse patch prior</a></li>
+  <li><a href="#iterative-shrinkage">Iterative shrinkage</a></li>
+  <li><a href="#non-negativity">Non-negativity</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>We continue our quest for a better model for the patch prior probability
+$P_ {\mathpzc{F}} (\pi_ {\bm{\mathrm{x}}} \mathpzc{F}) $ to be used in
+MAP and Bayesian estimators. This time we consider the family of priors
+based on the assertion that a patch admits a <em>sparse representation</em> in
+some dictionary.</p>
+
+<h2 id="kurtosis-and-sparsity">Kurtosis and sparsity</h2>
+
+<p>Let us start with a little background in probability theory. Let us
+consider the Gaussian distribution of a random variable given by the
+density function</p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{X}} (x) \propto e^{-\frac{(x-\mu)^2 }{2\sigma^2}}</script>
+
+<p>and fully characterized by the mean $\mu$ and variance $\sigma^2$. Since the
+density function has a negative exponential of the square of $x$, its
+tails decay very fast. However, there might be other distributions with
+much “heavier” tails, that is, containing more probability in the tails.</p>
+
+<p>A common measure for the “tailedness” of a distribution is the notion of
+<em>kurtosis</em>, defined as the normalized central fourth moment,</p>
+
+<script type="math/tex; mode=display">\mathrm{Kurt}\,\mathpzc{X} = \mathbb{E} \left( \frac{\mathpzc{X} - \mu }{\sigma} \right)^4 = \frac{ \mathbb{E}(\mathpzc{X} - \mu)^4 }{\sigma^4}.</script>
+
+<p>All Gaussian distributions happen to have kurtosis $3$. It is customary
+to define the <em>kurtosis excess</em> as $\mathrm{Kurt}\,\mathpzc{X} - 3$.
+Distributions with positive kurtosis excess are called <em>super-Gaussian</em>
+or <em>leptokurtic</em> or, colloquially, as “heavy-tailed”. Positive curtosis
+excess arises in two circumstances: when the probability mass is
+concentrated around the mean and the data-generating process produces
+occasional values far from the mean, and when the probability mass is
+concentrated in the tails of the distribution. On the contrary, when the
+kurtosis excess is negative, the distribution is called <em>sub-Gaussian</em>
+or <em>platykurtic</em> or, informally, as “light-tailed”.</p>
+
+<p>The <em>exponential power distribution</em> given by the density function</p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{X}} (x) \propto e^{-(\alpha | x -\mu |)^p}</script>
+
+<p>can be thought of a generalized Gaussian distribution with the mean and
+variance controlled by the parameters $\mu$ and $\alpha$, respectively,
+and the shape of the distribution controlled by the power $p$. Note that
+$p=2$ yields exactly the Gaussian distribution with
+$\mathrm{Kurt}\,\mathpzc{X} - 3 = 0$. For $p&lt;2$, a super-Gaussian family
+of distributions is obtained with the notable case of the Laplace
+(a.k.a. double-exponential) distribution corresponding to $p=1$. For
+$p&gt;2$, the family is sub-Gaussian converging pointwise to the uniform
+distribution on $[\mu-\alpha,\mu+\alpha]$ as $p \rightarrow \infty$.</p>
+
+<p>Let ${\bm{\mathrm{x}}}$ be an $n$-dimensional vector sampled i.i.d. from
+a zero-mean super-Gaussian random variable. Since the variable will
+often realize values around zero, and occasionally large non-zero
+values, most of the elements of the vector will be nearly zero, with
+some elements (at uniformly random indices) having a large magnitude.
+This can be thought of as a probabilistic formalization of the statement
+<em>“vector ${\bm{\mathrm{x}}}$ is sparse”</em>. In this sense,
+super-Gaussianity leads to sparsity.</p>
+
+<h2 id="bases-frames-and-dictionaries">Bases, frames and dictionaries</h2>
+
+<p>We will now need a few important notions in linear algebra and
+functional analysis. Recall that we defined a patch of a signal $f$
+centered at ${\bm{\mathrm{x}}}$ as the function $f$ translated by
+${\bm{\mathrm{x}}}$ and restricted to the domain
+$\square = \left[-\frac{T}{2},\frac{T}{2}\right]^d$. For notation
+convenience, in the following treatment we refer to the patch by the
+name $f$ itself. Recall that any continuous function on $\square$ could
+be decomposed into the Fourier series</p>
+
+<script type="math/tex; mode=display">f = \sum_ {\bm{\mathrm{n}} \in \mathbb{Z}^d} c_ {\bm{\mathrm{n}}} \phi_ {\bm{\mathrm{n}}},</script>
+
+<p>with</p>
+
+<script type="math/tex; mode=display">\phi_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) = e^{\ii \, \frac{\bm{\mathrm{x}}^\Tr {\bm{\mathrm{n}}}}{T} }</script>
+
+<p>and the coefficients
+$c_ {\bm{\mathrm{n}}} = \langle f, \phi_ {\bm{\mathrm{n}}} \rangle_ {L^2(\square)}$.
+An important observation here is that the functions
+${ \phi_  {\bm{\mathrm{n}}} }_  {\bm{\mathrm{n}} \in \mathbb{Z}^d}$
+are <em>linearly-independent</em> and <em>span</em> the space of functions
+$L^2(\square)$. Such a set is called a <em>basis</em> of the said space. The
+crucial feature of a basis is the uniqueness of the decomposition. In
+other words, there exists only one set of coefficients
+${  c_ {\bm{\mathrm{n}}} }$ representing $f$ in
+${ \phi_ {\bm{\mathrm{n}}} }_ {\bm{\mathrm{n}}}$; in the particular
+case discussed above, the basis is furthermore orthonormal, so we have a
+simple formula for computing the coefficients using orthogonal
+projections on the basis functions<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>Let us now be given a collection of <em>linearly-dependent</em> functions
+${ \phi_ {\bm{\mathrm{n}}} }_ {\bm{\mathrm{n}}}$ spanning
+$L^2(\square)$. Such vectors no more form a basis and therefore the
+benefit of unique representation is lost. However, as we will see in the
+sequel, the loss of uniqueness can be actually a very powerful tool. A
+formal generalization of a basis is the notion of a <em>frame</em> defined
+through the following condition: if there exists two constants
+$0 &lt; A \le  B &lt; \infty$ such that for every $f$ in the space</p>
+
+<script type="math/tex; mode=display">A \, \| f \|^2 \le \sum_ {\bm{\mathrm{n}} \in \mathbb{Z}^d} | \langle f, \phi_ {\bm{\mathrm{n}}}  \rangle |^2 \le B \, \| f \|^2,</script>
+
+<p>the set ${ \phi_ {\bm{\mathrm{n}}} }_ {\bm{\mathrm{n}}}$ is called a
+<em>frame</em>. A proper frame (that is, which is not a basis) is called
+<em>overcomplete</em> or <em>redundant</em>. Intuitively, it contains “more” functions
+that a basis would need. Formally, there exist an infinite set of
+coefficients $c = { c_ {\bm{\mathrm{n}}}  }$ representing $f$ w.r.t.
+${ \phi_ {\bm{\mathrm{n}}} }$.</p>
+
+<p>We will associate with the frame the <em>synthesis operator</em>
+$\Phi : \ell^2 \rightarrow  L^2(\square)$ producing</p>
+
+<script type="math/tex; mode=display">\Phi  c = \sum_ {\bm{\mathrm{n}} \in \mathbb{Z}^d} c_ {\bm{\mathrm{n}}} \phi_ {\bm{\mathrm{n}}}</script>
+
+<p>from the sequence of coefficients ${ c_ {\bm{\mathrm{n}}} }$. The
+adjoint <em>analysis operator</em>
+$\Phi^\ast : L^2(\square) \rightarrow \ell^2$ mapps $f$ to $c$.</p>
+
+<p>In the signal processing jargon, it is customary to speak of a frame as
+of a <em>dictionary</em> and of the constituent functions as of <em>atoms</em>. Then,
+a function $f$ can be represented as a superposition of atoms. If the
+dictionary is overcomplete, such a representation is not unique.</p>
+
+<p>For example, the set of functions</p>
+
+<script type="math/tex; mode=display">\phi_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) = e^{\ii \, \frac{\bm{\mathrm{x}}^\Tr {\bm{\mathrm{n}}}}{a T} }</script>
+
+<p>with $a&gt;1$ forms a frame on $\square$. We can think of it as an
+overcomplete Fourier transform dictionary. Taking the real value yields
+the overcomplete cosine dictionary,</p>
+
+<script type="math/tex; mode=display">\phi_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) = \cos\left(\frac{\bm{\mathrm{x}}^\Tr {\bm{\mathrm{n}}}}{a T} \right).</script>
+
+<p>There exists a plethora of other useful dictionaries such as wavelets,
+ridgelets, curvelets, countourlets (which all have a beautiful theory)
+and there also exists a possibility to <em>learn</em> the dictionary (optimal
+in some sense) from examples. The latter approach has been shown
+advantageous in many applications.</p>
+
+<h2 id="discrete-dictionaries">Discrete dictionaries</h2>
+
+<p>When the patch domain is <em>sampled</em>, say, on the lattice
+$\frac{T}{N} \mathbb{Z}^d$, $f$ is given on a finite set of $(2N+1)^d$
+points</p>
+
+<script type="math/tex; mode=display">f[{\bm{\mathrm{n}}}] = f\left( \frac{T}{N} {\bm{\mathrm{n}}}\right)</script>
+
+<p>with ${\bm{\mathrm{n}}} \in { -N, \dots, N}^d$. Reordering the samples
+$f[{\bm{\mathrm{n}}}]$ into a long $n=(2N+1)^d$-dimensional vector
+${\bm{\mathrm{f}}}$, we can think of the dictionary representation as</p>
+
+<script type="math/tex; mode=display">{\bm{\mathrm{f}}} = {\bm{\mathrm{\Phi}}} {\bm{\mathrm{c}}},</script>
+
+<p>where ${\bm{\mathrm{\Phi}}}$ is an $n \times k$ matrix whose columns are the
+sampled versions of the frame functions $\phi_ {\bm{\mathrm{k}}}$
+sampled and reodered into $n$-dimensional vectors,
+${\bm{\mathrm{\phi}}}_ {\bm{\mathrm{k}}}$ that are ordered in some
+order such that there are $k = an &gt; n$ functions. The overcomplete
+cosine frame readily becomes the overcomplete <em>discrete cosine
+transform</em> (DCT) dictionary.</p>
+
+<h2 id="sparse-patch-priors">Sparse patch priors</h2>
+
+<p>A crucial empirical observation is that patches of natural images can be
+approximated by a small number of atoms in many overcomplete
+dictionaries such as the overcomplete cosine dictionary. We will
+formalize this by letting</p>
+
+<script type="math/tex; mode=display">\pi_ {\bm{\mathrm{x}}} \mathpzc{F} =  \Phi  c + \mathpzc{E} = \sum_ {\bm{\mathrm{n}} \in \mathbb{Z}^d} c_ {\bm{\mathrm{n}}} \phi_ {\bm{\mathrm{n}}} + \mathpzc{E}</script>
+
+<p>and asserting that the coefficients $c_ {\bm{\mathrm{n}}}$ are i.i.d.
+with a super-Gaussian distribution, while the residual $\mathpzc{E}$ is
+white Gaussian with the variance $\sigma^2_ \mathpzc{E}$.</p>
+
+<p>This leads to the following negative log likelihood:</p>
+
+<script type="math/tex; mode=display">- \log f_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{F} | c({\bm{\mathrm{x}}}) } \left( \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = f | c({\bm{\mathrm{x}}}) = \{ c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}})  \} \right) = - \log f_ { \mathpzc{S} } \left( f -   \Phi  c ({\bm{\mathrm{x}}})   \right)  = \sigma^2_ \mathpzc{E} \left\| f -   \Phi  c({\bm{\mathrm{x}}}) \right\|^2_ {L^2(\square)} + \mathrm{const}</script>
+
+<p>with the negative log prior density of the coefficients,</p>
+
+<script type="math/tex; mode=display">- \log f_ {c}  \left(c({\bm{\mathrm{x}}}) \right) =  \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d } -\log f_ c(c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) ).</script>
+
+<p>For example, using the exponential power family for $f_ c$ leads to</p>
+
+<script type="math/tex; mode=display">- \log f_ {c}  \left( c({\bm{\mathrm{x}}}) \right) = \alpha^p \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) |^p + \mathrm{const}.</script>
+
+<p>Invoking the Bayes theorem leads to the following posterior density</p>
+
+<script type="math/tex; mode=display">- \log f_ {c({\bm{\mathrm{x}}}) | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} } \left( c({\bm{\mathrm{x}}})   |  f  \right) =  \sigma^2_ \mathpzc{E} \left\| f -  \Phi c({\bm{\mathrm{x}}}) \right\|^2_ {L^2(\square)} + \alpha^p \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) |^p + \mathrm{const}.</script>
+
+<p>Note that in order to promote sparsity of the coefficients $p&lt;2$ has to
+be small. However, for $p&lt;1$, the negative log density is non-convex,
+which is a major complication as we eventually would like to add it as a
+prior term to our optimization problem in a Bayesian or MAP estimatior.
+A pragmatic choice is $p=1$, the smallest value of $p$ keeping the term
+convex (yet making it non-smooth at zero). This choice corresponds to
+the Laplacian distribution, leading to the following aggregate of the
+$L_ 2$ norm with the $\ell_ 1$ norm:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+- \log f_ {c({\bm{\mathrm{x}}}) | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} } \left( c({\bm{\mathrm{x}}})  |f  \right) &=&  \sigma^2_ \mathpzc{E} \left\| f -  \Phi c({\bm{\mathrm{x}}}) \right\|^2_ {L^2(\square)} + \alpha \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) | + \mathrm{const} \\
+&=&  \left\| f -  \Phi c({\bm{\mathrm{x}}}) \right\|^2_ {L^2(\square)} + \lambda \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) | + \mathrm{const},\end{aligned} %]]></script>
+
+<p>where $\lambda = \frac{\alpha}{\sigma^2_ \mathpzc{E}}$.</p>
+
+<p>Some flavors of sparse priors use dictionaries with non-negative
+functions and further assert non-negative coefficients,
+$c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) \ge 0$. This incorporates the
+prior information that the signal is non-negative, and is often employed
+for modelling images and spectral magnitudes of audio signals.</p>
+
+<h2 id="map-estimation-with-a-sparse-patch-prior">MAP estimation with a sparse patch prior</h2>
+
+<p>At this point, we have two possibilities. We can rephrase our model as</p>
+
+<script type="math/tex; mode=display">\pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = \Phi c + \mathpzc{E}</script>
+
+<p>estimate the contents of a patch directly as</p>
+
+<script type="math/tex; mode=display">\pi_ {\bm{\mathrm{x}}} \hat{f} =  \Phi \hat{c}</script>
+
+<p>where</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\hat{c}  &=& \mathrm{arg}\min_ {c } \, \log f_ {c | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y} } \left(c | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y} =  \pi_ {\bm{\mathrm{x}}} y  \right) \\
+&=&  \mathrm{arg}\min_ {c } \,    \left\|  \pi_ {\bm{\mathrm{x}}} y -  \Phi c \right\|^2_ {L^2(\square)} + \lambda \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}  |.\end{aligned} %]]></script>
+
+<p>This can be done for every ${\bm{\mathrm{x}}}$; afterwards, the
+overlapping estimated patches are aggregated by simple averaging.
+However, such an avergaing steers us farther away from the assumption of
+sparse representation, as a sum of sparsely represented functions is
+less sparsely represented. A cure can be a smarter way to aggregate the
+patches.</p>
+
+<p>An alternative approach is to estimate the entire signal $f$ by solving</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\hat{f}  &=&  \mathrm{arg}\min_ { f, c } \mu \left\| f - y \right\|_ {L^2(\mathbb{R}^d)}^2   +  \int_ {\mathbb{R}^d}\left(  \left\|  \pi_ {\bm{\mathrm{x}}} f -  \Phi c({\bm{\mathrm{x}}}) \right\|^2_ {L^2(\square)} + \lambda \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}})  | \right) d{\bm{\mathrm{x}}}\end{aligned} %]]></script>
+
+<p>simultaneously for $f$ and
+${ c_ {\bm{\mathrm{n}}}({\bm{\mathrm{x}}}) }$ at <em>all</em> patches.</p>
+
+<h2 id="iterative-shrinkage">Iterative shrinkage</h2>
+
+<p>Regardless of which flavor of the above MAP estimators we choose, both
+require the minimization of an aggregate of the $L_ 2$ and $\ell_ 1$
+norms. We will rewrite this problem in the form</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\mathrm{arg}\min_ { c  }  \frac{1}{2} \left\| \Phi c - y \right\|^2_ {L^2(\square)}  + \lambda \sum_ { {\bm{\mathrm{n}}} \in \mathbb{Z}^d }  |  c_ {\bm{\mathrm{n}}}  | =& \mathrm{arg}\min_ { c } \frac{1}{2} \langle  \Phi c - y ,  \Phi c - y \rangle + \lambda \|  c \|_ 1 \\
+=& \mathrm{arg}\min_ { c }\frac{1}{2}  \langle  \Phi c  ,  \Phi c  \rangle -  \langle  \Phi c  ,  y \rangle + \frac{1}{2} \langle  y  ,  y  \rangle+ \lambda \| c \|_ 1 \\
+=& \mathrm{arg}\min_ { c } \frac{1}{2}\langle  \Phi^\ast \Phi c  ,   c  \rangle -  \langle  \Phi^\ast y  ,  c \rangle + \lambda \| c \|_ 1,\end{aligned} %]]></script>
+
+<p>where the inner products are on $L^2(\square)$ and the $\ell_ 1$ norm is
+on the space of sequences. This problem bears the name of Lasso (short
+for <em>least absolute shrinkage and selection operator</em>) in statistics.</p>
+
+<p>Note that the objective is a function of the sequence $c$ with the first
+two terms differentiable that we will denote as</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+g(c) &=& \frac{1}{2}\langle  \Phi^\ast \Phi c  ,   c  \rangle -  \langle  \Phi^\ast y  ,  c \rangle,\end{aligned} %]]></script>
+
+<p>and a non-differentiable third term, <script type="math/tex">h(c) = \lambda \| c \|_ 1.</script> Let
+us fix some $c$ and approximate $g(c)$ around $c$ as</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+g(u-c) 
+\approx& g(c) +\langle \nabla g(c) ,  (u-c) \rangle_ {\ell^2}  + \frac{1}{2 \eta} \| u-c \|^2_ {\ell^2} \\
+=& \frac{1}{2\eta} \left\| u - c + \eta \nabla g(c)  \right\|^2_ {\ell^2} - \frac{\eta}{2}  \| \nabla g(c) \|^2_ {\ell^2} + g(c) \\
+=& \frac{1}{2\eta} \left\| u - (c - \eta \nabla g(c) ) \right\|^2_ {\ell^2} + \mathrm{const}.
+\end{aligned} %]]></script>
+
+<p>Here $\eta$ controls the curvature of the second-order term in the
+approximation. Plugging this approximation into the minimization problem
+yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\mathrm{arg} \min_ {u} g(u-c) + h(u) =& \mathrm{arg} \min_ {u}  \frac{1}{2\eta} \left\| u - (c - \eta \nabla g(c) ) \right\|^2_ {\ell^2} +  \lambda \| u \|_ 1 \\
+=& \mathrm{arg} \min_ {u}  \frac{1}{2} \left\| u - z \right\|^2_ {\ell^2} + \eta \lambda \| u \|_ 1 \\
+=& \mathrm{arg} \min_ {u}  \sum_ {\bm{\mathrm{n}} \in \mathbb{Z}^d } \frac{1}{2}( u_ {\bm{\mathrm{n}}} - z_ {\bm{\mathrm{n}}} )^2  + \eta \lambda | u_ {\bm{\mathrm{n}}} | \\
+=& \{  \mathrm{arg} \min_ {u}  \frac{1}{2}( u  - z_ {\bm{\mathrm{n}}} )^2  +  \eta \lambda  | u |  \}_ {\bm{\mathrm{n}} \in \mathbb{Z}^d},\end{aligned} %]]></script>
+
+<p>where</p>
+
+<script type="math/tex; mode=display">z = c - \eta \nabla g(c) = c - \eta \, \Phi^\ast (\Phi c - y).</script>
+
+<p>Note that the latter problem is coordinate-separable, so we can consider
+the following one-dimensional minimization problem:</p>
+
+<script type="math/tex; mode=display">\mathrm{arg} \min_ u \frac{1}{2} (u - z)^2 + \lambda |u|</script>
+
+<p>Since the problem is non-smooth at $u=0$, we cannot readily take a derivative
+w.r.t. to $u$ and compare it to zero; instead, we have to use the
+sub-differential set</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\partial |u| = \begin{aligned}
+\text{sign}(u) &: u \neq 0  \\
+[-1,1] &: u = 0\
+\end{aligned} %]]></script>
+
+<p>This yields $u = y - \lambda \alpha$ for $\alpha \in \partial |u|$.
+Whenever $z \in [-\lambda, \lambda]$, we can set $u=0$ with
+$\alpha = \frac{z}{\lambda} \in  \left( \partial |u| \right|_ {u=0}$.
+Otherwise, $u \ne 0$ and we have $\alpha = \mathrm{sign}\, u$ yielding
+$u = z - \lambda \, \mathrm{sign}\, u$. If $z&gt;\lambda$, the right hand
+side is positive, hence $u&gt;0$ and $\mathrm{sign}\, u = 1$; this yields
+$u = z-\lambda$. Similarly, for $y &lt; -\lambda$, we have $u&lt;0$ and hence
+$u = z + \lambda$. We can therefore summarize the solution to the
+problem as</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\mathrm{arg} \min_ u \frac{1}{2} (u - z)^2 + \lambda |u| = \left\{ \begin{array}{ll} 0 & : -\lambda \le z \le \lambda \\
+                z - \lambda & : z > \lambda \\
+                z + \lambda & : z < -\lambda \\                
+                \end{array} \right. %]]></script>
+
+<p>This operation on $z$ is called
+<em>soft thresholding</em> or <em>shrinkage</em><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> and will be denoted by
+$u = \mathcal{S}_ {\lambda}(z)$.</p>
+
+<p>Plugging this result back into our original multi-dimensional problem
+yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\mathrm{arg} \min_ {u} g(u-c) + h(u) &=& \{  \mathcal{S}_ { \eta \lambda }( z_ {\bm{\mathrm{n}}}  )   \}_ {\bm{\mathrm{n}} \in \mathbb{Z}^d} 
+= \mathcal{S}_ { \eta \lambda }( c - \eta \, \Phi^\ast (\Phi c - y)  ),\end{aligned} %]]></script>
+
+<p>where in the last passage the shrinkage operator
+$ \mathcal{S}_ { \eta \lambda }$ is applied element-wise to the sequence.
+We can repeat the process iterartively starting at some initial $c^0$
+(upperscript indices denote iteration number),</p>
+
+<script type="math/tex; mode=display">c^{k+1} = \mathcal{S}_ { \eta \lambda }(  c^{k} - \eta \, \Phi^\ast (\Phi c^{k} - y)     ),</script>
+
+<p>yielding a process known as <em>iterative shrinkage</em> (a.k.a. iterative
+shrinkage and thresholding algorithm or ISTA for short)<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>. Note that
+the step $c^{k} - \eta \, \Phi^\ast (\Phi c^{k} - y)$ inside the
+shrinkage operator is a gradient descent step at point $c^k$ with the
+step size $\eta$, and it would be exactly the step if the objective
+lacked the term $h(c)$. The shrinkage operator accounts for this
+additional term.</p>
+
+<h2 id="non-negativity">Non-negativity</h2>
+
+<p>In the case of non-negative dictionaries with non-negative coefficients,
+we can modify our one-dimensional Lasso problem by adding a
+non-negativity constraint on $u$,</p>
+
+<script type="math/tex; mode=display">\mathrm{arg} \min_ {u \ge 0} \frac{1}{2} (u - z)^2 + \lambda |u|</script>
+
+<p>The solution is obtained in the same manner, except thart now $u$ cannot
+attain negative values. This leads to the one-sided shrinkage operator</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\mathrm{arg} \min_ {u \ge 0} \frac{1}{2} (u - z)^2 + \lambda |u| = \left\{ \begin{array}{ll} 0 & : z \le \lambda \\
+                z - \lambda & : z > \lambda \\         
+                \end{array} \right. = \mathcal{R}_ {\lambda}(z). %]]></script>
+
+<p>This operator is known under the name of <em>rectified linear unit</em> (or ReLU for
+short) in the deep learning literature. We will explore this surprising
+connection more in the sequel.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>In the general case, projection onto the bi-orthonormal set of
+functions yields the coefficients. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>This operator can be viewed as the <em>proximity map</em> of the function
+$\lambda |c|$. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>This is a member of a larger family of non-smooth optimization
+algorithms known as proximal methods. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/cs236860/semesters/w1920/lecture_notes/lecture_6/" class="pagination--pager" title="Lecture 6: Patch-based priors
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/semesters/w1920/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/semesters/w1920/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/semesters/w1920/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/semesters/w1920/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/semesters/w1920/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/semesters/w1920/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/semesters/w1920/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>

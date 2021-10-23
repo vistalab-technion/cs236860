@@ -1,0 +1,1106 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 4: Random signals | CS236860: Digital Image Processing</title>
+<meta name="description" content="Elementary probabilty, Random signals">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 4: Random signals">
+<meta property="og:url" content="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_4/">
+
+
+  <meta property="og:description" content="Elementary probabilty, Random signals">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_4/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "http://0.0.0.0:4000/cs236860",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/assignments/" >Assignments</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/" >Semesters</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 4: Random signals">
+    <meta itemprop="description" content="Elementary probabilty, Random signals">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 4: Random signals
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  57 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#elementary-probability">Elementary probability</a>
+    <ul>
+      <li><a href="#probability-measure">Probability measure</a></li>
+      <li><a href="#random-variables">Random variables</a></li>
+      <li><a href="#uniform-distribution-and-uniformization">Uniform distribution and uniformization</a></li>
+      <li><a href="#expectation">Expectation</a></li>
+      <li><a href="#moments">Moments</a></li>
+      <li><a href="#joint-distribution">Joint distribution</a></li>
+      <li><a href="#marginal-distribution">Marginal distribution</a></li>
+      <li><a href="#statistical-independence">Statistical independence</a></li>
+      <li><a href="#convolution-theorem">Convolution theorem</a></li>
+      <li><a href="#limit-theorems">Limit theorems</a></li>
+      <li><a href="#joint-moments">Joint moments</a></li>
+      <li><a href="#linear-transformations">Linear transformations</a></li>
+    </ul>
+  </li>
+  <li><a href="#random-signals">Random signals</a>
+    <ul>
+      <li><a href="#stationarity">Stationarity</a></li>
+      <li><a href="#auto-correlation-and-cross-correlation">Auto-correlation and cross-correlation</a></li>
+      <li><a href="#wide-sense-stationarity">Wide-sense stationarity</a></li>
+      <li><a href="#power-spectrum-density">Power spectrum density</a></li>
+      <li><a href="#cross-spectral-density">Cross-spectral density</a></li>
+      <li><a href="#lsi-systems">LSI systems</a></li>
+      <li><a href="#white-and-colored-noise">White and colored noise</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="elementary-probability">Elementary probability</h2>
+
+<h3 id="probability-measure">Probability measure</h3>
+
+<p>We start with a few elementary (and simplified) definitions from the
+theory of probability. Let us fix a <em>sample space</em> $\Omega = [0,1]$. A
+<em>Borel set</em> on $\Omega$ is a set that can be formed from open intervals
+of the form $(a,b), 0 \le a&lt;b \le 1$, through the operations of
+countable union, countable intersection, and set difference. We will
+denote the collection of all Borel sets in $\Omega$ as $\Sigma$. It is
+pretty straightforward to show that $\Sigma$ contains the empty set, is
+closed under complement, and is closed under countable union. Such a set
+is known as <em>$\sigma$-algebra</em> and its elements (subsets of
+$\mathbb{R}$) are referred to as <em>events</em>.</p>
+
+<p>A <em>probability measure</em> $P$ on $\Sigma$ is a function
+$P : \Sigma \rightarrow [0,1]$ satisfying $P(\emptyset) = 0$,
+$P(\mathbb{R}) = 1$ and additivity for every countable collection
+${ E _n \in \Sigma }$,</p>
+
+<script type="math/tex; mode=display">P\left(  \bigcup _n E _n \right) = \sum _{n} P(E _n).</script>
+
+<h3 id="random-variables">Random variables</h3>
+
+<p>A <em>random variable</em> $\mathpzc{X}$ is a <em>measurable</em> map
+$\mathpzc{X} : \Omega \rightarrow \mathbb{R}$, i.e., a function such
+that for every $a$,
+${ \mathpzc{X} \le a } = { \alpha : \mathpzc{X}(\alpha) \le a  } \in \Sigma$.
+The map $\mathpzc{X}$ pushes forward the probability measure $P$; the
+<em>pushforward measure</em> $\mathpzc{X} _\ast P$ is given by</p>
+
+<script type="math/tex; mode=display">(\mathpzc{X} _\ast P)(A) = P(\mathpzc{X}^{-1}(A)),</script>
+
+<p>where
+$\mathpzc{X}^{-1}(A) = { \alpha  : X(\alpha) \in A }$ is the preimage
+of $A \subseteq \mathbb{R}$. (In short, we can write
+$\mathpzc{X} _\ast P = P\mathpzc{X}^{-1}$). This pushforward probability
+measure $\mathpzc{X} _\ast P$ is usually referred to as the <em>probability
+distribution</em> (or the <em>law</em>) of $\mathpzc{X}$.</p>
+
+<p>When the range of $\mathpzc{X}$ is finite or countably infinite, the
+random variable is called <em>discrete</em> and its distribution can be
+described by the <em>probability mass function</em> (PMF):</p>
+
+<script type="math/tex; mode=display">f _{\mathpzc{X}}(x) = P(\mathpzc{X}=x),</script>
+
+<p>which is a shorthand for $P(  {\alpha : \mathpzc{X}(\alpha) = x } )$. 
+Otherwise, $\mathpzc{X}$ is called a <em>continuous</em> random variable.
+Any random variable can be described by the <em>cumulative distribution function</em> (CDF)</p>
+
+<script type="math/tex; mode=display">F _{\mathpzc{X}}(x) = P({\mathpzc{X} \le x}),</script>
+
+<p>which is a shorthand for
+$F _{\mathpzc{X}}(x) = P(  {\alpha : \mathpzc{X}(\alpha) \le x } )$. If
+$X$ is absolutely continuous, the CDF can be described by the integral</p>
+
+<script type="math/tex; mode=display">F _{\mathpzc{X}}(x) = \int _{-\infty}^x f _{\mathpzc{X}}(x') dx',</script>
+
+<p>where the integrand $f _{\mathpzc{X}}$ is known as the <em>probability density
+function</em> (PDF)<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<h3 id="uniform-distribution-and-uniformization">Uniform distribution and uniformization</h3>
+
+<p>A random variable $\mathpzc(U)$ is said to be <em>uniformly distributed</em> on
+$[0,1]$ (denoted as $\mathpzc{U} \sim \mathcal{U}[0,1]$) if</p>
+
+<script type="math/tex; mode=display">P(\mathpzc{U} \in [a,b]) = b-a = \lambda([a,b]).</script>
+
+<p>In other words, the map $\mathpzc{U}$ pushes forward the standard Lebesgue measure on
+$[0,1]$, $\mathpzc{U} _\ast P = \lambda$. The corresponding CDF is
+$F _\mathpzc{U}(u) = \max{ 0, \min{ 1, u } }$. Let $\mathpzc{X}$ be
+some other random variable characterized by the CDF $F _\mathpzc{X}$. We
+define $\mathpzc{U} = F _\mathpzc{X}(\mathpzc{X})$. Let us pick an
+arbitrary $x \in \mathbb{R}$ and let $u = F _\mathpzc{X}(x) \in [0,1]$.
+From monotonicity of the CDF, it follows that $\mathpzc{U} \le u$ if and
+only if $\mathpzc{X} \le x$. Hence,
+$F _\mathpzc{U}(u) = P(\mathpzc{U} \le u) = P(\mathpzc{X} \le x) = F _\mathpzc{X}(x) = u$.
+We conclude that by transforming a random variable with its own CDF
+uniformizes it on the interval $[0,1]$.</p>
+
+<p>Applying the relation in inverse direction, let
+$\mathpzc{U} \sim \mathcal{U}[0,1]$ and let $F$ be a valid CDF. Then,
+the random variable $\mathpzc{X} = F^{-1}(\mathpzc{U})$ is distributed
+with the CDF $F _\mathpzc{U} = F$.</p>
+
+<h3 id="expectation">Expectation</h3>
+
+<p>The <em>expected value</em> (a.k.a. the <em>expectation</em> or <em>mean</em>) of a random
+variable $\mathpzc{X}$ is given by</p>
+
+<script type="math/tex; mode=display">\mathbb{E} \mathpzc{X} = \int _{\mathbb{R}} \mathrm{id}\, d(\mathpzc{X} _\ast P) =  \int _{\Omega} \mathpzc{X}(\alpha) d\alpha,</script>
+
+<p>where the integral is the Lebesgue integral w.r.t. the measure $P$;
+whenever a probability density function exists, the latter can be
+written as</p>
+
+<script type="math/tex; mode=display">\mathbb{E} \mathpzc{X} = \int _{\mathbb{R}} x  f _{\mathpzc{X}}(x) dx.</script>
+
+<p>Note that due to the linearity of integration, the expectation operator
+$\mathbb{E}$ is linear. Using the Lebesgue integral notation, we can
+write for $E \in \Sigma$</p>
+
+<script type="math/tex; mode=display">P(E) = \int _E dP = \int _\mathbb{R} \ind _E \, dP = \mathbb{E}  \ind _E,</script>
+
+<p>where</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\ind _E(\alpha) = \left\{
+ \begin{array}{ccc}
+ 1 & : & \alpha \in E \\
+ 0 & : & \mathrm{otherwise}
+ \end{array}
+   \right. %]]></script>
+
+<p>is the <em>indicator function</em> of $E$, which is by itself a
+random variable. This relates the expectation of the indicator of an
+event to its probability.</p>
+
+<h3 id="moments">Moments</h3>
+
+<p>For any measurable function $g : \mathbb{R} \rightarrow \mathbb{R}$,
+$\mathpzc{Z} = g(\mathpzc{X})$ is also a random variable with the
+expectation</p>
+
+<script type="math/tex; mode=display">\mathbb{E} \mathpzc{Z} = \mathbb{E} g(\mathpzc{X}) =  \int _{\mathbb{R}} g\, dP =  \int _{\mathbb{R}} g(x) f _{\mathpzc{X}}(x) dx.</script>
+
+<p>Such an expectation is called a <em>moment</em> of $\mathpzc{X}$. Particularly,
+the $k$-th order moment is obtained by setting $g(x) = x^k$,</p>
+
+<script type="math/tex; mode=display">\mu _{k}(\mathpzc{X}) = \mathbb{E} \mathpzc{X}^k.</script>
+
+<p>The expected value itself is the first-order moment of $\mathpzc{X}$, which is often
+denoted simply as $\mu _\mathpzc{X} = \mu _{1}(\mathpzc{X})$. The
+<em>central</em> $k$-th order moment is obtained by setting
+$g(x) = (x - \mu _\mathpzc{X})^k$,</p>
+
+<script type="math/tex; mode=display">m _{k}(\mathpzc{X}) = \mathbb{E} ( \mathpzc{X}  - \mathbb{E}  \mathpzc{X})^k.</script>
+
+<p>A particularly important central second-order moment is the <em>variance</em></p>
+
+<script type="math/tex; mode=display">\sigma _\mathpzc{X}^2 = \mathrm{Var}\, \mathpzc{X} = m _2 = \mathbb{E} ( \mathpzc{X}  - \mathbb{E}  \mathpzc{X})^2 = \mu _2  ( \mathpzc{X} ) - \mu^2 _\mathpzc{X}.</script>
+
+<h3 id="joint-distribution">Joint distribution</h3>
+
+<p>A vector $\mathpzcb{X} = (\mathpzc{X} _1, \dots, \mathpzc{X} _n)$ of
+random variables is called a <em>random vector</em>. Its probability
+distribution is defined as before as the pushforward measure
+$P = \mathpzcb{X} _\ast \lambda$ Its is customary to treat $\mathpzcb{X}$
+as a collection of $n$ random variables and define their <em>joint CDF</em> as</p>
+
+<script type="math/tex; mode=display">F _{\mathpzcb{X}}(\bb{x}) = P({\mathpzcb{X} \le \bb{x}}) = P(\mathpzc{X} _1 \le x _1, \dots, \mathpzc{X} _n \le x _n) 
+= P(\{ \mathpzc{X} _1 \le x _1 \} \times  \dots \times \{ \mathpzc{X} _n \le x _n \}).</script>
+
+<p>As before, whenever the following holds</p>
+
+<script type="math/tex; mode=display">F _{\mathpzcb{X}}(\bb{x}) = \int _{-\infty}^{x _1} \cdots \int _{-\infty}^{x _n}  f _{\mathpzcb{X}}(x _1',\dots, x _n') dx' _1 \cdots dx' _n,</script>
+
+<p>the integrand $f _{\mathpzcb{X}}$ is called the <em>joint PDF</em> of
+$\mathpzcb{X}$. The more rigorous definition as the Radon-Nikodym
+derivative</p>
+
+<script type="math/tex; mode=display">f _{\mathpzcb{X}} = \frac{d(\mathpzc{X} _\ast P) }{ d\lambda}</script>
+
+<p>stays unaltered, only that now $\lambda$ is the $n$-dimensional Lebesgue
+measure.</p>
+
+<h3 id="marginal-distribution">Marginal distribution</h3>
+
+<p>Note that the joint CDF of the sub-vector
+$(\mathpzc{X} _2, \dots, \mathpzc{X} _n)$ is given by</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+F _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) =& P(\mathpzc{X} _2 \le x _2, \dots, \mathpzc{X} _n \le x _n) 
+= P(\mathpzc{X} _1 \le \infty, \mathpzc{X} _2 \le x _2, \dots, \mathpzc{X} _n \le x _n)  \\
+=& F _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n } (\infty, x _2,\dots,x _n).\end{aligned} %]]></script>
+
+<p>Such a distribiution is called <em>marginal</em> w.r.t. $\mathpzc{X} _1$ and the
+process of obtaining it by substituting $x _1 = \infty$ into
+$F _{\mathpzcb{X}}$ is called <em>marginalization</em>. The corresponding action
+in terms of the PDF consists of integration over $x _1$,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+f _{\mathpzc{X} _2, \cdots, \mathpzc{X} _n } (x _2,\dots,x _n) =& 
+\int _\mathbb{R} f _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n } (x _1, x _2,\dots,x _n) dx _1.\end{aligned} %]]></script>
+
+<h3 id="statistical-independence">Statistical independence</h3>
+
+<p>A set $\mathpzc{X} _1, \dots, \mathpzc{X} _n$ of random variables is
+called <em>statistically independent</em> if their joint CDF is
+coordinate-separable, i.e., can be written as the following tensor
+product</p>
+
+<script type="math/tex; mode=display">F _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n} = F _{\mathpzc{X} _1} \otimes \cdots \otimes F _{\mathpzc{X} _n}.</script>
+
+<p>An alternative definion can be given in terms of the PDF (whenever it
+exists):</p>
+
+<script type="math/tex; mode=display">f _{\mathpzc{X} _1, \cdots, \mathpzc{X} _n} = f _{\mathpzc{X} _1} \otimes \cdots \otimes f _{\mathpzc{X} _n}.</script>
+
+<p>We will see a few additional alternative definitions in the sequel.</p>
+
+<h3 id="convolution-theorem">Convolution theorem</h3>
+
+<p>Let $\mathpzc{X}$ and $\mathpzc{Y}$ be statistically-independent random
+variables with a PDF and let $\mathpzc{Z} = \mathpzc{X}+\mathpzc{Y}$.
+Then,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+F _\mathpzc{Z}(z) =& P(\mathpzc{Z} \le z) = P(X+Y \le z) = \int _{\mathbb{R}} \int _{\infty}^{z-y} f _{\mathpzc{X}\mathpzc{Y}}(x,y) dxdy \\
+=& \int _{\mathbb{R}} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy,\end{aligned} %]]></script>
+
+<p>where we changed the variable $x$ to $x’ = x+y$. Differentiating w.r.t.
+$z$ yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+f _\mathpzc{Z}(z)  =& \frac{dF _\mathpzc{Z}(z)}{dz} = \int _{\mathbb{R}} \frac{\partial}{\partial z} \int _{\infty}^{z} f _{\mathpzc{X}\mathpzc{Y}}(x'-y,y) dx' dy = \int _{\mathbb{R}}  f _{\mathpzc{X}\mathpzc{Y}}(z-y,y)  dy.\end{aligned} %]]></script>
+
+<p>Since $\mathpzc{X}$ and $\mathpzc{Y}$ are statistically-independent, we
+can substitute
+$f _{\mathpzc{X}\mathpzc{Y}} = f _{\mathpzc{X}} \otimes f _{\mathpzc{Y}}$
+yielding</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+f _\mathpzc{Z}(z)  =& \int _{\mathbb{R}}  f _{\mathpzc{X}}(z-y) f _{\mathpzc{Y}}(y)  dy = (f _{\mathpzc{X}} \ast f _{\mathpzc{Y}} )(z).\end{aligned} %]]></script>
+
+<h3 id="limit-theorems">Limit theorems</h3>
+
+<p>Given independent identically distributed (i.i.d.) variables
+$\mathpzc{X} _1, \dots, \mathpzc{X} _n$ with mean $\mu$ and variance
+$\sigma^2$, we define their <em>sample average</em> as</p>
+
+<script type="math/tex; mode=display">\mathpzc{S} _n = \frac{1}{n}( \mathpzc{X} _1 + \cdots + \mathpzc{X} _n ).</script>
+
+<p>Note that $\mathpzc{S} _n$ is also a random variable with
+$\mu _{\mathpzc{S} _n} = \mu$ and
+$\displaystyle{\sigma^2 _{\mathpzc{S} _n} = \frac{\sigma^2}{n}}$. It is
+straightforward to see that the variance decays to zero in the limit
+$n \rightarrow \infty$, meaning that $\mathpzc{S} _n$ approaches a
+deterministic variable $\mathpzc{S} = \mu$. However, a much stronger
+result exists: the (strong) <em>law of large numbers</em> states that in the
+limit $n \rightarrow \infty$, the sample average converges in
+probability to the expected value, i.e.,</p>
+
+<script type="math/tex; mode=display">P\left(  \lim _{n \rightarrow \infty} \mathpzc{S} _n = \mu  \right) = 1.</script>
+
+<p>This fact is often denoted as
+$\mathpzc{S} _n \mathop{\rightarrow}^P \mu$. Furthermore, defining the
+normalized deviation from the limit
+$\mathpzc{D} _n = \sqrt{n}(\mathpzc{S} _n - \mu)$, the <em>central limit
+theorem</em> states that $\mathpzc{D} _n$ converges in distribution to
+$\mathcal{N}(0,\sigma^2)$, that is, its CDF converges pointwise to that
+of the normal distribution. This is often denoted as
+$\mathpzc{D} _n \mathop{\rightarrow}^D \mathcal{N}(0,\sigma^2)$.</p>
+
+<p>A slightly more general result is known as the <em>delta method</em> in
+statistics: if $g :  \mathbb{R} \rightarrow \mathbb{R}$ is a
+$\mathcal{C}^1$ function with non-vanishing derivative, then by the
+Taylor theorem,</p>
+
+<script type="math/tex; mode=display">g(\mathpzc{S} _n) = g(\mu) + g'(\nu)(\mathpzc{S} _n-\mu) + \mathcal{O}(| \mathpzc{S} _n-\mu |^2),</script>
+
+<p>where $\nu$ lies between $\mathpzc{S} _n$ and $\mu$. Since by the law of
+large numbers $\mathpzc{S} _n \mathop{\rightarrow}^P \mu$, we also have
+$\nu \mathop{\rightarrow}^P \mu$; since $g’$ is continuous,
+$g’(\nu) \mathop{\rightarrow}^P g’(\mu)$. Rearranging the terms and
+multiplying by $\sqrt{n}$ yields</p>
+
+<script type="math/tex; mode=display">\sqrt{n}( g(\mathpzc{S} _n) - g(\mu) ) = g'(\nu) \sqrt{n}( \mathpzc{S} _n) - \mu ) = g'(\nu) \mathpzc{D} _n,</script>
+
+<p>from where (formally, by invoking the Slutsky theorem):</p>
+
+<script type="math/tex; mode=display">\sqrt{n}( g(\mathpzc{S} _n) - g(\mu) ) \mathop{\rightarrow}^D \mathcal{N}(0,g^{\prime} (\mu)^2 \sigma^2).</script>
+
+<h3 id="joint-moments">Joint moments</h3>
+
+<p>Given a measurable function
+$\bb{g} : \mathbb{R}^n \rightarrow \mathbb{R}^m$, a (joint) moment of a
+random vector $\mathpzcb{X} = (\mathpzc{X} _1, \dots, \mathpzc{X} _n)$ is</p>
+
+<script type="math/tex; mode=display">\mathbb{E} \bb{g}(\mathpzcb{X}) = \int \bb{g}(\bb{x}) dP = 
+\left(\begin{array}{c} 
+ \int g _1(\bb{x}) dP \\
+\vdots \\
+ \int g _m(\bb{x}) dP
+\end{array}
+\right)
+=
+\left(\begin{array}{c} 
+\int _{\mathbb{R}^n} g _1(\bb{x}) f _{\mathpzcb{X}}(\bb{x}) d\bb{x}  \\
+\vdots \\
+\int _{\mathbb{R}^n} g _m(\bb{x}) f _{\mathpzcb{X}}(\bb{x}) d\bb{x}
+\end{array}
+\right);</script>
+
+<p>the last term migh be undefined if the PDF does not exist.
+The mean of a random vector is simply
+$\bb{\mu} _\mathpzcb{X}  = \mathbb{E} \mathpzcb{X}$. Of particular
+importance are the second-order joint moments of pairs of random
+variables,</p>
+
+<script type="math/tex; mode=display">r _{\mathpzc{X}\mathpzc{Y}} = \mathbb{E} \mathpzc{X}\mathpzc{Y}</script>
+
+<p>and its central version</p>
+
+<script type="math/tex; mode=display">\sigma^2 _{\mathpzc{X}\mathpzc{Y}} = \mathrm{Cov}(\mathpzc{X},\mathpzc{Y}) = \mathbb{E} \left( (\mathpzc{X} - \mathbb{E} \mathpzc{X} )(\mathpzc{Y}  - \mathbb{E} \mathpzc{Y}) \right) = r _{\mathpzc{X}\mathpzc{Y}} - \mu _\mathpzc{X} \mu _\mathpzc{Y}.</script>
+
+<p>The latter quantity is known as the <em>covariance</em> of $\mathpzc{X}$ and
+$\mathpzc{Y}$.</p>
+
+<p>Two random variables $\mathpzc{X}$ and $\mathpzc{Y}$ with
+$r _{\mathpzc{X}\mathpzc{Y}} = 0$ are called <em>orthogonal</em><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<p>The variables with $\sigma^2 _{\mathpzc{X}\mathpzc{Y}} = 0$ are called
+<em>uncorrelated</em>. Note that for a statistically independent pair
+$(\mathpzc{X},\mathpzc{Y})$,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\sigma^2 _{\mathpzc{X}\mathpzc{Y}} =& \int _{\mathbb{R}^2} (x-\mu _\mathpzc{X}) (y-\mu _\mathpzc{Y}) d((\mathpzc{X} \times \mathpzc{Y}) _\ast P) = \int _{\mathbb{R}} (x-\mu _\mathpzc{X}) d(\mathpzc{X} _\ast P) \, \int _{\mathbb{R}} (y-\mu _\mathpzc{Y}) d(\mathpzc{Y} _\ast P) \\
+=& \mathbb{E} (\mathpzc{X} - \mathbb{E} \mathpzc{X} ) \cdot \mathbb{E} (\mathpzc{Y}  - \mathbb{E} \mathpzc{Y}) = 0.\end{aligned} %]]></script>
+
+<p>However, the converse is not true, i.e., lack of correlation does not
+generally imply statistical independence (with the notable exception of
+normal variables). If $\mathpzc{X}$ and $\mathpzc{Y}$ are uncorrelated
+and furthermore one of them is zero-mean, then they are also orthogonal
+(and the other way around).</p>
+
+<p>In general, the <em>correlation matrix</em> of a random vector
+$\mathpzcb{X} = (\mathpzc{X} _1, \dots, \mathpzc{X} _n)$ is given by</p>
+
+<script type="math/tex; mode=display">\bb{R} _{\mathpzcb{X}} = \mathbb{E}  \mathpzcb{X} \mathpzcb{X}^\Tr;</script>
+
+<p>its $(i,j)$-th element is
+$(\bb{R} _{\mathpzcb{X}}) _{ij} = \mathbb{E} \mathpzc{X} _i \mathpzc{X} _j$.
+Similarly, the <em>covariance matrix</em> is defined as the central counterpart
+of the above moment,</p>
+
+<script type="math/tex; mode=display">\bb{C} _{\mathpzcb{X}} = \mathbb{E}  (\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} ) (\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} )^\Tr;</script>
+
+<p>its $(i,j)$-th element is
+$(\bb{C} _{\mathpzcb{X}}) _{ij} =\mathrm{Cov}( \mathpzc{X} _i , \mathpzc{X} _j)$.
+Given another random vector
+$\mathpzcb{Y} = (\mathpzc{Y} _1, \dots, \mathpzc{Y} _m)$, the
+<em>cross-correlation</em> and <em>cross-covariance</em> matrices are defined as
+$\bb{R} _{\mathpzcb{X}\mathpzcb{Y}} = \mathbb{E}  \mathpzcb{X} \mathpzcb{Y}^\Tr$
+and
+$\bb{C} _{\mathpzcb{X}\mathpzcb{Y}} = \mathbb{E}  (\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} ) (\mathpzcb{Y} - \bb{\mu} _\mathpzcb{Y} )^\Tr$,
+respectively.</p>
+
+<h3 id="linear-transformations">Linear transformations</h3>
+
+<p>Let $\mathpzcb{X} = (\mathpzc{X} _1, \dots, \mathpzc{X} _n)$ be an
+$n$-dimensional random vector, $\bb{A}$ and $m \times n$ deterministic
+matrix, and $\bb{b}$ and $m$-dimensional deterministic vector. We define
+a random vector $\mathpzcb{Y} = \bb{A} \mathpzcb{X} + \bb{b} $ as the
+affine transformation of $\mathpzcb{X}$. Using linearity of the
+expectation operator, it is straightforward to show that</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\bb{\mu} _\mathpzcb{Y}  =& \mathbb{E}(\bb{A} \mathpzcb{X} + \bb{b}) = \bb{A} \bb{\mu} _\mathpzcb{X} + \bb{b} \\
+\bb{C} _\mathpzcb{Y}  =& \mathbb{E}(\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr = \bb{A} \bb{C} _\mathpzcb{X} \bb{A}^\Tr \\
+\bb{C} _{\mathpzcb{X} \mathpzcb{Y}}  =& \mathbb{E}(\mathpzcb{X} - \bb{\mu} _\mathpzcb{X} ) (\bb{A} \mathpzcb{X} - \bb{A} \bb{\mu} _\mathpzcb{X} )^\Tr  = \bb{C} _\mathpzcb{X} \bb{A}^\Tr.\end{aligned} %]]></script>
+
+<h2 id="random-signals">Random signals</h2>
+
+<p>A <em>random signal</em> or a <em>stochastic process</em> is a collection of random
+variables ${ \mathpzc{F}(\bb{x}) : \bb{x} \in D }$ indexed by some set
+$D$ (called the domain) and assuming values in some space $S$ (called
+the state space). For our purpose, we will assume $D$ to be either
+$\mathbb{R}^d$ (in this case we will refer to the process as to a
+continuous-domain stochastic process) or $\mathbb{Z}^d$ (discrete-domain
+process); the state space $D$ will be assumed either $\mathbb{R}$
+(continuous state) or $\mathbb{Z}$ (discrete state). Informally, setting
+$D=\mathbb{R}^2$ and $S=\mathbb{R}$ we can think of $\mathpzc{F}$ as of
+a random image. When $d&gt;1$, it is customary to call the stochastic
+process a <em>random field</em>. We will henceforth use the term “random
+signal”. In what follows, we will almost always tacitly assume $D$ to be
+$\mathbb{R}^d$; the very same reasoning applies to discrete-domain
+signals mutatis mutandis.</p>
+
+<p>Formally, a random signal $\mathpzc{F}$ is a function
+$\mathpzc{F} : D \times \Omega \rightarrow S$, where $\Omega$ denotes
+the sample space. The first argument $\bb{x} \in D$ in
+$\mathpzc{F}(\bb{x}, \alpha)$ sets the location in the domain, while the
+second argument $\alpha \in \Omega$ is responsible for the randomness.
+Fixing some $\alpha \in \Omega$, the resulting deterministic function
+$f(\bb{x}) = \mathpzc{F}(\bb{x}, \alpha)$ is called a <em>realization</em> or a
+<em>sample function</em> of $\mathpzc{F}$. Fixing some $\bb{x} \in D$, we
+obtain a random variable
+$\mathpzc{F}(\alpha) =  \mathpzc{F}(\bb{x}, \alpha)$ describing the
+randomness of the signal sampled at a fixed location $\bb{x}$. Note that
+for a singletone $D = {1}$, the signal is just a random variable,
+while for a finite $D = {1,2,\dots,n}$ it is a random vector. Random
+signals can be therefore thought of as a generalization of random
+vectors to “random functions”. However, in such an
+infinitely-dimensional case it is not easy to define the standard
+notions such as density. Instead, we are going to sample the signal at a
+set of points ${ \bb{x} _1,\dots,\bb{x} _n } \subset D$ and describe the
+distribution of the random vector
+$\mathpzcb{F} = (\mathpzc{F}(\bb{x} _1),\dots, \mathpzc{F}(\bb{x} _n))$.
+We will define the <em>finite-dimensional CDF</em> as</p>
+
+<script type="math/tex; mode=display">F _{\bb{x} _1,\dots,\bb{x} _n}(f _1,\dots,f _n) = P(\mathpzc{F}(\bb{x} _1) \le f _1, \dots, \mathpzc{F}(\bb{x} _n) \le f _n).</script>
+
+<h3 id="stationarity">Stationarity</h3>
+
+<p>A random signal is said (strict sense) <em>stationary</em> (SSS), if its
+probability distribution is shift-invariant. In other words, if for any
+$n$, any ${ \bb{x} _1,\dots,\bb{x} _n } \subset D$, and any
+$\bb{p} \in D$,
+$(\mathpzc{F}(\bb{x} _1+\bb{p}),\dots, \mathpzc{F}(\bb{x} _n+\bb{p}))$ has
+the same distribution as
+$(\mathpzc{F}(\bb{x} _1),\dots, \mathpzc{F}(\bb{x} _n))$, then
+$\mathpzc{F}$ is SSS.</p>
+
+<h3 id="auto-correlation-and-cross-correlation">Auto-correlation and cross-correlation</h3>
+
+<p>Moments of random signals can be defined by considering random vectors
+obtained from sampling the signal at some set of locations. Of
+particular importance will be the following first- and second-order
+moments: the <em>mean</em> function</p>
+
+<script type="math/tex; mode=display">\mu _{\mathpzc{F}}(\bb{x}) = \mathbb{E} \mathpzc{F}(\bb{x}))</script>
+
+<p>and the <em>auto-correlation</em> function</p>
+
+<script type="math/tex; mode=display">R _{\mathpzc{F}}(\bb{x} _1,\bb{x} _2) = \mathbb{E} \mathpzc{F}(\bb{x} _1) \mathpzc{F}(\bb{x} _2).</script>
+
+<p>Given two random signals $\mathpzc{F}$ and $\mathpzc{G}$, we can
+similarly define their <em>cross-correlation</em> as</p>
+
+<script type="math/tex; mode=display">R _{\mathpzc{F}\mathpzc{G}}(\bb{x} _1,\bb{x} _2) = \mathbb{E} \mathpzc{F}(\bb{x} _1) \mathpzc{G}(\bb{x} _2).</script>
+
+<p>It follows from definition that
+$R _{\mathpzc{F}}(\bb{x} _1,\bb{x} _2)  = R _{\mathpzc{F}}(\bb{x} _2,\bb{x} _1)$
+and
+$R _{\mathpzc{G}\mathpzc{F}}(\bb{x} _1,\bb{x} _2)  = R _{\mathpzc{F}\mathpzc{G}}(\bb{x} _2,\bb{x} _1)$.
+Two random signals are said to be <em>orthogonal</em> if their covariance
+function vanishes at every point.</p>
+
+<h3 id="wide-sense-stationarity">Wide-sense stationarity</h3>
+
+<p>A random signal $\mathpzc{F}$ is called <em>wide-sense stationary</em> (WSS) if
+its mean and auto-correlation functions are shift-invariant, i.e., for
+every $\bb{p} \in D$
+$\mu _{\mathpzc{F}}(\bb{x} + \bb{p}) = \mu _{\mathpzc{F}}(\bb{x})$ for
+every $\bb{x} \in D$, and
+$R _{\mathpzc{F}}(\bb{x} _1 + \bb{p},\bb{x} _2 + \bb{p}) = R _{\mathpzc{F}}(\bb{x} _1,\bb{x} _2)$
+for every $\bb{x} _1,\bb{x} _2 \in D$. These conditions immediately
+translate to demanding $\mu _{\mathpzc{F}} = \mathrm{const}$ and
+$R _{\mathpzc{F}}(\bb{x} _1,\bb{x} _2) = R _{\mathpzc{F}}(\bb{x} _1 - \bb{x} _2)$.
+Two WSS random signals $\mathpzc{F}$ and $\mathpzc{G}$ are called
+<em>jointly</em> WSS if their cross-correlation is shift-invariant, i.e.,
+$R _{\mathpzc{F}\mathpzc{G}}(\bb{x} _1,\bb{x} _2) = R _{\mathpzc{F}\mathpzc{G}}(\bb{x} _1 - \bb{x} _2)$.</p>
+
+<h3 id="power-spectrum-density">Power spectrum density</h3>
+
+<p>We start our discussion with the more familiar domain of deterministic
+signals. In the signal processing jargon, the <em>energy</em> of a
+deterministic signal $f$ is defined as</p>
+
+<script type="math/tex; mode=display">E = \| f \|^2 _{L^2(\mathbb{R}^d)} = \int _{\mathbb{R}^d} | f(\bb{x})|^2 d\bb{x}.</script>
+
+<p>Due to Parseval’s identity,</p>
+
+<script type="math/tex; mode=display">E = \| \mathcal{F} f \|^2 _{L^2(\mathbb{R}^d)} = \int _{\mathbb{R}^d} | F(\bb{\xi})|^2 d\bb{\xi}</script>
+
+<p>(the same is true mutatis mutandis for discrete-domain signals). We can
+therefore think of $| F(\bb{\xi})|^2$ as of the <em>energy density</em> of $f$
+per unit of frequency.</p>
+
+<p>When the signal has infinite energy, we can still define its <em>average
+power</em> by windowing the signal and normalizing its energy within the
+window by the volume of the latter,</p>
+
+<script type="math/tex; mode=display">W = \lim _{T \rightarrow \infty} \frac{1}{T^d} \int _{[-\frac{T}{2},\frac{T}{2}]^d} | f(\bb{x})|^2 d\bb{x} =\lim _{T \rightarrow \infty} \left\|  \frac{1}{T^\frac{d}{2}} \, \mathrm{rect} _T \cdot f \right\|^2 _{L^2(\mathbb{R}^d)}</script>
+
+<p>where $\mathrm{rect} _T(\bb{x}) = \mathrm{rect}(\bb{x}/T)$. Defining the
+windowed Fourier transform</p>
+
+<script type="math/tex; mode=display">F _T(\bb{\xi}) =  \frac{1}{T^\frac{d}{2}} \, \mathcal{F}\left( \mathrm{rect} _T \cdot f \right)</script>
+
+<p>and invoking Parseval’s identity, we have</p>
+
+<script type="math/tex; mode=display">W = \lim _{T \rightarrow \infty} \| F _T(\bb{\xi}) \|^2 _{L^2(\mathbb{R}^d)} = 
+\lim _{T \rightarrow \infty}   \int _{\mathbb{R}^d}  |  F _T(\bb{\xi}) |^2 d\bb{\xi}.</script>
+
+<p>$\lim _{T \rightarrow \infty} |F _T(\bb{\xi})|^2$ can be interpreted as
+the density of power per unit of frequency and is often referred to as
+the <em>power spectral density</em> (PSD).</p>
+
+<p>The same reasoning can be repeated for WSS random processes. While a
+random process $\mathpzc{F}$ has infinite energy, it generally has
+finite average power and one can define the PSD as</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+S _{\mathpzc{F}}(\bb{\xi}) =& \lim _{T \rightarrow \infty}  \frac{1}{T^\frac{d}{2}} \,  \mathbb{E} \left|\mathcal{F}\left( \mathrm{rect} _T \cdot \mathpzc{F} \right)   \right|^2  \\
+=&
+ \lim _{T \rightarrow \infty}    \frac{1}{T^d} \, \mathbb{E} \left( 
+  \int _{[-\frac{T}{2},\frac{T}{2}]^d}  f(\bb{x}) e^{+2\pi \ii \, \bb{\xi}^\Tr \bb{x} } d\bb{x} 
+\int _{[-\frac{T}{2},\frac{T}{2}]^d}  f(\bb{x}') e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}' } d\bb{x}'
+  \right) \\
+  =& 
+ \lim _{T \rightarrow \infty}    \frac{1}{T^d}   \int _{[-\frac{T}{2},\frac{T}{2}]^{2d}}  \mathbb{E} f(\bb{x})f(\bb{x}') \, e^{-2\pi \ii \, \bb{\xi}^\Tr (\bb{x}-\bb{x}') } d\bb{x}  d\bb{x}'.\end{aligned} %]]></script>
+
+<p>Changing the integration variable $\bb{x}’$ to
+$\bb{y} = \bb{x}-\bb{x}’$, one obtains the following result known as the
+<em>Wiener-Khinchin theorem</em>:</p>
+
+<script type="math/tex; mode=display">\begin{aligned}
+{S _{\mathpzc{F}} = \mathcal{F} R _{\mathpzc{F}}}\end{aligned}</script>
+
+<p>This is a profound conclusion relating the PSD of a random signal to the
+Fourier transform of its auto-correlation.</p>
+
+<p>Since $R _{\mathpzc{F}}$ is an even function (i.e., invariant to space
+mirroring), $S _{\mathpzc{F}}$ is real-valued. However, it is also easy
+to show that $S _{\mathpzc{F}} \ge 0$. This stems from the fact that the
+auto-correlation is positive semi-definite and, in case of wide-sense
+stationarity, it is diagonalized by the Fourier transform; hence the its
+spectrum is non-negative.</p>
+
+<h3 id="cross-spectral-density">Cross-spectral density</h3>
+
+<p>The result can be generalized to a pair of jointly WSS random signals
+$\mathpzc{F}$ and $\mathpzc{G}$. We define the <em>cross-spectal density</em>
+as</p>
+
+<script type="math/tex; mode=display">S _{\mathpzc{F}}(\bb{\xi}) = \lim _{T \rightarrow \infty}  \frac{1}{T^\frac{d}{2}} \, \mathbb{E} \left(  \mathcal{F}\left( \mathrm{rect} _T \cdot \mathpzc{F} \right)   )^\ast \mathcal{F}\left( \mathrm{rect} _T \cdot \mathpzc{G} \right)   
+\right).</script>
+
+<p>The Wiener-Kinchin theorem states</p>
+
+<script type="math/tex; mode=display">\begin{aligned}
+{S _{\mathpzc{F}\mathpzc{G}} = \mathcal{F} R _{\mathpzc{F}\mathpzc{G}}}\end{aligned}</script>
+
+<p>where the cross-correlation is defined as
+$R _{\mathpzc{F}\mathpzc{G}} (\bb{x}) = \mathbb{E} \mathpzc{F}(\bb{0}) \mathpzc{G}(\bb{x})$.</p>
+
+<h3 id="lsi-systems">LSI systems</h3>
+
+<p>Let $\mathpzc{F}$ be a WSS signal passing through a linear
+shift-invariant system $\mathcal{H}$ with the impulse reponse $h$. We
+define the output signal as $\mathpzc{G} = h \ast \mathpzc{F}$.
+Straightforwardly, the mean function of $\mathpzc{G}$ is given by</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\mu _{\mathpzc{G}}(\bb{x}) =& \mathbb{E}  \mathpzc{G}(\bb{x}) =  \mathbb{E} \int _{\mathbb{R}^d} h(\bb{x}')  \mathpzc{F}(\bb{x} - \bb{x}') d\bb{x}' = 
+ \int _{\mathbb{R}^d} h(\bb{x}')  \mu _\mathpzc{F}(\bb{x} - \bb{x}') d\bb{x}' \\
+ =& \int _{\mathbb{R}^d} h(\bb{x}')   d\bb{x}'  \, \mu _\mathpzc{F}   = H(\bb{0}) \mu _\mathpzc{F},\end{aligned} %]]></script>
+
+<p>where $H(\bb{0})$ is usually called the <em>DC response</em> of $\mathcal{H}$.
+Note that the mean function is constant.</p>
+
+<p>The auto-correlation function of $\mathpzc{G}$ is given by</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+R _{\mathpzc{G}}(\bb{x},\bb{x}-\bb{y}) =& \mathbb{E}  \mathpzc{G}(\bb{x}) \mathpzc{G}(\bb{x}+\bb{y}) \\
+=&  \mathbb{E} \left( \int _{\mathbb{R}^d} h(\bb{x}')  \mathpzc{F}(\bb{x} - \bb{x}') d\bb{x}'   \int _{\mathbb{R}^d} h(\bb{x}'')  \mathpzc{F}(\bb{x}-\bb{y} - \bb{x}'') d\bb{x}''  \right) \\
+=&   \int _{\mathbb{R}^d} h(\bb{x}'')   \left( \int _{\mathbb{R}^d} h(\bb{x}') \,  \mathbb{E}   \mathpzc{F}(\bb{x} - \bb{x}') \mathpzc{F}(\bb{x}-\bb{y} - \bb{x}'') d\bb{x}' \right) d\bb{x}'' \\
+=&   \int _{\mathbb{R}^d} h(\bb{x}'')   \left( \int _{\mathbb{R}^d} h(\bb{x}') \,  R _\mathpzc{F} (\bb{y} + \bb{x}'' - \bb{x}') d\bb{x}' \right) d\bb{x}'' \\
+=&   \int _{\mathbb{R}^d} h(\bb{x}'')   (h \ast R _\mathpzc{F}) (\bb{y} + \bb{x}'')  d\bb{x}'' 
+= \int _{\mathbb{R}^d} \overline{h}(\bb{y}'')   (h \ast R _\mathpzc{F}) (\bb{y} - \bb{y}'')  d\bb{y}''
+\\
+=& (h \ast R _\mathpzc{F} \ast \overline{h})(\bb{y}),\end{aligned} %]]></script>
+
+<p>where $ \overline{h}(\bb{x}) = h(-\bb{x})$. Note that the
+auto-correlation function is shift-invariant (i.e., it does not depend
+on $\bb{x}$). These two results imply that $\mathpzc{Y}$ is WSS (not
+surprising: a signal with shift-invariant moments passing through a
+shift-invariant system leads to a signal with shift-invariant moments).</p>
+
+<p>The input-output cross-correlation is given by</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+R _{\mathcal{F}\mathpzc{G}}(\bb{x},\bb{x}-\bb{y}) =& \mathbb{E}  \mathpzc{F}(\bb{x}) \mathpzc{G}(\bb{x}-\bb{y}) \\
+=&  \mathbb{E} \left( \mathpzc{F}(\bb{x})   \int _{\mathbb{R}^d} h(\bb{x}')  \mathpzc{F}(\bb{x}-\bb{y} - \bb{x}') d\bb{x}' \right) \\
+=&   \int _{\mathbb{R}^d} h(\bb{x}') \,  \mathbb{E}   \mathpzc{F}(\bb{x}) \mathpzc{F}(\bb{x}-\bb{y} - \bb{x}') d\bb{x}'  \\
+=&   \int _{\mathbb{R}^d} h(\bb{x}') \,  R _\mathpzc{F}(\bb{y} + \bb{x}') d\bb{x}'  = (\bar{h} \ast R _\mathpzc{F})(\bb{y}).\end{aligned} %]]></script>
+
+<p>Again note that the function is shift-invariant, implying that
+$\mathpzc{F}$ and $\mathpzc{G}$ are jointly WSS. Clearly, since
+$R _{\mathcal{G}\mathpzc{F}} = \overline{R} _{\mathcal{F}\mathpzc{G}} = {h} \ast \overline{R} _\mathpzc{F}  = {h} \ast {R} _\mathpzc{F}$.</p>
+
+<p>Translating the latter expressions to the frequency domain, we obtain
+the following relations</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+R _{\mathpzc{G}} = h \ast R _{\mathpzc{F}} \ast \overline{h} & \,\, \fff \,\, & S _{\mathpzc{G}} = |H|^2 \cdot S _{\mathpzc{F}} \\
+R _{\mathpzc{F} \mathpzc{G}} = \overline{h} \ast R _{\mathpzc{F}}  & \,\, \fff \,\,& S _{\mathpzc{F}\mathpzc{G}} = H^\ast \cdot S _{\mathpzc{F}} \\
+R _{\mathpzc{G} \mathpzc{H}} = {h} \ast R _{\mathpzc{F}}  & \,\, \fff \,\,& S _{\mathpzc{G}\mathpzc{F}} = H \cdot S _{\mathpzc{F}}
+\end{aligned} %]]></script>
+
+<p>Compare this to linear transformations of random vectors.</p>
+
+<h3 id="white-and-colored-noise">White and colored noise</h3>
+
+<p>A random signal $\mathpzc{N}$ with constant PSD,
+$S _{\mathpzc{N}}(\bb{\xi}) = \sigma _\mathpzc{N}^2$ is usually called
+<em>white noise</em>, by analogy with white light that has approximately flat
+spectrum<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>. Its auto-correlation is given by
+$R _{\mathpzc{N}}(\bb{x}) = \sigma _\mathpzc{N}^2 \, \delta$. When white
+noise passes through an LSI system $\mathcal{H}$, the spectrum at the
+output,
+$S _{\mathcal{H}\mathpzc{N}}(\bb{\xi}) = |H(\bb{\xi})|^2 \sigma _\mathpzc{N}^2$,
+is shaped by the power response $|H(\bb{\xi})|^2$ of the system. This
+phenomenon is called as <em>coloring</em>. The auto-correlation function of
+colored noise is given by
+$R _{\mathcal{H}\mathpzc{N}} = \sigma _\mathpzc{N}^2 \, h \ast  \delta \ast \overline{h} = \sigma _\mathpzc{N}^2 \, h \ast \overline{h}$.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>To be completely rigorous, the proper way to define the PDF is by
+first equipping the image of the map $\mathpzc{X}$ with the Lebesgue
+measure $\lambda$ that assigns to every interval $[a,b]$ its length
+$b-a$. Then, we invoke the Radon-Nikodym theorem saying that if
+$\mathpzc{X}$ is absolutely continuous w.r.t. $\lambda$, there
+exists a measurable function $f : \mathbb{R} \rightarrow [0,\infty)$
+such that for every measurable $A \subset \mathbb{R}$,
+$\displaystyle{(\mathpzc{X} _\ast P)(A) =P(\mathpzc{X}^{-1}(A)) = \int _A f d\lambda}$.
+$f$ is called the <em>Radon-Nikodym derivative</em> and denoted by
+$\displaystyle{f = \frac{d(\mathpzc{X} _\ast P)}{d\lambda}} $. It is
+exactly our PDF. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>In fact, $r _{\mathpzc{X}\mathpzc{Y}}$ can be viewed as an inner
+product on the space of random variables. This creates a geometry
+isomorphic to the standard Euclidean metric in $\mathbb{R}^n$. Using
+this construction, the Cauchy-Schwarz inequality immediately
+follows:
+$| r _{\mathpzc{X}\mathpzc{Y}} | \le \sigma _\mathpzc{X} \sigma _\mathpzc{Y}$. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>This appears to be false when color perception is examined more
+closely! <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/cs236860/lecture_notes/lecture_3/" class="pagination--pager" title="Lecture 3: Discrete-domain signals and systems
+">Previous</a>
+    
+    
+      <a href="/cs236860/lecture_notes/lecture_5/" class="pagination--pager" title="Lecture 5: Statistical estimation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>

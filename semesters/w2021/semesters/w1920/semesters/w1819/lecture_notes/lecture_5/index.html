@@ -1,0 +1,952 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 5: Statistical estimation | CS236860: Digital Image Processing</title>
+<meta name="description" content="Inverse problems, statistical estimation">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 5: Statistical estimation">
+<meta property="og:url" content="https://vistalab-technion.github.io/cs236860/semesters/w1819/lecture_notes/lecture_5/">
+
+
+  <meta property="og:description" content="Inverse problems, statistical estimation">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://vistalab-technion.github.io/cs236860/semesters/w1819/lecture_notes/lecture_5/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "https://vistalab-technion.github.iocs236860/semesters/w1819",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/semesters/w1819/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/semesters/w1819/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/semesters/w1819/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/hw/" >Assignments</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 5: Statistical estimation">
+    <meta itemprop="description" content="Inverse problems, statistical estimation">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 5: Statistical estimation
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  46 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#inverse-problems-and-estimation">Inverse problems and estimation</a></li>
+  <li><a href="#wiener-filter">Wiener filter</a>
+    <ul>
+      <li><a href="#estimation-mse">Estimation MSE</a></li>
+      <li><a href="#orthogonality">Orthogonality</a></li>
+      <li><a href="#optimal-deconvolution">Optimal deconvolution</a></li>
+    </ul>
+  </li>
+  <li><a href="#maximum-likelihood-estimators">Maximum likelihood estimators</a>
+    <ul>
+      <li><a href="#kullback-leibler-divergence">Kullback-Leibler divergence</a></li>
+      <li><a href="#maximum-likelihood">Maximum likelihood</a></li>
+      <li><a href="#ml-deconvolution">ML deconvolution</a></li>
+    </ul>
+  </li>
+  <li><a href="#maximum-a-posteriori-estimators">Maximum a posteriori estimators</a>
+    <ul>
+      <li><a href="#conditional-distributions">Conditional distributions</a></li>
+      <li><a href="#bayes-theorem">Bayes’ theorem</a></li>
+      <li><a href="#posterior-probability-maximization">Posterior probability maximization</a></li>
+      <li><a href="#map-deconvolution">MAP deconvolution</a></li>
+      <li><a href="#bayesian-estimators">Bayesian estimators</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="inverse-problems-and-estimation">Inverse problems and estimation</h2>
+
+<p>Let $\mathpzc{F}$ be a latent WSS random signal of which a degraded
+observation $\mathpzc{Y} = \mathcal{H} \mathpzc{F} + \mathpzc{N}$ is
+given, with $\mathcal{H}$ being a known invertible LSI system (e.g.,
+out-of-focus or motion blur), and $\mathpzc{N}$ is zero-mean additive
+WSS white noise with $S_ \mathpzc{N}  = \sigma_ \mathpzc{N}^2$
+statistically independent of $\mathpzc{F}$ (we will get back to the
+question of how to model the noise more realistically). From our
+previous derivations, we straightforwardly have
+$S_ \mathpzc{Y} = |H|^2 S_ \mathpzc{F} + S_ \mathpzc{N}$ and
+$S_ {\mathpzc{F} \mathpzc{Y}} = H^\ast S_ \mathpzc{F}$.</p>
+
+<p>Our goal is to invert the action of $\mathcal{H}$ obtaining the latent
+signal $\mathpzc{F}$ from the observation $\mathpzc{Y}$. Such a problem
+is known as (non-blind) <em>deconvolution</em> and falls into a more general
+category of <em>inverse problems</em>. In the absence of noise
+($\sigma_ \mathpzc{N}=0$), $\mathpzc{F}  = \mathcal{H}^{-1} \mathpzc{Y}$,
+where $\mathcal{H}^{-1}$ is the inverse system with the frequency
+response $1/H({\bm{\mathrm{\xi}}})$. However, in practice this is very
+often a very bad idea. Even if $\mathcal{H}$ is invertible in theory,
+its inverse might amplify even the slightest noise to unreasonable
+proportions. We will therefore phrase our problem as an <em>estimation</em>
+problem: find an LSI system $\mathcal{G}$ such that the estimator
+$\hat{\mathpzc{F}} = \mathcal{G} \mathpzc{Y}$ is optimally close to the
+true $\mathpzc{F}$ in the sense of some error criterion. We define the
+<em>error signal</em></p>
+
+<script type="math/tex; mode=display">\mathpzc{E} = \mathpzc{F} - \hat{\mathpzc{F}} = \mathpzc{F} - \mathcal{G} \mathpzc{Y}</script>
+
+<p>(which is straightforwardly WSS), and seek a system $\mathcal{G}$
+satisfying</p>
+
+<script type="math/tex; mode=display">\mathcal{G}_ \ast = \mathrm{arg}\min_ {\mathcal{G}} \epsilon(\mathpzc{E}),</script>
+
+<p>where $\epsilon$ is some error criterion. In what follows, we discuss
+several choices of $\epsilon$ setting stage to a variety of estimation
+frameworks. We also discuss more general inverse problems.</p>
+
+<h2 id="wiener-filter">Wiener filter</h2>
+
+<p>A very popular pragmatic choice is the <em>mean squared error</em> (MSE),</p>
+
+<script type="math/tex; mode=display">\epsilon = \mathbb{E} \mathpzc{E}({\bm{\mathrm{x}}})^2 = R_ \mathpzc{E}({\bm{\mathrm{0}}}).</script>
+
+<p>This choise leads to <em>minimum MSE</em> (MMSE) estimators. Using the fact
+that</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+R_ \mathpzc{E}({\bm{\mathrm{x}}}) &= \mathbb{E} \mathpzc{E}({\bm{\mathrm{0}}}) \mathpzc{E}({\bm{\mathrm{x}}}) = \mathbb{E} \left( (\mathpzc{F}({\bm{\mathrm{0}}}) - \hat{\mathpzc{F}}({\bm{\mathrm{0}}}) ) (\mathpzc{F}({\bm{\mathrm{x}}}) - \hat{\mathpzc{F}}({\bm{\mathrm{x}}}) ) \right) \\
+&= \mathbb{E} \left( \mathpzc{F}({\bm{\mathrm{0}}})\mathpzc{F}({\bm{\mathrm{x}}}) + \hat{\mathpzc{F}}({\bm{\mathrm{0}}}) \hat{\mathpzc{F}}({\bm{\mathrm{x}}}) - {\mathpzc{F}}({\bm{\mathrm{0}}}) \hat{\mathpzc{F}}({\bm{\mathrm{x}}})  - \hat{\mathpzc{F}}({\bm{\mathrm{0}}}) {\mathpzc{F}}({\bm{\mathrm{x}}})\right)  \\
+&= R_ \mathpzc{F}({\bm{\mathrm{x}}}) + R_ {\hat{\mathpzc{F}}}({\bm{\mathrm{x}}}) -  R_ {\mathpzc{F} \hat{\mathpzc{F}}}({\bm{\mathrm{x}}}) -  R_ {\hat{\mathpzc{F}} \mathpzc{F} }({\bm{\mathrm{x}}}), \end{aligned} %]]></script>
+
+<p>we can write</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\epsilon &=& R_ \mathpzc{E}({\bm{\mathrm{0}}}) = \int_ {\mathbb{R}^d}  S_ \mathpzc{E}({\bm{\mathrm{\xi}}}) \, e^{2\pi \ii\, {\bm{\mathrm{\xi}}}^\Tr {\bm{\mathrm{0}}} } d{\bm{\mathrm{\xi}}} =
+ \int_ {\mathbb{R}^d}  ( S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) + S_ {\hat{\mathpzc{F}}}({\bm{\mathrm{\xi}}}) -  S_ {\mathpzc{F} \hat{\mathpzc{F}}}({\bm{\mathrm{\xi}}}) -  S^\ast_ {\mathpzc{F} \hat{\mathpzc{F}}}({\bm{\mathrm{\xi}}}) ) d{\bm{\mathrm{\xi}}}.\end{aligned} %]]></script>
+
+<p>Substituting $ S_ \hat{\mathpzc{F}} = |G|^2  S_ {\mathpzc{Y}}$ and
+$S_ {\mathpzc{F} \hat{\mathpzc{F}}} = G^\ast S_ {\mathpzc{F} \mathpzc{Y} }$
+yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\epsilon &=& \int_ {\mathbb{R}^d}  ( S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) + |G({\bm{\mathrm{\xi}}})|^2 S_ \mathpzc{Y}({\bm{\mathrm{\xi}}}) - G^\ast({\bm{\mathrm{\xi}}}) S_ {\mathpzc{F}\mathpzc{Y} }({\bm{\mathrm{\xi}}})
+- G({\bm{\mathrm{\xi}}}) S^\ast_ {\mathpzc{F}\mathpzc{Y} }({\bm{\mathrm{\xi}}})  ) d\xi.\end{aligned} %]]></script>
+
+<p>In order to minimize $\epsilon$ over $G({\bm{\mathrm{\xi}}})$ it is
+therefore sufficient to minimize the above integrand for every
+${\bm{\mathrm{\xi}}}$ individually; furthermore since the first term in
+the integrand does not depend on $G$, we aim at minimizing (for every
+${\bm{\mathrm{\xi}}}$, which is omitted for convenience)</p>
+
+<script type="math/tex; mode=display">S_ {\mathpzc{F}} + GG^\ast S_ \mathpzc{Y} - G^\ast S_ {\mathpzc{F}\mathpzc{Y} }  - G S^\ast_ {\mathpzc{F}\mathpzc{Y} } =  GG^\ast S_ \mathpzc{Y} - G^\ast S_ {\mathpzc{F}\mathpzc{Y} }  - G S^\ast_ {\mathpzc{F}\mathpzc{Y} } + \mathrm{const}.</script>
+
+<p>(Note that the first term does not depend on $G$).</p>
+
+<p>Observe that at frequencies where $S_ \mathpzc{Y}$ vanishes, it can be
+shown that $S_ \mathpzc{FY}$ vanishes as well (Cauchy-Schwarz
+inequality). Hence, at those frequencies we may arbitrarily set $G$ to
+zero. Otherwise, using the fact that $S_ \mathpzc{Y}$ is real and
+non-negative, we can write</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+GG^\ast S_ \mathpzc{Y} - G^\ast S_ {\mathpzc{F}\mathpzc{Y} }  - G S^\ast_ {\mathpzc{F}\mathpzc{Y} }  =& \left( G S_ \mathpzc{Y}^{\frac{1}{2}} - \frac{ S_ {\mathpzc{F}\mathpzc{Y} } }{S_ \mathpzc{Y}^{\frac{1}{2}}  } \right)\left( G^\ast S_ \mathpzc{Y}^{\frac{1}{2}} - \frac{ S^\ast_ {\mathpzc{F}\mathpzc{Y} } }{S_ \mathpzc{Y}^{\frac{1}{2}}  } \right) - \frac{ S_ \mathpzc{FY}  S_ \mathpzc{FY}^\ast }{ S_ \mathpzc{Y} } \\
+=& \left|   G S_ \mathpzc{Y}^{\frac{1}{2}} - \frac{ S_ {\mathpzc{F}\mathpzc{Y} } }{S_ \mathpzc{Y}^{\frac{1}{2}}  }  \right|^2 + \mathrm{const}.\end{aligned} %]]></script>
+
+<p>In the absence of other constraints (such as, e.g., bounded spatial
+support), the minimizer of the above expression is simply</p>
+
+<script type="math/tex; mode=display">G_ \ast({\bm{\mathrm{\xi}}}) =  \frac{ S_ {\mathpzc{F}\mathpzc{Y} } ({\bm{\mathrm{\xi}}}) }{S_ \mathpzc{Y}({\bm{\mathrm{\xi}}})  }.</script>
+
+<p>This result is known as the <em>Wiener filter</em> after the mathematician
+Norbert Wiener. Note that since both $S_ {\mathpzc{F}\mathpzc{Y} }$ and
+$S_ \mathpzc{Y}$ are Fourier transforms or real-valued functions, they
+are conjugate symmetric, and so is their ratio. Consequently,
+$G_ \ast({\bm{\mathrm{\xi}}})$ is the frequency response of an LSI system
+with a real-valued impulse response.</p>
+
+<h3 id="estimation-mse">Estimation MSE</h3>
+
+<p>Substituting $G_ \ast$ into the MSE expression yields the error achieved
+by the Wiener filter,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\epsilon_ \ast =& \int_ {\mathbb{R}^d}  S_ \mathpzc{E}({\bm{\mathrm{\xi}}})  d{\bm{\mathrm{\xi}}} = \int_ {\mathbb{R}^d}  \left(S_ \mathpzc{F}({\bm{\mathrm{\xi}}})  - G_ \ast({\bm{\mathrm{\xi}}}) S_ \mathpzc{FY}^\ast({\bm{\mathrm{\xi}}}) \right)  d{\bm{\mathrm{\xi}}} \\
+=& \int_ {\mathbb{R}^d}  S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) \left( 1 - \frac{ S_ \mathpzc{FY}({\bm{\mathrm{\xi}}}) S_ \mathpzc{FY}^\ast({\bm{\mathrm{\xi}}}) }{ S_ \mathpzc{Y}({\bm{\mathrm{\xi}}}) S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) } \right)  d{\bm{\mathrm{\xi}}} =
+\int_ {\mathbb{R}^d}  S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) \left( 1 - \rho({\bm{\mathrm{\xi}}}) \rho^\ast({\bm{\mathrm{\xi}}}) \right)  d{\bm{\mathrm{\xi}}},\end{aligned} %]]></script>
+
+<p>where</p>
+
+<script type="math/tex; mode=display">\rho({\bm{\mathrm{\xi}}}) = \frac{ S_ \mathpzc{FY}({\bm{\mathrm{\xi}}})   }{ \sqrt{ S_ \mathpzc{Y}({\bm{\mathrm{\xi}}}) S_ \mathpzc{F}({\bm{\mathrm{\xi}}}) } }</script>
+
+<p>plays the role of frequency-wise correlation coefficient.</p>
+
+<h3 id="orthogonality">Orthogonality</h3>
+
+<p>Observe that at every frequency,</p>
+
+<script type="math/tex; mode=display">S_ {\hat{\mathpzc{F}}\mathpzc{Y} } = G_ \ast S_ {\mathpzc{Y} } = \frac{ S_ {\mathpzc{F}\mathpzc{Y} }  }{S_ \mathpzc{Y}   } S_ {\mathpzc{Y} } = S_ {\mathpzc{FY} },</script>
+
+<p>from where $R_ {\hat{\mathpzc{F}}\mathpzc{Y} } = R_ {\mathpzc{FY} }$.
+Hence,</p>
+
+<script type="math/tex; mode=display">R_ {\mathpzc{E}\mathpzc{Y} }({\bm{\mathrm{\tau}}}) = R_ {(\mathpzc{F}-\hat{\mathpzc{F}})\mathpzc{Y} }({\bm{\mathrm{\tau}}}) = R_ {\mathpzc{F}\mathpzc{Y} }({\bm{\mathrm{\tau}}}) - R_ {\hat{\mathpzc{F}}\mathpzc{Y} }({\bm{\mathrm{\tau}}}) = 0</script>
+
+<p>for every ${\bm{\mathrm{\tau}}}$. This can be stated as the following
+<em>orthogonality property</em>: $\mathpzc{E} \perp \mathpzc{Y}$, that is, the
+estimation error is orthonogonal to the data. Orthogonality is the
+hallmark of $\ell_ 2$-optimality, which is the case of MMSE estimators.</p>
+
+<h3 id="optimal-deconvolution">Optimal deconvolution</h3>
+
+<p>Note that the Wiener filter expression is general and does not assume
+any specific relation between the latent signal $\mathpzc{F}$ and the
+observation $\mathpzc{Y}$ except the assumption of joint wide-sense
+stationarity and that their cross-spectrum is known. In the specific
+case of $\mathpzc{Y} = \mathcal{H} \mathpzc{F} + \mathpzc{N}$ with
+statistically-independent additive zero-mean noise $\mathpzc{N}$, we
+have</p>
+
+<p>$R_ {\mathpzc{Y}}({\bm{\mathrm{\tau}}}) = S_ {(\mathcal{H}\mathpzc{F})}({\bm{\mathrm{\tau}}}) + R_ {\mathpzc{N}}({\bm{\mathrm{\tau}}})$</p>
+
+<p>and can write</p>
+
+<script type="math/tex; mode=display">S_ {\mathpzc{Y}}({\bm{\mathrm{\xi}}}) = |H({\bm{\mathrm{\xi}}})|^2 S_ {\mathpzc{F}}({\bm{\mathrm{\xi}}}) + S_ {\mathpzc{N}}({\bm{\mathrm{\xi}}}).</script>
+
+<p>Similarly,</p>
+
+<script type="math/tex; mode=display">S_ {\mathpzc{FY}}({\bm{\mathrm{\xi}}}) = H^\ast({\bm{\mathrm{\xi}}}) S_ {\mathpzc{F}}({\bm{\mathrm{\xi}}}).</script>
+
+<p>Substituting into the Wiener filter expression we obtain after
+elementary algebraic manipulations</p>
+
+<script type="math/tex; mode=display">G_ \ast({\bm{\mathrm{\xi}}}) =  \frac{  H^\ast({\bm{\mathrm{\xi}}})S_ 
+{\mathpzc{F}}({\bm{\mathrm{\xi}}})  }{    H({\bm{\mathrm{\xi}}})  H^\ast({\bm{\mathrm{\xi}}})   S_ {\mathpzc{F}}({\bm{\mathrm{\xi}}}) + S_ {\mathpzc{N}}({\bm{\mathrm{\xi}}})   }.</script>
+
+<p>Let us define the <em>signal-to-noise ratio</em> (SNR) at frequency
+${\bm{\mathrm{\xi}}}$ as</p>
+
+<script type="math/tex; mode=display">\mathrm{SNR}({\bm{\mathrm{\xi}}}) = \frac{ S_ {\mathpzc{F}}({\bm{\mathrm{\xi}}})  }{ S_ {\mathpzc{N}}({\bm{\mathrm{\xi}}})  }.</script>
+
+<p>Note that in the particular case of white noise with the spectrum
+$S_ \mathpzc{N}  = \sigma_ \mathpzc{N}^2$,</p>
+
+<script type="math/tex; mode=display">\mathrm{SNR}({\bm{\mathrm{\xi}}}) = \frac{ S_ {\mathpzc{F}}({\bm{\mathrm{\xi}}})  }{ \sigma^2_ {\mathpzc{N}}   }.</script>
+
+<p>The filter expression can be written as</p>
+
+<script type="math/tex; mode=display">G_ \ast({\bm{\mathrm{\xi}}}) =  \frac{  H^\ast({\bm{\mathrm{\xi}}}) \, \mathrm{SNR}({\bm{\mathrm{\xi}}})  }{    H({\bm{\mathrm{\xi}}})  H^\ast({\bm{\mathrm{\xi}}})  \,  \mathrm{SNR}({\bm{\mathrm{\xi}}}) + 1   }.</script>
+
+<p>At frequencies where $\mathrm{SNR}({\bm{\mathrm{\xi}}}) \gg 1$ (signal
+is much stronger than the noise),</p>
+
+<script type="math/tex; mode=display">G_ \ast({\bm{\mathrm{\xi}}}) \approx  \frac{  H^\ast({\bm{\mathrm{\xi}}}) \, \mathrm{SNR}({\bm{\mathrm{\xi}}})  }{    H({\bm{\mathrm{\xi}}})  H^\ast({\bm{\mathrm{\xi}}})  \,  \mathrm{SNR}({\bm{\mathrm{\xi}}})  } = \frac{1}{H({\bm{\mathrm{\xi}}})},</script>
+
+<p>which is exactly the inverse system. On the other hand, at frequencies
+where $\mathrm{SNR}({\bm{\mathrm{\xi}}})$ approaches zero, (noise much
+stronger than the signal), the numerator becomes dominant and
+$G_ \ast({\bm{\mathrm{\xi}}})$ also approaches zero.</p>
+
+<h2 id="maximum-likelihood-estimators">Maximum likelihood estimators</h2>
+
+<h3 id="kullback-leibler-divergence">Kullback-Leibler divergence</h3>
+
+<p>Let $P$ and $Q$ be two probability measures (such that $P$ is absolutely
+continuous w.r.t. $Q$). Then, the <em>Kullback-Leibler divergence</em> from Q
+to P is defined as</p>
+
+<script type="math/tex; mode=display">D(P || Q) = \int_ {} \, \log \frac{dP}{dQ} \, dP.</script>
+
+<p>In other words, it is the expectation of the logarithmic differences
+between the probabilities $P$ and $Q$ when the expectation is taken over
+$P$. The divergence can be thought of as an (asymmetric) distance
+between the two distributions.</p>
+
+<h3 id="maximum-likelihood">Maximum likelihood</h3>
+
+<p>Since $\mathpzc{Y}= \mathcal{H} \mathpzc{F} + \mathpzc{N}$, we can
+assert that the distribution of the measurement $\mathpzc{Y}$ given the
+latent signal $\mathpzc{F}$ is simply the distribution of $\mathpzc{N}$
+at $\mathpzc{N} = \mathpzc{Y}- \mathcal{H} \mathpzc{F}$,</p>
+
+<script type="math/tex; mode=display">P_ {\mathpzc{Y} | \mathpzc{F}}( y | f  ) = P_ {\mathpzc{N}}( y - \mathcal{H} f ).</script>
+
+<p>Assuming i.i.d. noise, the latter simplifies to a product of
+one-dimensional measures. Note that this is essentially a parametric
+family of distributions – each choice of $f$ yields a distribution
+$P_ {\mathpzc{Y} | \mathpzc{F} = f}$ of $\mathpzc{Y}$. For the time
+being, let us treat the notation $\mathpzc{Y} | \mathpzc{F}$ just as a
+funny way of writing.</p>
+
+<p>Given an estimate $\hat{f}$ of the true realization $f$ of
+$\mathpzc{F}$, we can measure its “quality” by measuring the distance
+from $P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f}}$ to the true distribution
+$P_ {\mathpzc{Y} | \mathpzc{F}=f}$ that created $\mathpzc{Y}$, and try to
+minimize it. Our estimator of $f$ can therefore be written as</p>
+
+<script type="math/tex; mode=display">\hat{f} = \mathrm{arg}\min_ {\hat{\mathpzc{F}}} D(P_ {\mathpzc{Y} | \mathpzc{F}=f}  ||  P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f}} ),</script>
+
+<p>where we used the Kullback-Leibler divergence to quantify the distance
+between the distributions. Note that we treat the quantity to be
+estimated as a deterministic parameter rather than a stochastic
+quantity.</p>
+
+<p>Let us have a closer look at the minimization objective</p>
+
+<script type="math/tex; mode=display">D(P_ {\mathpzc{Y} | \mathpzc{F}=f}  ||  P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f}}  ) = \mathbb{E}_ { \mathpzc{Y} \sim P_ {\mathpzc{Y} | \mathpzc{F}=f}   }   \log\left(  \frac{P_ {\mathpzc{Y} | \mathpzc{F}=f}  }{ P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f} }  } \right) 
+=\mathbb{E}_ { \mathpzc{Y} \sim P_ {\mathpzc{Y} | \mathpzc{F} = f}   }   \log P_ {\mathpzc{Y} | \mathpzc{F} = f}  -\mathbb{E}_ { \mathpzc{Y} \sim P_ {\mathpzc{Y} | \mathpzc{F} = f}   }   \log P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f} }.</script>
+
+<p>Note that the first term (that can be recognized as the entropy of
+$\log P_ {\mathpzc{Y} | \mathpzc{F}=f}$) does not depend on the
+minimization variable; hence, we have</p>
+
+<script type="math/tex; mode=display">\hat{f} = \mathrm{arg}\min_ {\hat{f}} \, \mathbb{E}_ { \mathpzc{Y} \sim P_ {\mathpzc{Y} | \mathpzc{F}=f}   }   \left( - \log P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f}} \right).</script>
+
+<p>Let us now assume that $\mathpzc{Y}$ is observed at some set of $N$
+spatial locations
+${ {\bm{\mathrm{x}}}_ 1, \dots, {\bm{\mathrm{x}}}_ N }$; we will denote
+$\mathpzc{Y}_ i = \mathpzc{Y}({\bm{\mathrm{x}}}_ i)$. In this case, we can
+use p.d.f.s to write</p>
+
+<script type="math/tex; mode=display">-\frac{1}{N} \log f_ {\mathpzc{Y} | \mathpzc{F}=f} (y_ 1,\dots, y_ N ) = - \frac{1}{N} \sum_ {i=1}^N \log f_ \mathpzc{N} (y_ i - (\mathcal{H} f)({\bm{\mathrm{x}}}_ i) ) = L(y_ 1,\dots,y_ N | f).</script>
+
+<p>This function is known as the <em>negative log likelihood</em> function. By the
+law of large numbers, when $N$ approaches infinity,</p>
+
+<script type="math/tex; mode=display">L(y_ 1,\dots,y_ N | f) \rightarrow \mathbb{E}_ { \mathpzc{Y} \sim P_ {\mathpzc{Y} | \mathpzc{F}=f}   }   
+\left( - \log P_ {\mathpzc{Y} | \mathpzc{F}=\hat{f}} \right).</script>
+
+<p>Behold our minimization objective!</p>
+
+<p>To recapitulate, recall that we started with minimizing the discrepancy
+between the latent parametric distribution that generated the
+observation and that associated with our estimator. However, a closer
+look at the objective revealed that it is the limit of the negative log
+likelihood when the sample size goes to infinity. The minimization of
+the Kullback-Leibler divergence is equivalent to maximization of the
+likelihood of the data coming from a specific parametric distribution,</p>
+
+<script type="math/tex; mode=display">\hat{f} = \mathrm{arg}\max_ {\hat{f}} \, P(  \mathpzc{Y}=y |  \mathpzc{F}=f ).</script>
+
+<p>For this reason, the former estimator is called <em>maximum likelihood</em>
+(ML).</p>
+
+<h3 id="ml-deconvolution">ML deconvolution</h3>
+
+<p>Back to our deconvolution problem. Assuming white Gaussian distribution
+of the noise with zero mean and variance $\sigma^2_ {\mathpzc{N}}$ yields</p>
+
+<script type="math/tex; mode=display">- \log f_ \mathpzc{N}(n) = \mathrm{const} + \frac{n^2 }{2 \sigma^2_ {\mathpzc{N}}};</script>
+
+<p>this in turn gives rise to the following negative log likelihood
+function</p>
+
+<script type="math/tex; mode=display">L(y_ 1,\dots, y_ N) = \frac{1}{2 N \sigma^2_ {\mathpzc{N} }} \sum_ {i=1}^N (y_ i - (\mathcal{H} f)({\bm{\mathrm{x}}}_ i) )^2.</script>
+
+<p>In the limit case, we minimize</p>
+
+<script type="math/tex; mode=display">\int_ {\mathbb{R}^d} (y({\bm{\mathrm{x}}}) - (\mathcal{H} f) ({\bm{\mathrm{x}}}))^2 d{\bm{\mathrm{x}}} = \|  y - \mathcal{H} f \|^2_ {L^2(\mathbb{R}^d)},</script>
+
+<p>which by Parseval’s identity is equal to</p>
+
+<script type="math/tex; mode=display">\|  Y - H F \|^2_ {L^2(\mathbb{R}^d)} = \int_ {\mathbb{R}^d} |Y({\bm{\mathrm{\xi}}}) -H({\bm{\mathrm{\xi}}})  F({\bm{\mathrm{\xi}}})|^2 d{\bm{\mathrm{\xi}}}.</script>
+
+<p>The latter integral is obviously mimimized by $F = \frac{Y}{H}$, which
+we know is a very bad idea in practice.</p>
+
+<h2 id="maximum-a-posteriori-estimators">Maximum <em>a posteriori</em> estimators</h2>
+
+<h3 id="conditional-distributions">Conditional distributions</h3>
+
+<p>Before treating maximum <em>a posteriori</em> estimation, we need to briefly
+introduce the important notion of conditioning and conditional
+distributions. Recall our construction of a probability space comprising
+the triplet $\Omega$ (the sample space), $\Sigma$ (the Borel sigma
+algebra), and $P$ (the probability measure). Let $X$ be a random
+variable and $B \subset \Sigma$ a sub sigma-algebra of $\Sigma$. We can
+then define the <em>conditional expectation of $\mathpzc{X}$ given $B$</em> as
+a random variable $\mathpzc{Z} = \mathbb{E} \mathpzc{X} | B$ satisfying
+for every $E \in B$</p>
+
+<script type="math/tex; mode=display">\int_ A \mathpzc{Z} dP = \int_ A \mathpzc{X} dP.</script>
+
+<p>(we are omitting some technical details such as, e.g., integrability
+that $\mathpzc{X}$ has to satisfy).</p>
+
+<p>Given another random variable $\mathpzc{Y}$, we say that it generates a
+sigma algebra $\sigma(\mathpzc{Y})$ as the set of pre-images of all
+Borel sets in $\mathbb{R}$,</p>
+
+<script type="math/tex; mode=display">\sigma(\mathpzc{Y}) = \{ \mathpzc{Y}^{-1}(A) : A \in \mathbb{B}(\mathbb{R}) \}.</script>
+
+<p>We can then use the previous definition to define the conditional
+expectation of <em>$\mathpzc{X}$ given $\mathpzc{Y}$</em> as</p>
+
+<script type="math/tex; mode=display">\mathbb{E} \mathpzc{X} | \mathpzc{Y} = \mathbb{E} \mathpzc{X} | \sigma(\mathpzc{Y}).</script>
+
+<p>Recall that expectation applied to indicator functions can be used to
+define probability measures. In fact, for every $E \in \Sigma$, we may
+construct the random variable $\ind_ E$, leading to
+$P(E) = \mathbb{E} \ind_ E$. We now repeat the same, this time replacing
+$\mathbb{E} $ with $\mathbb{E} \cdot | \mathpzc{Y}$. For every
+$E \in \Sigma$, <script type="math/tex">\varphi(\mathpzc{Y}) = \mathbb{E} \, E | \mathpzc{Y}</script>
+is a random variable that can be thought of as a transformation of the
+random variable $\mathpzc{Y}$ by the function $\varphi$. We denote this
+function as $P(E |\mathpzc{Y})$ and refer to it as the (regular)
+<em>conditional probability of $E$ given $\mathpzc{Y}$</em>. It is easy to show
+that for every measurable set $B \subset \mathbb{R}$,</p>
+
+<script type="math/tex; mode=display">\int_ B P(E | \mathpzc{Y}=y) (\mathpzc{Y}_ \ast P)(dy) = P(E \cap \{ \mathpzc{Y} \in B \});</script>
+
+<p>Substituting $E = { \mathpzc{X} \in B}$ yields the <em>conditional
+distribution of $X$ given $\mathpzc{Y}$</em>,</p>
+
+<script type="math/tex; mode=display">P_ {\mathpzc{X} | \mathpzc{Y}} (  B  | \mathpzc{Y}=y) = P(\mathpzc{X} \in B | \mathpzc{Y}=y).</script>
+
+<p>It can be easily shown that $P_ {\mathpzc{X} | \mathpzc{Y}}$ is a valid
+probability measure on $\Sigma$ and for every pair of measurable sets
+$A$ and $B$,</p>
+
+<script type="math/tex; mode=display">\int_ B P_ {\mathpzc{X} | \mathpzc{Y}} (A | \mathpzc{Y}=y) (\mathpzc{Y}_ \ast P)(dy) = P(\{ \mathpzc{X} \in A  \} \cap \{ \mathpzc{Y} \in B \}).</script>
+
+<p>If density exists, $P_ {\mathpzc{X} | \mathpzc{Y}}$ can be described
+using the <em>conditional p.d.f.</em> $f_ {\mathpzc{X} | \mathpzc{Y}}$ and the
+latter identity can be rewritten in the form</p>
+
+<script type="math/tex; mode=display">\int_ A \left( \int_ B f_ {\mathpzc{X} | \mathpzc{Y}} (x | y) f_ \mathpzc{Y}(y) dy  \right)  dx = P(\{ \mathpzc{X} \in A  \} \cap \{ \mathpzc{Y} \in B \}) = \int_ A \int_ B f_ {\mathpzc{XY} } (x, y) dxdy.</script>
+
+<p>This essentially means that
+$f_ {\mathpzc{XY} } (x, y) = f_ {\mathpzc{X} | \mathpzc{Y}} (x | y)  f_ \mathpzc{Y}(y)$.
+Integrating w.r.t. $y$ yields the so-called <em>total probability formula</em></p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{X} } (x) = \int_ \mathbb{R} f_ {\mathpzc{XY} } (x, y) dy = \int_ \mathbb{R} f_ {\mathpzc{X|Y} } (x|y)  f_ \mathpzc{Y}(y) dy.</script>
+
+<p>We can also immediately observe that if $\mathpzc{X}$ and $\mathpzc{Y}$
+are statistically independent, we have</p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{XY} } (x, y) = f_ {\mathpzc{X} }(x) f_ {\mathpzc{Y} } (y) =  f_ {\mathpzc{X} | \mathpzc{Y}} (x | y)  f_ \mathpzc{Y}(y),</script>
+
+<p>from where $f_ {\mathpzc{X} | \mathpzc{Y}} = f_ {\mathpzc{X}}$. In this
+case, conditioning on $\mathpzc{Y}$ does not change our knowledge of
+$\mathpzc{X}$.</p>
+
+<h3 id="bayes-theorem">Bayes’ theorem</h3>
+
+<p>One of the most celebrate (and useful) results related to conditional
+distributions is the following theorem named after Thomas Bayes.
+Exchanging the roles of $\mathpzc{X}$ and $\mathpzc{Y}$, we have</p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{XY} }  = f_ {\mathpzc{X} | \mathpzc{Y}}   f_ \mathpzc{Y} = f_ {\mathpzc{Y} | \mathpzc{X}}   f_ \mathpzc{X};</script>
+
+<p>re-arranging the terms, we have</p>
+
+<script type="math/tex; mode=display">f_ {\mathpzc{Y} | \mathpzc{X}} = f_ {\mathpzc{X} | \mathpzc{Y}} \, \frac{  f_ \mathpzc{X} }{  f_ \mathpzc{Y} };</script>
+
+<p>in terms of probability measures, the equivalent form is</p>
+
+<script type="math/tex; mode=display">P_ {\mathpzc{Y} | \mathpzc{X}} = P_ {\mathpzc{X} | \mathpzc{Y}} \, \frac{  dP_ \mathpzc{X} }{  dP_ \mathpzc{Y} }.</script>
+
+<h3 id="posterior-probability-maximization">Posterior probability maximization</h3>
+
+<p>Recall that in maximum likelihood estimation we treated $\mathpzc{F}$ as
+a deterministic parameter and tried to maximize the conditional
+probability $P(\mathpzc{Y} | \mathpzc{F})$. Let us now think of
+$\mathpzc{F}$ as of a random signal and maximize its probability given
+the data,</p>
+
+<script type="math/tex; mode=display">\hat{f}(y) = \mathrm{arg}\max_ { \hat{f} } P_ {\mathpzc{F} | \mathpzc{Y} } ( \mathpzc{F} =  \hat{f} | \mathpzc{Y} = y).</script>
+
+<p>Invoking the Bayes theorem yields</p>
+
+<script type="math/tex; mode=display">P_ {\mathpzc{F} | \mathpzc{Y}} = P_ {\mathpzc{Y} | \mathpzc{F} } \, \frac{ dP_ {\mathpzc{F}} }{dP_ {\mathpzc{Y}} }</script>
+
+<p>In the Bayesian jargon, $P_ {\mathpzc{F}}$ is called the <em>prior</em>
+probability, that is, our initial knowledge about $\mathpzc{F}$ before
+any observation thereof was obtained; $P_ {\mathpzc{F} | \mathpzc{Y}}$ is
+called the <em>posterior</em> probability having accounted for the measurement
+$\mathpzc{Y}$. Note that the term $P_ {\mathpzc{Y} | \mathpzc{F}}$ is our
+good old likelihood. Since we are maximizing the posterior probability,
+the former estimator is called <em>maximum a posteriori</em> (MAP).</p>
+
+<p>Taking negative logarithm, we obtain</p>
+
+<script type="math/tex; mode=display">-\log P_ {\mathpzc{F} | \mathpzc{Y}} = -\log P_ {\mathpzc{Y} | \mathpzc{F} } -\log P_ \mathpzc{F} +\log P_ {\mathpzc{Y}} = L(\mathpzc{Y} | \mathpzc{F}) - \log P_ {\mathpzc{F}} + \mathrm{const}.</script>
+
+<p>This yields the following expression for the MAP estimator</p>
+
+<script type="math/tex; mode=display">\hat{f} = \mathrm{arg}\min_ { \hat{f} } L(\mathpzc{Y} |  \hat{f} ) - \log P_ \mathpzc{F} ( \hat{f} ).</script>
+
+<p>The minimization objective looks very similar to what we had in the ML
+case; the only difference is that now a <em>prior</em> term is added. In the
+absence of a good prior, a uniform prior is typically assumed, which
+reduces MAP estimation to ML estimation.</p>
+
+<h3 id="map-deconvolution">MAP deconvolution</h3>
+
+<p>Let us consider for examples our deconvolution problem. As a prior, we
+assume that $\mathcal{D} \mathpzc{F}$ is distributed normally i.i.d.
+with zero mean and variances $\sigma^2_ \mathrm{D}$, where $\mathcal{D}$
+is a derivative of an appropriate order. This leads to the following
+objective function</p>
+
+<script type="math/tex; mode=display">\frac{1}{2\sigma^2_ {\mathpzc{N}} }\int_ {\mathbb{R}^d} (y({\bm{\mathrm{x}}}) - (\mathcal{H} f) ({\bm{\mathrm{x}}}))^2 d{\bm{\mathrm{x}}}  + \frac{1}{2\sigma^2_ {D} }\int_ {\mathbb{R}^d} (\mathcal{D} f) ({\bm{\mathrm{x}}})^2 d{\bm{\mathrm{x}}}</script>
+
+<p>which by Parseval’s identity is equal to</p>
+
+<script type="math/tex; mode=display">\frac{1}{2\sigma^2_ {\mathpzc{N}} } \int_ {\mathbb{R}^d} |Y({\bm{\mathrm{\xi}}}) -H({\bm{\mathrm{\xi}}})  F({\bm{\mathrm{\xi}}})|^2 d{\bm{\mathrm{\xi}}} + \frac{1}{2\sigma^2_ {D}} \int_ {\mathbb{R}^d} |D({\bm{\mathrm{\xi}}})  F({\bm{\mathrm{\xi}}})|^2 d{\bm{\mathrm{\xi}}}</script>
+
+<p>(Note the complex modulus – the integrands in the frequency domain are
+complex). The expression is minimized by minimizing at each frequency</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+|Y-HF|^2 + \frac{\sigma^2_ {\mathpzc{N}} }{\sigma^2_ {D}} |DF|^2 &=& Y^\ast Y - Y^\ast HF - Y H^\ast F^\ast + \left( H^\ast H  + \frac{\sigma^2_ {\mathpzc{N}} }{\sigma^2_ {D}} D^\ast D \right) F^\ast F.\end{aligned} %]]></script>
+
+<p>Note that this is a convex quadratic function in $F$ having a single
+global minimum. Differentiating w.r.t. $F$ and demanding equality to
+zero yields, up to the factor of $2$,</p>
+
+<script type="math/tex; mode=display">0 =  -H^\ast Y + \left( H^\ast H  + \frac{\sigma^2_ {\mathpzc{N}} }{\sigma^2_ {D}} D^\ast D \right) F</script>
+
+<p>(refer to Chapter 4 in the Matrix Cook Book for the exact treatment of
+derivatives w.r.t. a complex variable). The final expression for the
+Fourier transform of the estimated signal is given by</p>
+
+<script type="math/tex; mode=display">\hat{F}({\bm{\mathrm{\xi}}}) = \frac{H^\ast({\bm{\mathrm{\xi}}}) }{ H({\bm{\mathrm{\xi}}}) 
+H^\ast({\bm{\mathrm{\xi}}}) + \frac{\sigma^2_ {\mathpzc{N}} }{\sigma^2_ {D}} D({\bm{\mathrm{\xi}}}) D^\ast({\bm{\mathrm{\xi}}}) } Y({\bm{\mathrm{\xi}}}).</script>
+
+<p>Note the resemblance to the Wiener filter: the ratio
+$ \frac{\sigma^2_ {\mathpzc{N}} }{\sigma^2_ {D}}$ controls the amount of
+regularization applied to the inverse of $H$. When the noise is strong,
+the term $D^\ast D$ dominates; for vanishing noise variance, the
+expression reduces to $H^{-1}$. However, the MAP formalizm immediately
+allows incorporating more meaningful and realistic priors instead of our
+toy example. While not leading to closed-form solutions, they will still
+form well-defined minimization problems that can be solved (or at least
+attempted to be solved) iteratively. An important philosophical question
+arises at this point: What is better – to use an incorrect model that we
+know how to solve (e.g., the Wiener filter), or try to develop a better
+model that we can hope to solve (e.g., some non-convex MAP estimation
+problem)? Practice of the past two decades shows that the second
+approach may literally lead (and has, indeed, led) to revolutions.
+Without too much exaggeration, we can state that over $99\%$ of recent
+studies in image processing essentially revolve around finding a better
+expression for the prior probability $P_ {\mathpzc{F} }$.</p>
+
+<h3 id="bayesian-estimators">Bayesian estimators</h3>
+
+<p>Note that the posterior distribution $P_ {\mathpzc{F} | \mathpzc{Y}}$ can
+be used to define conditional expectations. Let $\ell( f, \hat{f})$ be
+some <em>loss function</em> determining how far our estimate $\hat{f}$ is from
+the true signal $f$. Then, we can define an error criterion</p>
+
+<script type="math/tex; mode=display">\epsilon = \mathbb{E} \, \ell( \mathpzc{F}, \hat{\mathpzc{F}}) | \mathpzc{Y}</script>
+
+<p>and minimize it over estimators of the form $\hat{f} = \hat{f}(y)$.
+(Note that the expectation is evaluated w.r.t. the posterior
+distribution $P_ {\mathpzc{F} | \mathpzc{Y}}$). This yields to the
+so-called <em>Bayesian estimators</em></p>
+
+<script type="math/tex; mode=display">\hat{f} = \mathrm{arg}\min_ {\hat{f}} \mathbb{E} \, \ell( \mathpzc{F}, \hat{f}(\mathpzc{Y}) ) | \mathpzc{Y}.</script>
+
+<p>The Wiener filter (MMSE estimator) is a particular case of Bayesian
+estimators where the loss is set to be Euclidean,
+$\ell(f, \hat{f}) = | f - \hat{f} |^2_ {L^2(\mathbb{R}^d}$, and
+estimators have the form $\hat{f}(y) = h\ast y$.</p>
+
+<p>For the particular choice of the loss function</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\ell(f, \hat{f}  = \left\{ \begin{array}{cl}  0 & : | f- \hat{ f } | \le c \\  1 & : \mathrm{else} \end{array} \right. %]]></script>
+
+<p>a $c$ approaches $0$, the Bayesian estimator estimates the mode of the
+posterior distribution and thus approaches the MAP estimator, provided
+that the distribution of $\mathpzc{F}$ is unimodal.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/cs236860/semesters/w1819/lecture_notes/lecture_4/" class="pagination--pager" title="Lecture 4: Random signals
+">Previous</a>
+    
+    
+      <a href="/cs236860/semesters/w1819/lecture_notes/lecture_6/" class="pagination--pager" title="Lecture 6: Patch-based priors
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/semesters/w1819/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/semesters/w1819/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/semesters/w1819/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/semesters/w1819/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>
