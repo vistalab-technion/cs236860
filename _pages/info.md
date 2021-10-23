@@ -35,16 +35,16 @@ At the end of the course, the student will:
 
 | # | Date | Pre-requisite | Lecture | Tutorial | Homework |
 | --- | --- | ---  | --- | --- | --- |
-| 1 | `22/10/2020` | | Introduction | Math background | |
-| 2 | `29/10/2020` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
-| 3 | `05/11/2020` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
-| 4 | `12/11/2020` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
-| 5 | `19/11/2020` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
-| 6 | `26/11/2020` | Lecture 5a | Introduction to random signals | Inverse filtering | |
-| 7 | `03/12/2020` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
-| 8 | `10/12/2020` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
-| 9 | `24/12/2020` | Lecture 7 | Sparsity-based priors | PatchMatch | |
-| 10 | `31/12/2020` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
-| 11 | `07/01/2021` | Lecture 9 | Learning image priors | Dictionary learning | |
-| 12 | `14/01/2021` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
-| 13 | `21/01/2021` | Lecture 11 | Computational imaging | Deep learning (part 2) | |
+| 1 | `28/10/2021` | | Introduction | Math background | |
+| 2 | `04/10/2021` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
+| 3 | `11/11/2021` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
+| 4 | `18/11/2021` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
+| 5 | `25/11/2021` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
+| 6 | `02/11/2021` | Lecture 5a | Introduction to random signals | Inverse filtering | |
+| 7 | `09/12/2021` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
+| 8 | `16/12/2021` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
+| 9 | `23/12/2021` | Lecture 7 | Sparsity-based priors | PatchMatch | |
+| 10 | `30/12/2021` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
+| 11 | `06/01/2022` | Lecture 9 | Learning image priors | Dictionary learning | |
+| 12 | `13/01/2022` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
+| 13 | `20/01/2022` | Lecture 11 | Computational imaging | Deep learning (part 2) | |
