@@ -26,4 +26,5 @@ Notes:
 We wish you a productive semester and hope you enjoy the course.
 
 Good luck,
+
 Alex and Sanketh.
