@@ -47,4 +47,4 @@ At the end of the course, the student will:
 | 10 | `30/12/2021` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
 | 11 | `06/01/2022` | Lecture 9 | Learning image priors | Dictionary learning | |
 | 12 | `13/01/2022` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
-| 13 | `20/01/2022` | Lecture 11 | Computational imaging | Deep learning (part 2) | |
+| 13 | `20/01/2022` | Lecture 11 | Computational imaging | Deep learning (part 2) | HW3 |
