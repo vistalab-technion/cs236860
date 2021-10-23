@@ -18,7 +18,7 @@ sanketh:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:omerd@cs.technion.ac.il"
+      url: "mailto:sanketh@cs.technion.ac.il"
     - label: "Web"
       icon: "fas fa-fw fa-link"
       url: "https://vista.cs.technion.ac.il/people/?pn=2188"
