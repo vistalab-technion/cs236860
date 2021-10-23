@@ -9,8 +9,7 @@ alex:
     - label: "Web"
       icon: "fas fa-fw fa-link"
       url: "https://www.cs.technion.ac.il/~bron/"
-    - label: "Zoom"
-      url: "https://technion.zoom.us/j/6862788334"
+
 
 sanketh:
   name: Sanketh Vedula
@@ -23,5 +22,4 @@ sanketh:
     - label: "Web"
       icon: "fas fa-fw fa-link"
       url: "https://vista.cs.technion.ac.il/people/?pn=2188"
-    - label: "Zoom"
-      url: "https://technion.zoom.us/j/3836016858"
+
