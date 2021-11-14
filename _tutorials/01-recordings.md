@@ -17,5 +17,5 @@ The first tutorial was not recorded properly due to technical glitches, provided
 
 [Tutorial 2](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=0c966272-13a5-4290-941f-addc00bba336)
 
-Tutorial 3
+[Tutorial 3](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=52ad11c0-9d52-4314-81b6-ade00033e764)
 
