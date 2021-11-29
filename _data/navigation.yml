@@ -5,8 +5,8 @@ main:
     url: /lectures/
   - title: "Tutorials"
     url: /tutorials/
-  # - title: "Assignments"
-  #   url: /assignments/
+  - title: "Assignments"
+    url: /assignments/
   - title: "Semesters"
     url: /semesters/
 
