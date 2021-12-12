@@ -23,3 +23,4 @@ The first tutorial was not recorded properly due to technical glitches, provided
 
 [Tutorial 5](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=80cd8475-18a8-48aa-bcb1-adef00931270)
 
+[Tutorial 6](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d9e8320c-e9c9-4bc6-b5b3-adfc00559007)
