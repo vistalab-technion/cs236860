@@ -57,4 +57,4 @@ The zip file should include:
     3. Steps to reproduce your results using this code: Where to get and place
        the data, how to run all the data processing steps, and etc.
 
-Submission will be available [here](https://webcourse.cs.technion.ac.il/236860/Winter2020-2021).
+Submission will be available [here](https://webcourse.cs.technion.ac.il/236860/Winter2021-2022).
