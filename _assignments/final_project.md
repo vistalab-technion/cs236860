@@ -11,7 +11,7 @@ The goal of the project is to familiarize you with the state-of-the-art research
 
 ## Milestones
 
-- 17th Dec: The bidding of the papers end. The papers are assigned.
+- 14th Jan: The bidding of the papers end. The papers are assigned.
 - 18th Mar: Turn in the final report.
 
 ## Choosing the project
@@ -40,10 +40,6 @@ Try to do something beyond the MVP. For example, apply the method to a new probl
 
 - MVP: 60%
 - Research work: 40%
-
-### Deadline
-
-March 18th, 2022
 
 
 ## Submission
