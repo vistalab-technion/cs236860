@@ -31,3 +31,7 @@ Provided below for those tutorials are the recordings from Winter 2020-21 presen
 [Tutorial 8](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6ccb5dae-a3a5-4493-9ca6-ac9b00d6220b)
 
 [Tutorial 9](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=eb7aca02-e30c-409d-8f31-ae18014697a6)
+
+[Tutorial 10](https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7d6eebac-411a-4d13-a574-ae1c00f1340b)
+
+
