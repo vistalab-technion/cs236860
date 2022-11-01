@@ -1,0 +1,711 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 6: Patch-based priors | CS236860: Digital Image Processing</title>
+<meta name="description" content="Patch-based denoising, NLM, Bilateral filter">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 6: Patch-based priors">
+<meta property="og:url" content="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_6/">
+
+
+  <meta property="og:description" content="Patch-based denoising, NLM, Bilateral filter">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_6/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "http://0.0.0.0:4000/cs236860",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/assignments/" >Assignments</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/" >Semesters</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 6: Patch-based priors">
+    <meta itemprop="description" content="Patch-based denoising, NLM, Bilateral filter">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 6: Patch-based priors
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  49 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#patch-based-denoising">Patch-based denoising</a>
+    <ul>
+      <li><a href="#denoising-using-multiple-images">Denoising using multiple images</a></li>
+      <li><a href="#non-local-means">Non-local means</a></li>
+      <li><a href="#bilateral-filter">Bilateral filter</a></li>
+      <li><a href="#nlm-as-mmse">NLM as MMSE</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>We continue our quest for a better model for the prior probability
+$P_ {\mathpzc{F}}$ to be used in MAP and Bayesian estimators. While it is
+almost hopeless to be able to formulate such a prior on the entire
+image, it is a much more practical task to do it on a small region of an
+image (known in the image processing jargon as a <em>patch</em>). Let us first
+fix some size $T$ and define a square domain
+$\square = \left[-\frac{T}{2},\frac{T}{2}\right]^d$. A patch around some
+point ${\bm{\mathrm{x}}}$ in an image $f$ can be thought of as
+$\tau_ {\bm{\mathrm{x}}} f |_ \square$. We can therefore define a <em>patch
+operator</em>
+$\pi_ {\bm{\mathrm{p}}} : \mathbb{F}( {\bm{\mathrm{R}}}^d, {\bm{\mathrm{R}}}) \rightarrow \mathbb{F}( \square, {\bm{\mathrm{R}}})$
+taking $f$ as the input and producing
+$\tau_ {\bm{\mathrm{x}}} f |_ \square$ as the output. In these terms, we
+redefine the problem of modeling the prior probability of a natural
+image $\mathpzc{F}$ as the problem of modeling the prior probability of
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$ for every location
+${\bm{\mathrm{x}}}$ in the image domain. To that end, let us assume to
+have access to a (potentially, very large) collection of clean patches
+${p_ 1,\dots,p_ K}$; such a collection can be obtained by taking a very
+large representative set of images, decomposing them into a collection
+of overlapping patches and clustering the latter into $K$ samples. We
+will further assume that a patch in a natural image
+$\pi_ {\bm{\mathrm{q}}} \mathpzc{F}$ is uniformly distributed over that
+collection, i.e., $\pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k$ with
+probability $\frac{1}{K}$ for $k=1,\dots,K$. Note that the simple
+assumption of uniform distribution over the collection of example
+patches leads to a potentially very intricate prior distribution of
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$ itself, since the collection
+captures the intricate structure of representative image patches!</p>
+
+<h2 id="patch-based-denoising">Patch-based denoising</h2>
+
+<h3 id="denoising-using-multiple-images">Denoising using multiple images</h3>
+
+<p>Let us simplify our archetypal inverse problem assuming that the latent
+signal $\mathpzc{F}$ is only degraded by white additive noise,
+$\mathpzc{Y} = \mathpzc{F} + \mathpzc{N}$, admitting a Gaussian
+distribution
+$\mathpzc{N}({\bm{\mathrm{x}}}) \sim \mathcal{N}(0,\sigma_ \mathpzc{N}^2)$.
+This problem is known as <em>Gaussian denoising</em>. The likelihood of
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}$ given that
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$ was formed using the patch $p_ k$
+is simply given by the density of $\pi_ \bm{\mathrm{x}} \mathpzc{N}$,</p>
+
+\[P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}  | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} } (\pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = y | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k) = f_ {\mathpzc{N}}( y - p_ k )  \propto e^{-\frac{ \| y - p_ k  \|^2 }{2 \sigma_ \mathpzc{N}^2} },\]
+
+<p>where the norm is the $L^2$ norm on $\square$. Since we asserted uniform
+distribution of $k$ over ${1,\dots,K}$, the Bayes formula readliy
+yields</p>
+
+\[P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{F} |\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}   } ( \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = y ) = \frac{  e^{-\frac{ \| y - p_ k  \|^2 }{2 \sigma_ \mathpzc{N}^2} }   }{  \displaystyle{\sum_ {i=1}^K   e^{-\frac{ \| y - p_ i  \|^2 }{2 \sigma_ \mathpzc{N}^2} }   }} .\]
+
+<p>Using this posterior, we can define the MSE of the estimator $\hat{f}$
+at point ${\bm{\mathrm{x}}}$ as</p>
+
+\[\epsilon( \hat{f}({\bm{\mathrm{x}}}) ) =  \mathbb{E} ( \hat{f}({\bm{\mathrm{x}}}) - p_ k({\bm{\mathrm{0}}}) )^2  =  \sum_ { k=1 }^K ( \hat{f}({\bm{\mathrm{x}}}) - p_ k({\bm{\mathrm{0}}}) )^2  P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{F} |\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}   } ( \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y}  =  \pi_ {\bm{\mathrm{x}}} y );\]
+
+<p>the MMSE estimator is therefore defined as</p>
+
+\[\hat{f}({\bm{\mathrm{x}}})   = \mathrm{arg}\min_ {\hat{f}({\bm{\mathrm{x}}})  } \epsilon( \hat{f}({\bm{\mathrm{x}}})  ) = \mathrm{arg} \min_ { \hat{f}({\bm{\mathrm{x}}})  }  \sum_ { k=1 }^K ( \hat{f}({\bm{\mathrm{x}}}) - p_ k({\bm{\mathrm{0}}}) )^2   h_ {k} ({\bm{\mathrm{x}}}  ),\]
+
+<p>where
+$h_ {k}( {\bm{\mathrm{x}}}  ) =  P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{F} |\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}   } ( \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y}  =  \pi_ {\bm{\mathrm{x}}} y )$.
+Note that the sum of the latter weights over $k$ is always one. Also
+note that $ p_ k({\bm{\mathrm{0}}})$ gives the value at the center of the
+patch. The latter problem has a simple closed-form solution as the
+weighted average</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) = \sum_ { k=1 }^K  h_ {k} ( {\bm{\mathrm{x}}}   ) p_ k({\bm{\mathrm{0}}}) = \frac{   \displaystyle{\sum_ {k=1}^K e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - p_ k  \|^2 }{2 \sigma_ \mathpzc{N}^2}  }  p_ k({\bm{\mathrm{0}}}) }   }{  \displaystyle{\sum_ {k=1}^K   e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - p_ k  \|^2 }{2 \sigma_ \mathpzc{N}^2} }   }}\]
+
+<p>of the central values from exemplar patches ${p_ 1,\dots,p_ K}$, with
+weights inversely proportional to the distance of the said patches from
+the corresponding input patch centered at ${\bm{\mathrm{x}}}$. Since $K$
+might be very big and the exponential anyway decays very fast in
+$ | \pi_ {\bm{\mathrm{x}}} y - p_ k  |$, in practice the above sum is
+approximated by taking a fixed number of (approximate) <em>nearest
+neighbors)</em> in the sense of the inter-patch distance
+$ | \pi_ {\bm{\mathrm{x}}} y - p_ k  |$.</p>
+
+<h3 id="non-local-means">Non-local means</h3>
+
+<p>It is sometimes inconvenient to assume the availability of exemplar
+patches ${p_ k}$ coming from an external collection of images; instead,
+it is often desirable to use the patches from the image itself for the
+purpose of defining the prior on $\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$.
+The former MMSE estimator can be readily formulated in this setup as</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) =  \frac{   \displaystyle{\int_ {\RR^d} e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y -  \pi_ {\bm{\mathrm{x}}'} y \|^2 }{2 \sigma_ \mathpzc{N}^2}  } y({\bm{\mathrm{x}}}')  d{\bm{\mathrm{x}}}' }   }{  \displaystyle{\int_ {\RR^d}   e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - \pi_ {\bm{\mathrm{x}}'} y  \|^2 }{2 \sigma_ \mathpzc{N}^2} }  d{\bm{\mathrm{x}}}'  }}\]
+
+<p>or, more practically,</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) = \frac{   \displaystyle{\sum_ {k=1}^K e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - \pi_ {\bm{\mathrm{x}}_ k} y  \|^2 }{2 \sigma_ \mathpzc{N}^2}  }  y({\bm{\mathrm{x}}}_ k) }   }{  \displaystyle{\sum_ {k=1}^K   e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - \pi_ {\bm{\mathrm{x}}_ k} y  \|^2 }{2 \sigma_ \mathpzc{N}^2} }   }},\]
+
+<p>where
+${ \pi_ {\bm{\mathrm{x}}_ 1} y, \dots, \pi_ {\bm{\mathrm{x}}_ K} y }$
+are the $K$ nearest neighbors of $\pi_ {\bm{\mathrm{x}}} y$ in the
+noisy image itself $y$ (variants of the PatchMatch are very useful to
+compute the nearest neighbors). Such a filter is known as <em>non-local
+means</em> (NLM) – it works like a regular local averaging that supresses
+noise (by the law of large numbers), yet, in the case of NLM averaging
+is non-local. Oftentimes, an additional (very slowly decaying) spatial
+weight is added to down-weigh spatially distant pixels,</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) = \frac{   \displaystyle{\sum_ {k=1}^K e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - \pi_ {\bm{\mathrm{x}}_ k} y  \|^2 }{2 \sigma_ \mathpzc{N}^2} - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}  }  y({\bm{\mathrm{x}}}_ k) }   }{  \displaystyle{\sum_ {k=1}^K   e^{-\frac{ \| \pi_ {\bm{\mathrm{x}}} y - \pi_ {\bm{\mathrm{x}}_ k} y  \|^2 }{2 \sigma_ \mathpzc{N}^2}  - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}   }   }},\]
+
+<p>where $\sigma^2_ \mathrm{s}$ controls the width of the spatial weight.</p>
+
+<h3 id="bilateral-filter">Bilateral filter</h3>
+
+<p>A particularly renowned setting of NLM (that was actually devised prior
+to NLM) is the case of point-wise patches, i.e.,
+$\pi_ {\bm{\mathrm{x}}} : f \rightarrow f({\bm{\mathrm{x}}})$. In this
+case, the NLM estimator simplifies to</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) =  \frac{   \displaystyle{\int_ {\RR^d} e^{-\frac{ (y({\bm{\mathrm{x}}}) - y({\bm{\mathrm{x}}}'))^2 }{2 \sigma_ \mathpzc{N}^2} - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}  }  y({\bm{\mathrm{x}}}')  d{\bm{\mathrm{x}}}' }   }{  \displaystyle{\int_ {\RR^d}   e^{-\frac{ ( y({\bm{\mathrm{x}}}) - y({\bm{\mathrm{x}}}') )^2 }{2 \sigma_ \mathpzc{N}^2} - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}  }  d{\bm{\mathrm{x}}}'  }},\]
+
+<p>which is known as the <em>bilateral filter</em>. Bilateral filter can be
+thought of as a non-shift invariant linear filter,</p>
+
+\[\hat{f}({\bm{\mathrm{x}}}) =  \int_ {\RR^d} h({\bm{\mathrm{x}}},{\bm{\mathrm{x}}}')  y({\bm{\mathrm{x}}}')  d{\bm{\mathrm{x}}}'\]
+
+<p>with the spatially-varying unit-DC impulse response</p>
+
+\[h({\bm{\mathrm{x}}},{\bm{\mathrm{x}}}')  =  \frac{    e^{-\frac{ (y({\bm{\mathrm{x}}}) - y({\bm{\mathrm{x}}}'))^2 }{2 \sigma_ \mathpzc{N}^2} - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}  }   }{  \displaystyle{\int_ {\RR^d}   e^{-\frac{ ( y({\bm{\mathrm{x}}}) - y({\bm{\mathrm{x}}}') )^2 }{2 \sigma_ \mathpzc{N}^2} - \frac{\| {\bm{\mathrm{x}}}-{\bm{\mathrm{x}}}' \|^2_ 2 }{\sigma^2_ \mathrm{s}}  }  d{\bm{\mathrm{x}}}'  }}.\]
+
+<p>Another useful model is to consider the so-called <em>lifted</em> space
+${\bm{\mathrm{R}}}^d \times {\bm{\mathrm{R}}}$, in which the graph of
+the image $f$ resides. The graph can be modeled as a delta distribution
+on ${\bm{\mathrm{R}}}^d \times {\bm{\mathrm{R}}}$ supported on
+$({\bm{\mathrm{x}}},f({\bm{\mathrm{x}}})$ (note that every function $f$
+has such a representation, but not every function or distribution on
+${\bm{\mathrm{R}}}^d \times {\bm{\mathrm{R}}}$ represents a valid
+function). Then, convolving the latter distribution with an LSI Gaussian
+kernel,</p>
+
+\[h(({\bm{\mathrm{x}}},f)) \propto  \exp\left(- \left\|  \left( \frac{\bm{\mathrm{x}}}{ \sqrt{2} \sigma_ \mathpzc{N} }, \frac{f}{ \sqrt{2}  \sigma_ \mathrm{s} } \right) \right\|^2_ 2 \right),\]
+
+<p>and marginalizing over $f$ yields precisely the bilateral filter.</p>
+
+<h3 id="nlm-as-mmse">NLM as MMSE</h3>
+
+<p>Note that in its original formulation, the NLM estimator is not an MMSE
+estimator. This stems from the fact that when using the patches of the
+image itself as exemplars to define the prior on
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$, the patches are contaminated with
+noise! Fixing a set of $K$ locations ${\bm{\mathrm{x}}}_ k$ from which
+exemplar patches are taken, we now do not have access to $p_ k$ but
+rather to their version contaminated by noise,
+$q_ k = p_ k + \pi_ {\bm{\mathrm{x}}_ k} \mathpzc{N} = p_ k + \mathpzc{N}_ k$.</p>
+
+<p>Let us repeat the derivation of the posterior probability distribution.
+The likelihood of $\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}$ given that
+$\pi_ {\bm{\mathrm{x}}} \mathpzc{F}$ was formed using the patch $p_ k$
+is simply given by the density of $\pi_ {\bm{\mathrm{x}}} \mathpzc{N}$,</p>
+
+\[P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}  | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} } (\pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = y | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k) \propto e^{-\frac{ \| y - p_ k  \|^2 }{2 \sigma_ \mathpzc{N}^2} };\]
+
+<p>however, we no more have access to $p_ k$. Instead, we can write</p>
+
+\[\begin{aligned}
+ \| y - p_ k  \|^2 &amp;=&amp;  \| y - q_ k + \mathpzc{N}_ k  \|^2 \approx \mathbb{E} \| y - q_ k + \mathpzc{N}_ k  \|^2 = \| y - q_ k\|^2 + \mathbb{E} \| \mathpzc{N}_ k \|^2 + 2 \mathbb{E} \langle y-q_ k,  \mathpzc{N}_ k \rangle\end{aligned}\]
+
+<p>By definition of random Gaussian noise, since the norm is computed on
+$\square$ of volume $T^d$,
+$\mathbb{E} | \mathpzc{N}_ k |^2 = T^d \sigma^2_ {\mathpzc{N}}$. Letting
+$y = p_ k + \pi_ {\bm{\mathrm{x}}} \mathpzc{N}$, the third term can be
+written as</p>
+
+\[\mathbb{E} \langle y-q_ k,  \mathpzc{N}_ k \rangle = \mathbb{E} \langle p_ k + \pi_ {\bm{\mathrm{x}
+}} \mathpzc{N} - p_ k - \mathpzc{N}_ k,  \mathpzc{N}_ k \rangle =  \mathbb{E} \langle \pi_ {\bm{\mathrm{x}}} \mathpzc{N},  \mathpzc{N}_ k \rangle - \mathbb{E} \| \mathpzc{N}_ k \|^2.\]
+
+<p>Even though the denoised and the reference patches may overlap, we will
+assume that $ \pi_ {\bm{\mathrm{x}}} \mathpzc{N}$ and $\mathpzc{N}_ k$
+are statistically independent and, since they are zero mean, they are
+orthogonal. This yields
+$\mathbb{E} \langle y-q_ k,  \mathpzc{N}_ k \rangle = -T^d \sigma^2_ {\mathpzc{N}}$;
+combining the previous results, we have</p>
+
+\[P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}  | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} } (\pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = y | \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k)  \propto e^{\frac{ - \| y - q_ k  \|^2 + T^d \sigma^2_ {\mathpzc{N}} }{2 \sigma_ \mathpzc{N}^2} }\]
+
+<p>Similarly to the noiseless exemplars case, the Bayes formula yields</p>
+
+\[P_ {\pi_ {\bm{\mathrm{x}}} \mathpzc{F} |\pi_ {\bm{\mathrm{x}}} \mathpzc{Y}   } ( \pi_ {\bm{\mathrm{x}}} \mathpzc{F} = p_ k | \pi_ {\bm{\mathrm{x}}} \mathpzc{Y} = y ) = \frac{  e^{-\frac{ \| y - q_ k  \|^2 + T^d \sigma^2_ {\mathpzc{N}}  }{2 \sigma_ \mathpzc{N}^2} }   }{  \displaystyle{\sum_ {i=1}^K   e^{-\frac{ \| y - q_ i  \|^2 + T^d \sigma^2_ {\mathpzc{N}}  }{2 \sigma_ \mathpzc{N}^2} }   }} = h_ k({\bm{\mathrm{x}}}).\]
+
+<p>Using this posterior, we again define the MSE of the estimator $\hat{f}$
+at point ${\bm{\mathrm{x}}}$ as</p>
+
+\[\epsilon( \hat{f}({\bm{\mathrm{x}}}) ) =  \mathbb{E} ( \hat{f}({\bm{\mathrm{x}}}) - p_ k({\bm{\mathrm{0}}}) )^2  =  \sum_ { k=1 }^K ( \hat{f}({\bm{\mathrm{x}}}) - p_ k({\bm{\mathrm{0}}}) )^2  h_ k({\bm{\mathrm{x}}}).\]
+
+<p>In the previous case, this yielded an estimator in the form of the
+weighted sum</p>
+
+\[\pi_ {\bm{\mathrm{x}}} \hat{f}  = \sum_ {k=1}^K c_ k  p_ k,\]
+
+<p>with $c_ k = h_ k({\bm{\mathrm{x}}})$ summing to $1$. However, note that $p_ k$
+are now unaccessible, so we have to write</p>
+
+\[\pi_ {\bm{\mathrm{x}}} \hat{f}= \sum_ {k=1}^K c_ k  q_ k = \sum_ {k=1}^K c_ k  p_ k  + \sum_ {k=1}^K c_ k  \mathpzc{N}_ k,\]
+
+<p>with some other set of weights ${\bm{\mathrm{c}}}$ also summing to $1$.
+This yields</p>
+
+\[\begin{aligned}
+\epsilon( {\bm{\mathrm{c}}} ) = &amp; \sum_ { j=1 }^K \| \pi_ {\bm{\mathrm{x}}}\hat{f} - p_ k \|^2 h_ k({\bm{\mathrm{x}}})  = \sum_ { k=1 }^K \left\| \sum_ {i=1}^K c_ i  p_ i + \sum_ {i=1}^K c_ i  \mathpzc{N}_ i - p_ k\right\|^2  h_ k({\bm{\mathrm{x}}}) \\
+\approx &amp;  \sum_ { k=1 }^K {\bm{\mathrm{E}}} \left\| \sum_ {i=1}^K c_ i  p_ i + \sum_ {i=1}^K c_ i  \mathpzc{N}_ i - p_ k\right\|^2  h_ k({\bm{\mathrm{x}}}) \\
+\approx &amp;  \sum_ { k=1 }^K \left(  \left\| \sum_ {i=1}^K c_ i  p_ i  - p_ k\right\|^2  +  \sum_ {i=1}^K c^2_ i {\bm{\mathrm{E}}}\| \mathpzc{N}_ i \|^2
+ \right) h_ k({\bm{\mathrm{x}}}) \\
+ =&amp; \sum_ { k=1 }^K  \left\| \sum_ {i=1}^K c_ i  p_ i  - p_ k\right\|^2   h_ k({\bm{\mathrm{x}}}) + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{c}}}^\Tr{\bm{\mathrm{c}}} \\
+ =&amp; {\bm{\mathrm{c}}}^\Tr ( {\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}} ) {\bm{\mathrm{c}}} - 2{\bm{\mathrm{c}}}^\Tr {\bm{\mathrm{P}}} {\bm{\mathrm{h}}} + {\bm{\mathrm{w}}}^\Tr {\bm{\mathrm{h}}}, \end{aligned}\]
+
+<p>where ${\bm{\mathrm{P}}}$ is a $K \times K$ matrix with the elements
+$({\bm{\mathrm{P}}})_ {ij} = \langle p_ i, p_ j \rangle$,
+${\bm{\mathrm{h}}}$ is the $K$-dimensional vector with the elements
+$h_ k({\bm{\mathrm{x}}})$, and ${\bm{\mathrm{w}}}$ is the $K$-dimensional
+vector with the elements $({\bm{\mathrm{w}}})_ i = |  p_ i |^2$. Our
+MMSE estimator is therefore given as the solution to the constrained
+minimization problem</p>
+
+\[{\bm{\mathrm{c}}}_ \ast = \mathrm{arg}\min_ {\bm{\mathrm{c}} } \epsilon( {\bm{\mathrm{c}}} )  \,\,\, 
+\mathrm{s.t.}\,\,\, {\bm{\mathrm{c}}}^\Tr {\bm{\mathrm{1}}} = 1.\]
+
+<p>Defining the Lagrangian
+$ \epsilon( {\bm{\mathrm{c}}} ) + \lambda {\bm{\mathrm{1}}}^\Tr {\bm{\mathrm{c}}}$,
+differentiating w.r.t. ${\bm{\mathrm{c}}}$ and setting the gradient to
+zero yields</p>
+
+\[{\bm{\mathrm{c}}}_ \ast = ({\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}} )^{-1} ({\bm{\mathrm{P}}} {\bm{\mathrm{h}}} + \lambda {\bm{\mathrm{1}}})\]
+
+<p>with the constant</p>
+
+\[\lambda = \frac{1 -  {\bm{\mathrm{1}}}^\Tr ({\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}} )^{-1}  {\bm{\mathrm{P}}} {\bm{\mathrm{h}}} }{ {\bm{\mathrm{1}}}^\Tr ({\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}} )^{-1}  {\bm{\mathrm{1}}}}\]
+
+<p>satisfying the unit sum constraint.</p>
+
+<p>Note the inversion of the potentially very big matrix
+${\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}}$ makes
+this solution impractical. However, assuming that for every $i$,
+$\langle p_ i, p_ i \rangle = T^d s^2_ {\mathpzc{F}}$ and for every
+$j \ne i$, $\langle p_ i, p_ j \rangle = \rho T^d s^2_ {\mathpzc{F}}$,
+where
+$s^2_ {\mathpzc{F}} = {\bm{\mathrm{E}}} \mathpzc{F}({\bm{\mathrm{x}}})$,
+the matrix the matrix ${\bm{\mathrm{P}}}$ assumes the simple form
+${\bm{\mathrm{P}}} = \alpha {\bm{\mathrm{I}}} + \beta {\bm{\mathrm{1}}}{\bm{\mathrm{1}}}^\Tr$,
+where $\alpha =   T^d (1-\rho)s^2_ {\mathpzc{F}}$ and
+$\beta = T^d \rho  s^2_ {\mathpzc{F}}$. The matrix to invert therefore
+becomes</p>
+
+\[{\bm{\mathrm{P}}} + T^d  \sigma_ \mathpzc{N}^2 {\bm{\mathrm{I}}}  = \gamma {\bm{\mathrm{I}}} + \beta {\bm{\mathrm{1}}}{\bm{\mathrm{1}}}^\Tr,\]
+
+<p>where $\gamma =  \alpha +  T^d \sigma_ \mathpzc{N}^2$. Using the
+Sherman-Morrison matrix identity, the inverse can be expressed as</p>
+
+\[\begin{aligned}
+( \gamma {\bm{\mathrm{I}}} + \beta {\bm{\mathrm{1}}}{\bm{\mathrm{1}}}^\Tr )^{-1} &amp;=&amp; \frac{1}{\gamma} \left( {\bm{\mathrm{I}}} - \frac{\beta}{\gamma + \beta K} {\bm{\mathrm{1}}}{\bm{\mathrm{1}}}^\Tr \right).\end{aligned}\]
+
+<p>Substituting the latter result to the formula for
+${\bm{\mathrm{c}}}_ \ast$, after tedious and boring algebra, we arrive at</p>
+
+\[{\bm{\mathrm{c}}}_ \ast = \frac{(1-\rho)s^2_ {\mathpzc{F}} }{ (1-\rho) s^2_ {\mathpzc{F}} + \sigma^2_ {\mathpzc{N}}} \, {\bm{\mathrm{h}}} 
++  \frac{\sigma^2_ {\mathpzc{N}} }{ (1-\rho) s^2_ {\mathpzc{F}} + \sigma^2_ {\mathpzc{N}}} \, \frac{1}{K} \, {\bm{\mathrm{1}}}.\]
+
+<p>Note that the weight vector is given by a weighted average (a convex
+combination) of the posterior probabilities ${\bm{\mathrm{h}}}$ and the
+uniform vector $\frac{1}{K} \, {\bm{\mathrm{1}}}$. Interpreting the
+signal to noise ratio as</p>
+
+\[\mathrm{SNR} =  \frac{(1-\rho)s^2_ {\mathpzc{F}} }{ \sigma^2_ {\mathpzc{N}}},\]
+
+<p>we can rewrite</p>
+
+\[c_ k = \frac{ \mathrm{SNR} \cdot h_ k + \frac{1}{K} }{  \mathrm{SNR}  + 1}.\]
+
+<p>For high SNR ($\sigma^2_ {\mathpzc{N}}$ approaching $0$), we obtain the
+classical NLM with $c_ k = h_ k$.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/cs236860/lecture_notes/lecture_5/" class="pagination--pager" title="Lecture 5: Statistical estimation
+">Previous</a>
+    
+    
+      <a href="/cs236860/lecture_notes/lecture_7/" class="pagination--pager" title="Lecture 7: Sparsity-based priors
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>

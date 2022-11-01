@@ -1,0 +1,662 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 1: Multidimensional signals and systems | CS236860: Digital Image Processing</title>
+<meta name="description" content="Notation, Multidimensional signals and systems, Fourier transform">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 1: Multidimensional signals and systems">
+<meta property="og:url" content="https://vistalab-technion.github.io/cs236860/semesters/w1819/lecture_notes/lecture_1/">
+
+
+  <meta property="og:description" content="Notation, Multidimensional signals and systems, Fourier transform">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://vistalab-technion.github.io/cs236860/semesters/w1819/lecture_notes/lecture_1/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "https://vistalab-technion.github.iocs236860/semesters/w1819",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/semesters/w1819/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/semesters/w1819/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/semesters/w1819/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/w1819/hw/" >Assignments</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 1: Multidimensional signals and systems">
+    <meta itemprop="description" content="Notation, Multidimensional signals and systems, Fourier transform">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 1: Multidimensional signals and systems
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  38 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#notation">Notation</a></li>
+  <li><a href="#multidimensional-signals-and-systems">Multidimensional signals and systems</a>
+    <ul>
+      <li><a href="#linearity">Linearity</a></li>
+      <li><a href="#shift-invariance">Shift invariance</a></li>
+    </ul>
+  </li>
+  <li><a href="#fourier-transform">Fourier transform</a>
+    <ul>
+      <li><a href="#harmonics">Harmonics</a></li>
+      <li><a href="#fourier-transform-1">Fourier transform</a></li>
+      <li><a href="#tensor-products">Tensor products</a></li>
+      <li><a href="#translation-and-modulation">Translation and modulation</a></li>
+      <li><a href="#convolution">Convolution</a></li>
+      <li><a href="#stretching">Stretching</a></li>
+      <li><a href="#rotation">Rotation</a></li>
+      <li><a href="#projection">Projection</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="notation">Notation</h2>
+
+<p>In our course, we will deal almost exclusively with real functions. 
+A scalar function will be denoted as $f : \RR^d \rightarrow \RR$, $f(\bb{x})$,
+or simply $f$, with $d$ denoting the domain dimension. 
+$d$-dimensional multi-indices will be denoted by $\bb{n} = (n_1,\dots,n_d) \in \bb{Z}^d$.
+An operator acting on a function will be denoted by $\mathcal{H}(f)$ or simply $\mathcal{H}f$.</p>
+
+<h2 id="multidimensional-signals-and-systems">Multidimensional signals and systems</h2>
+
+<p>A $d$-dimensional <strong>signal</strong> is a real- (or sometimes complex-) valued function $f : \RR^d \rightarrow \RR$. In the case of $d=2$, 
+we will refer to such signals as ‘‘images’’ and interpret the argument of the function, $\bb{x} = (x_1,x_2)$ as 
+the spatial location of a point in an image; for $d=3$, we will refer to such signals as to images, interpreting 
+the additional third dimension as ‘‘time’’. In the one-dimensional case,  the scalar argument will be denoted by $t$ and interpreted as ‘‘time’’.</p>
+
+<p>Denoting the space of real-valued signals as $\mathbb{F}(\RR^d,\RR) = {f  :  f : \RR^d \rightarrow \RR }$, a <strong>system</strong> is an operator $\mathcal{H} : \mathbb{F}(\RR^d,\RR) \rightarrow \mathbb{F}(\RR^d,\RR)$. That is, a system $\mathcal{H}$ accepts a signal  as the input and produces another signal as the output.
+For example the system receiving $f(\bb{x})$ and producing $f(\bb{x}-\bb{p})$ will be called <strong>translation</strong> (or <strong>shift</strong>) and the corresponding operator will be denoted as $\tau_{\bb{p}}$. With this notation we can write $(\tau_{\bb{p}} f)(\bb{x}) = f(\bb{x}-\bb{p})$.</p>
+
+<h3 id="linearity">Linearity</h3>
+
+<p>A system $\mathcal{H}$ is said to be a <strong>linear system</strong> is it is additive and homogenous, i.e., for every $f,g \in \mathbb{F}(\RR^d,\RR)$ and $a, b \in \RR$,</p>
+
+<script type="math/tex; mode=display">\mathcal{H}(a f + b g) = a \mathcal{H}f + b \mathcal{H}g .</script>
+
+<p>The output of (almost) every linear system can be represented as a linear functional of the form</p>
+
+<script type="math/tex; mode=display">(\mathcal{H}f)(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}') d\bb{x}',</script>
+
+<p>where the function (more generally, distribution – see in the sequel)  $h(\bb{x},\bb{x}’)$ is called the <strong>impulse response</strong> of the system. Informally, $h(\bb{x},\bb{x}’)$ tells what will be the output of the system at point $\bb{x}$ when the input is an impulse at $\bb{x}’$.<br />
+An alternative way to view the above description is by defining the standard inner product on $L^2(\RR) \subset \mathbb{F}(\RR^d,\RR)$:</p>
+
+<script type="math/tex; mode=display">\langle f,g \rangle = \int_{\RR^d} f(\bb{x}) g(\bb{x})^\ast d\bb{x};</script>
+
+<p>since most of the time we will be interested in real-valued functions, we will often omit the complex conjugate from the second argument.</p>
+
+<h3 id="shift-invariance">Shift invariance</h3>
+
+<p>A linear system $\mathcal{H}$ is called <strong>shift invariant</strong> (LSI for short) if it commutes with the translation operator, i.e., for every $\bb{p} \in \RR^d$</p>
+
+<script type="math/tex; mode=display">\tau_{\bb{p}} \mathcal{H} = \mathcal{H}\tau_{\bb{p}}.</script>
+
+<p>In other words, the output of the system given a shifted input is the same as the output of the system shifted by the same amount. 
+Substituting a specific input $f$ and shift $\bb{p}$, we have the identity</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+\int_{\RR^d} h(\bb{x} - \bb{p},\bb{x}') f(\bb{x}') d\bb{x}' &=& (\mathcal{H}f (\bb{x}) )(\bb{x}-\bb{p}) = (\mathcal{H}f (\bb{x} - \bb{p}) )(\bb{x}) = \int_{\RR^d} h(\bb{x},\bb{x}') f(\bb{x}'- \bb{p}) d\bb{x}' \\
+&=& \int_{\RR^d} h(\bb{x},\bb{x}'' + \bb{p}) f(\bb{x}'') d\bb{x}''.
+\end{eqnarray*} %]]></script>
+
+<p>Since the latter holds for every $h$ and $\bb{p}$, we have $h(\bb{x}-\bb{p}, \bb{x}’) = h(\bb{x}, \bb{x}’+\bb{p})$ at every $\bb{x}$. In other words, $h(\bb{x},\bb{x}’)$ is effectively only a function of $\bb{x}-\bb{x}’$, which we will continue denoting as ‘‘h’’ with some abuse of notation. This particular structure is called Toeplitz and is the multidimensional infinite support equivalent of a circulant matrix.  The response of an LSI system can be therefore represented as</p>
+
+<script type="math/tex; mode=display">(\mathcal{H}f)(\bb{x}) = \int_{\RR^d} h(\bb{x}-\bb{x}') f(\bb{x}') d\bb{x}'.</script>
+
+<p>The latter linear operation is called <strong>convolution</strong> and denotes as $h \ast f$. It is straightforward to show that $h \ast f = f \ast h$. 
+For real-valued functions, convolution of $h$ with $f$ can be also seen as $(h \ast f)(\bb{x}) = \langle \tau_{\bb{x}} \bar{h}, f  \rangle$,
+where $\bar{h}(\bb{x}) = h(-\bb{x})$.</p>
+
+<h2 id="fourier-transform">Fourier transform</h2>
+
+<h3 id="harmonics">Harmonics</h3>
+
+<p>A multi-dimensional <strong>harmonic</strong> is the function $\phi_{\bb{\xi}}(\bb{x}) = e^{2\pi \ii \, \bb{\xi}^\Tr \bb{x}}$ with the $d$-dimensional real parameter $\bb{\xi}$. 
+Note that the function has constant values along lines perpendicular to the direction of $\bb{\xi}$, and makes a full period every $1/| \bb{\xi} |$ units of space in the direction of $\bb{xi}$. In other words,  $\phi_{\bb{\xi}}$ looks like a periodic wave in the direction of $\bb{\xi}$ with the wavelength inversely proportional to $|\bb{\xi}|$ (or frequency proportional to $|\bb{\xi}|$). For this reason, $\bb{\xi}$ is usually referred to as the <strong>spatial frequency</strong> measured in inverse length units.<br />
+Note that $\phi_{\bb{\xi}}(\bb{p}) = \phi_{\bb{p}}(\bb{\xi})$, meaning that we can freely exchange the roles of the space location $\bb{x}$ and the spatial frequency $\bb{\xi}$.</p>
+
+<h3 id="fourier-transform-1">Fourier transform</h3>
+
+<p>Orthogonal projections onto the set of harmonics is a function of the argument $\bb{\xi}$,</p>
+
+<script type="math/tex; mode=display">F(\bb{\xi}) = \langle f, \phi_{\bb{\xi}} \rangle = \int_{\RR^d} f(\bb{x}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x},</script>
+
+<p>is called the (forward) <strong>Fourier transform</strong> of $f$. We will denote it as the action of the operator $\mathcal{F}$ on $f$ or simply by the capital $F$. The argument of $F$  is conventionally referred to as <strong>frequency</strong>, while the argument of $f$ is called <strong>space</strong>.</p>
+
+<p>The inverse Fourier transform is defined as</p>
+
+<script type="math/tex; mode=display">f(\bb{x}) =  (\mathcal{F}^{-1} F)(\bb{x}) =  \int_{\RR^d} F(\bb{\xi}) e^{2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{\xi}.</script>
+
+<p>In what follows, we prove several very useful properties of the Fourier transforms.</p>
+
+<h3 id="tensor-products">Tensor products</h3>
+
+<p>Let $f_1,\dots, f_d : \RR \rightarrow \RR$ be functions of a single variable, and let us define the tensor product $(f_1 \otimes \cdots \otimes f_d)(\bb{x}) = f_1(x_1) \cdots f_d(x_d)$. Applying the Fourier transform yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(\mathcal{F}(f_1 \otimes \cdots \otimes f_d))( \bb{\xi} ) &=& \int_{\RR^d} f_1(x_1) \cdots f_d(x_d) e^{-2\pi \ii (x_1 \xi_1 + \cdots + x_d \xi_d) } dx_1 \cdots dx_d \nonumber\\
+&=&  \int_\RR f_1(x_1) e^{-2\pi \ii x_1 \xi_1} dx_1 \cdots  \int_\RR f_d(x_d) e^{-2\pi \ii x_d \xi_d} dx_d \nonumber\\
+&=&(\mathcal{F} f_1) (\xi_1) \cdots (\mathcal{F} f_d) (\xi_d).
+\end{eqnarray*} %]]></script>
+
+<p>We can write this result in the following convenient notation:</p>
+
+<script type="math/tex; mode=display">f_1 \otimes \cdots \otimes f_d  \fff  F_1 \cdots F_d</script>
+
+<p>A useful example is the $d$-dimensional box function that can be defined as a tensor product of one-dimensional rectangular functions:
+$\mathrm{box} = \mathrm{rect} \otimes \cdots \otimes \mathrm{rect}$, where</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\mathrm{rect}(x) = \left\{ \begin{array}{lcl} 0 & : & |x| > \frac{1}{2} \\
+1 & : & |x| < \frac{1}{2}.
+\end{array} \right. %]]></script>
+
+<p>Since $(\mathcal{F} \mathrm{rect})(\xi) = \mathrm{sinc}(\xi) = \frac{\sin(\pi \xi)}{\pi \xi} $, we have $(\mathcal{F} \mathrm{box})(\bb{\xi}) =  \mathrm{sinc}(\xi_1) \cdots \mathrm{sinc}(\xi_d)$.</p>
+
+<h3 id="translation-and-modulation">Translation and modulation</h3>
+
+<p>Let $\bb{p} \in \RR^d$ and $f : \RR^d \rightarrow \RR$. Then,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(\mathcal{F}( \tau_{\bb{p}} f))( \bb{\xi} ) &=& \int_{\RR^d}  f(\bb{x}-\bb{p}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x} =  \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr (\bb{y}+\bb{p})} d\bb{y} \\
+&=& e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{p}} \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{y}} d\bb{y} = e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{p}} (\mathcal{F}f)( \bb{\xi} )
+\end{eqnarray*} %]]></script>
+
+<p>We can write this result as the duality between translation and <strong>modulation</strong> (i.e., multiplication by a harmonic)</p>
+
+<script type="math/tex; mode=display">\tau_{\bb{p}} f \fff  \phi_{-\bb{p}} F</script>
+
+<p>Obviously, the same relation holds when swapping the space and frequency domains.
+$\phi_{\bb{p}} f \fff  \tau_{\bb{p}} F$.
+In other words, shift in the space domain results in modulation (the addition of linear phase) in the frequency domain and modulation in the space domain results in shift in the frequency domain.</p>
+
+<h3 id="convolution">Convolution</h3>
+
+<p>Let $\bb{p} \in \RR^d$ and $f,h : \RR^d \rightarrow \RR$. Then,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(\mathcal{F}( h \ast f))( \bb{\xi} ) &=& \int_{\RR^d} \left(  \int_{\RR^d}  h(\bb{x}-\bb{y}) f(\bb{y}) d\bb{y} \right) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x}  \\
+&=& \int_{\RR^d}  \int_{\RR^d}  h(\bb{x}') f(\bb{y})  e^{-2\pi \ii \, \bb{\xi}^\Tr (\bb{x}' + \bb{y})} d\bb{x}' d\bb{y} \\
+&=&  \int_{\RR^d} h(\bb{x}')   e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}'} d\bb{x}'  \cdot \int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr  \bb{y}} d\bb{y}  = 
+(\mathcal{F} h )( \bb{\xi} )  \cdot (\mathcal{F} f )( \bb{\xi} ) 
+\end{eqnarray*} %]]></script>
+
+<p>In other words, convolution is dual to multiplication</p>
+
+<script type="math/tex; mode=display">h \ast f \fff  H \cdot F</script>
+
+<p>Obviously, the relation $h \cdot f \fff H \ast F$ also holds.</p>
+
+<p>The fact that convolution (a Toeplitz operator) becomes a pointwise product (a diagonal operator) under the Fourier transform is the manifestation of the fact that the harmonics form an eigenbasis for every linear shift invariant system (or, equivalently, the Fourier transform diagonalizes every linear shift invariant operator). To see that, observe that when a harmonic $\phi_{\bb{\xi}}$ is given as the input to a system described by the impulse response $h$, the output,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(h \ast \phi_{\bb{\xi}}) (\bb{x}) &=& (\phi_{\bb{\xi}} \ast h) (\bb{x}) = \int_{\RR^d}   \phi_{\bb{\xi}}( \bb{x} - \bb{x}' )  h(\bb{x}')  d\bb{x}' = 
+\int_{\RR^d}  h(\bb{x}') e^{2\pi \ii \, \bb{\xi}^\Tr  (\bb{x}-\bb{x}')}  d\bb{x}' \\
+&=& \int_{\RR^d}  h(\bb{x}') e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}'}  d\bb{x}' \cdot  e^{2\pi \ii \, \bb{\xi}^\Tr  \bb{x} } = F(\bb{\xi}) \phi_{\bb{\xi}} (\bb{x}),
+\end{eqnarray*} %]]></script>
+
+<p>meaning that $\phi_{\bb{\xi}}$ is an eigenfunction of the system corresponding to the eigenvalue $F(\bb{\xi})$. Note that the spectrum is continuous and depends on the specific $h$, while the eigenfunctions are independent of $h$.\footnote{It is a general fact from linear algebra that operators can be jointly diagonalized if and only if they commute with each other.}</p>
+
+<h3 id="stretching">Stretching</h3>
+
+<p>Let $\bb{A} \in \RR^{d \times d}$ be a regular (i.e., non-singular) matrix and let us define the <strong>stretching</strong> operator $\mathcal{S}_{\bb{A}} : f(\bb{x}) \mapsto f(\bb{A}\bb{x})$. Then,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(\mathcal{F}(  \mathcal{S}_{\bb{A}}  f))( \bb{\xi} ) &=& \int_{\RR^d}  f(\bb{A}\bb{x}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{x}} d\bb{x} = 
+\int_{\RR^d}  f(\bb{y}) e^{-2\pi \ii \, \bb{\xi}^\Tr \bb{A}^{-1} \bb{y}} \frac{d\bb{y} }{| \det \bb{A} |} = \frac{(\mathcal{F}f)(\bb{A}^{-\Tr} \bb{\xi} ) }{| \det \bb{A} |}.
+\end{eqnarray*} %]]></script>
+
+<p>In other words,</p>
+
+<script type="math/tex; mode=display">\mathcal{S}_{\bb{A}} f \fff \frac{\mathcal{S}_{\bb{A}^{-\Tr }} F }{ | \det \bb{A} | }</script>
+
+<p>This identity will reappear when talking about dual lattices in relation to sampling.</p>
+
+<p>A useful example of the stretching property is the multi-dimensional Gaussian. Let us first remind ourselves (or accept without a proof) that in the one-dimensional case $e^{-x^2} \fff e^{-\pi \xi^2}$. The tensor product property immediately yields $e^{-\bb{x}^\Tr \bb{x} } \fff e^{-\pi \bb{\xi}^\Tr \bb{\xi} }$ in the case of unit covariance (a.k.a. normal) multidimensional Gaussian. A general Gaussian $e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x} }$ with the covariance matrix 
+$\bb{C}$ can be obtained by stretching the normal Gaussian with the symmetric inverse square root matrix $\bb{A} = \bb{C}^{-\frac{1}{2}}$, since $(\bb{A} \bb{x})^\Tr (\bb{A} \bb{x}) = \bb{x}^\Tr \bb{A}^\Tr \bb{A} \bb{x} = \bb{x}^\Tr \bb{C}^{-1} \bb{x}$. The stretching property of the Fourier transform tells us that the corresponding stretch in frequency is by $\bb{A}^{-\Tr} = \bb{C}^{\frac{1}{2}}$ with furher scaling of the transform by the determinant of $\bb{C}^{\frac{1}{2}}$:</p>
+
+<script type="math/tex; mode=display">e^{-\bb{x}^\Tr \bb{C}^{-1} \bb{x}} \fff  \frac{1}{\sqrt{ \det \bb{C} } } e^{-\pi \bb{\xi}^\Tr \bb{C} \bb{\xi} }</script>
+
+<p>The covariance matrix $\bb{C}$ tells us how much the signal is concentrated in various spatial directions; its determinant can be used to quantify this spread: when $\det \bb{C}$ is small, the signal is localized in space. In the frequency domain, the signal remains Gaussian with the inverse covariance. Since both $\bb{C}$ and $\bb{C}^{-1}$ have the same eigenbasis but reciprocal eigenvalues, observe that the more the signal is concentrated in space in a certain direction, the more it is spread in frequency in the corresponding direction, and vice versa. The quantity $\pi  \det \bb{C}^{-1}$ measures the spread of the signal in frequency. Since $\det \bb{C} \cdot \pi  \det \bb{C}^{-1} = \pi$, we conclude that the Gaussian cannot be simultaneously localized both in space and frequency. This conclusion holds for every signal\footnote{Actually, the Gaussian achieves the best possible simultaneous localization in both domains.} – a result known as the <strong>uncertainty principle</strong> with profound implications on why the Universe looks like it looks.</p>
+
+<h3 id="rotation">Rotation</h3>
+
+<p>An important particular case of the stretching property is when $\bb{A}$ is an orthonormal matrix representing rotations (and, possibly, reflections). Let us define the <strong>rotation</strong> operator as $\mathcal{R} _{\bb{R}} : f(\bb{x}) \mapsto f(\bb{R}\bb{x})$, where $\bb{R}$ is a rotation matrix. Since orthonormal matrices satisfy $\bb{R}^{-1} = \bb{R}^\Tr$ and $ \det \bb{R} = \pm 1$, the stretching property reduces to $\mathcal{R} _{\bb{R}} f \fff \mathcal{R} _{\bb{R}} F$. In other words, the Fourier transform commutes with rotation:</p>
+
+<script type="math/tex; mode=display">\mathcal{F} \mathcal{R}_{\bb{R}}   = \mathcal{R}_{\bb{R}} \mathcal{F}</script>
+
+<h3 id="projection">Projection</h3>
+
+<p>Let us define the <strong>projection</strong> operator along the last spatial coordinate as</p>
+
+<script type="math/tex; mode=display">\mathcal{P} : f(\bb{x}) \mapsto \int_{\RR} f(x_1,\cdots,x_{d-1}, x_d) dx_d.</script>
+
+<p>Note that projection maps functions from $\mathbb{F}(\RR^d,\RR)$ to 
+$\mathbb{F}(\RR^{d-1},\RR)$. Interpreting $f$ as a $d$-dimensional probability density function, the latter operation can be interpreted as <strong>marginalization</strong> with respect to $x_d$. 
+Invoking the $(d-1)$-dimensional Fourier transform on $\mathcal{P} f$ yields</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+(\mathcal{F}( \mathcal{P} f))( \bb{\xi} ) &=& \int_{\RR^{d-1}}  \left(   \int_{\RR} f(x_1,\cdots,x_{d-1}, x_d) dx_d  \right)  e^{-2\pi \ii \, (x_1 \xi_1 + \cdots x_{d-1}\xi_{d-1} )} dx_1 \cdots dx_{d-1} \\
+&=&\left. \int_{\RR^d} f(\bb{x})  e^{-2\pi \ii \, \bb{x}^\Tr \bb{\xi} } d\bb{x} \right|_{\xi_d = 0} = (\mathcal{F}f)(\xi_1,\dots, \xi_{d-1}, 0).
+\end{eqnarray*} %]]></script>
+
+<p>Defining the <strong>slice</strong> operator $Q : f(\bb{x}) \mapsto f(x_1,\dots, x_{d-1},0)$ from $\mathbb{F}(\RR^d,\RR)$ to $\mathbb{F}(\RR^{d-1},\RR)$ we can express the latter result more compactly as $\mathcal{F}\mathcal{P} = \mathcal{Q}\mathcal{F}$. Note that while on the right hand side $\mathcal{F}$ denotes a $d$-dimensional Fourier transform, on the left hand side it stands for the $(d-1)$-dimensional counterpart.</p>
+
+<p>Applying a rotation operator on the right to both sides of the identity yields</p>
+
+<script type="math/tex; mode=display">\mathcal{F}\mathcal{P} \mathcal{R}_{\bb{R}} = \mathcal{Q}\mathcal{F} \mathcal{R} _{\bb{R}} = \mathcal{Q} \mathcal{R}_{\bb{R}} \mathcal{F}</script>
+
+<p>where in the last passage we used the commutativity of the Fourier transform with rotation. We interpret the composition  $\mathcal{P} \mathcal{R} _\bb{R}$ as a general projection operator,  $\mathcal{P}  _{\bb{R}}$, that first rotates the function and then project along the last axis. This essentially allows to project the function along any direction. In the same manner, we interpret $\mathcal{Q} \mathcal{R} _{\bb{R}}$ as a general slice operator, $\mathcal{Q} _{\bb{R}}$, slicing the function along an arbitrary direction. 
+This general result is known as the <strong>slice-projection theorem</strong> that in our notation can be expressed as</p>
+
+<script type="math/tex; mode=display">\mathcal{F} \mathcal{P} _{\bb{R}}   = \mathcal{Q}_{\bb{R}} \mathcal{F}</script>
+
+<p>An extremely important example where this result is used is computerized tomography (CT). In an idealized scenario, let us assume a $d=2$ dimensional world, in which we are interested in measuring the density of a slice of the human body, denoted by the function $f(x,y)$. Being unable to actually slice it (without going to jail), the next best thing we can do is to irradiate it with penetrating radiation (x-rays) from the side. Let us assume that an x-ray source sends parallel rays from one side of the body to the other side along the vertical ($y$) direction, where a linear detector measures the intensity profile $I(x)$. According to the Beer-Lambert law of light attenuation, the measured intensity is given by</p>
+
+<script type="math/tex; mode=display">I(x) = I_0\, \exp\left(-\int_\RR f(x,y) dy \right),</script>
+
+<p>where $I_0$ is the emitted intensity. Taking the logarithm yields</p>
+
+<script type="math/tex; mode=display">p(x) = -\log \frac{I(x)}{I_0} = \int_\RR f(x,y) dy = \mathcal{P} f.</script>
+
+<p>Rotating the emitter-detector setup around the body yields a collection of projections $\mathcal{P} _\theta f$ (note that in two dimensions, the rotation matrix is parameterized by a single angle $\theta$). The function $(x,\theta) \mapsto (\mathcal{P} _\theta f)(x)$ is often referred to as the <strong>Radon transform</strong> or the <strong>sinogram</strong> of $f$. The slice projection theorem tells us that the one-dimensional Fourier transform of each such projection $\mathcal{P} _\theta f$ yields a correspondingly directed slice $\mathcal{Q} _\theta f$ of the two-dimension Fourier transform of the unknown function $f$. Collecting enough projections, it is ‘‘just’’ a matter of numerics to estimate the said transform and invert it, yielding what we see on the screen as a slice of a CT scan.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/cs236860/semesters/w1819/lecture_notes/lecture_2/" class="pagination--pager" title="Lecture 2: Sampling and Interpolation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/semesters/w1819/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/semesters/w1819/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/semesters/w1819/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/semesters/w1819/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/semesters/w1819/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>

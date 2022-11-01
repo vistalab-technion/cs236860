@@ -1,0 +1,1001 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Lecture 3: Discrete-domain signals and systems | CS236860: Digital Image Processing</title>
+<meta name="description" content="Discrete-domain Fourier transform, Sampling, Aliasing, Interpolation, Polyphase representation">
+
+
+  <meta name="author" content="Prof. Alex Bronstein">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="CS236860: Digital Image Processing">
+<meta property="og:title" content="Lecture 3: Discrete-domain signals and systems">
+<meta property="og:url" content="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_3/">
+
+
+  <meta property="og:description" content="Discrete-domain Fourier transform, Sampling, Aliasing, Interpolation, Polyphase representation">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/cs236860/lecture_notes/lecture_3/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "VISTA Lab",
+      "url": "http://0.0.0.0:4000/cs236860",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/cs236860/feed.xml" type="application/atom+xml" rel="alternate" title="CS236860: Digital Image Processing Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/cs236860/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single text-justify wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/cs236860/">CS236860: Digital Image Processing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/cs236860/info/" >Info</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/lectures/" >Lectures</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/tutorials/" >Tutorials</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/assignments/" >Assignments</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cs236860/semesters/" >Semesters</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lecture 3: Discrete-domain signals and systems">
+    <meta itemprop="description" content="Discrete-domain Fourier transform, Sampling, Aliasing, Interpolation, Polyphase representation">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lecture 3: Discrete-domain signals and systems
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  73 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#discrete-domain-fourier-transform">Discrete-domain Fourier transform</a></li>
+  <li><a href="#discrete-systems">Discrete systems</a>
+    <ul>
+      <li><a href="#kroeneckers-delta">Kroenecker’s delta</a></li>
+    </ul>
+  </li>
+  <li><a href="#decimation">Decimation</a>
+    <ul>
+      <li><a href="#anti-aliasing">Anti-aliasing</a></li>
+    </ul>
+  </li>
+  <li><a href="#interpolation">Interpolation</a></li>
+  <li><a href="#resampling">Resampling</a></li>
+  <li><a href="#noble-identities">Noble identities</a>
+    <ul>
+      <li><a href="#linearity">Linearity</a></li>
+      <li><a href="#translation">Translation</a></li>
+      <li><a href="#exchanging-sub-sampling-and-filtering">Exchanging sub-sampling and filtering</a></li>
+      <li><a href="#exchanging-expansion-and-filtering">Exchanging expansion and filtering</a></li>
+    </ul>
+  </li>
+  <li><a href="#polyphase-representation">Polyphase representation</a></li>
+  <li><a href="#efficient-implementation-of-decimators">Efficient implementation of decimators</a></li>
+  <li><a href="#efficient-implementation-of-interpolators">Efficient implementation of interpolators</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="discrete-domain-fourier-transform">Discrete-domain Fourier transform</h2>
+
+<p>When a function $f$ is sampled on the lattice $\mathcal{L}^\ast$, its
+Fourier transform is periodized on the reciprocal lattice $\mathcal{L}$.
+Therefore, it is sufficient to describe the value of the transform on
+the <em>structural element</em> of the lattice, which can be parametrized as
+$\bb{\xi} = \bb{A} \bb{\omega}$ with
+$\bb{\omega} \in \left[ -\frac{1}{2}, \frac{1}{2} \right]$. The vector
+$\bb{\omega}$ is called the <em>normalized</em> or <em>digital frequency</em>.</p>
+
+<p>Substituting the normalized frequency into the periodized and scaled
+Fourier transform of $f$ yields</p>
+
+\[\begin{aligned}
+F[\bb{\omega}] =&amp; \mathrm{vol}\, \mathcal{L}\cdot (\bed _{\mathcal{L}} \ast F)( \bb{A} \bb{\omega} ) =  \mathcal{F}\left( \bed _{\mathcal{L}^\ast} \cdot f   \right)( \bb{A} \bb{\omega} ) =   \sum _{ \bb{p} \in \mathcal{L}^\ast } f(\bb{p}) \mathcal{F} (\tau _{\bb{p}} \delta)( \bb{A} \bb{\omega} ) \\
+=&amp;   \sum _{ \bb{p} \in \mathcal{L}^\ast } f(\bb{p}) \phi _{-\bb{p}}( \bb{A} \bb{\omega} )
+=    \sum _{ \bb{n} \in \mathbb{Z}^d } f( \bb{A}^\ast \bb{n}) \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{A}^{\ast \Tr} \bb{A} \bb{n} } \\
+=&amp;    \sum _{ \bb{n} \in \mathbb{Z}^d } f(\bb{A}^\ast \bb{n})  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{n} } = \sum _{ \bb{n} \in \mathbb{Z}^d } f[\bb{n}]  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{n} },\end{aligned}\]
+
+<p>where we defined $f[\bb{n}] =  f( \bb{A}^\ast \bb{n})$. In what follows,
+with some abuse of notation, the discrete sequence of samples,
+$f| _{\mathcal{L}^\ast} = { f _{\bb{n}} = f[\bb{n}] } _{ \bb{n} \in \mathbb{Z}^d }$,
+as well as its particular element will be denoted simply as $f _{\bb{n}}$
+or $f[\bb{n}]$. Square brackets will emphasize that we are working in
+the digital (i.e., discetely sampled) domain. We will refer to
+$f[\bb{n}]$ as to a <em>discrete signal</em> and to $F[\bb{\omega}]$ as to its
+<em>(discrete-domain) Fourier transform</em>. By convention, $F[\bb{\omega}]$
+is extended periodically to entire $\mathbb{R}^d$.</p>
+
+<p>Note that, as before, the Fourier transform is defined as the orthogonal
+projection,</p>
+
+\[F[\bb{n}] = \langle  f,  \phi _{\bb{\omega}} \rangle _{\ell^2(\mathbb{Z}^d)},\]
+
+<p>only this time the inner product is on the space of sequences</p>
+
+\[\langle  f,  g \rangle _{\ell^2(\mathbb{Z}^d)} = \sum _{\bb{n} \in \mathbb{Z}^d} f[\bb{n}] g^\ast[\bb{n}].\]
+
+<p>The inverse transform is given by \(\begin{aligned}
+f[\bb{n}] = \int _{\left[ -\frac{1}{2}, \frac{1}{2} \right]^d} F[\bb{\omega}] \, e^{2\pi \ii \bb{\omega}^\Tr \bb{n} } d\bb{\omega}.\end{aligned}\)
+Since the discrete-domain Fourier transform is defined through its
+(periodized) continuous counterpart, all the properties of the latter
+are straightforwardly inherited.</p>
+
+<h2 id="discrete-systems">Discrete systems</h2>
+
+<p>Let $f$ be a continuous-domain signal, $h$ the impulse response of an
+LSI system, and let us denote $g = f \ast h$. Sampling $g$ on the
+lattice $\mathcal{L}^\ast = \bb{A}^\ast \mathbb{Z}^d$ yields</p>
+
+\[\bed _{\mathcal{L}^\ast}  \cdot (f \ast h) \fff  \mathrm{vol}\, \mathcal{L} \cdot \bed _{\mathcal{L}} \ast (F \cdot H)\]
+
+<p>If either $f$ or $h$ is $\mathcal{L} _0$-band limited, so is $f \ast h$
+and we can further write
+$\bed _{\mathcal{L}} \ast (F \cdot H) = (\bed _{\mathcal{L}} \ast F) \cdot (\bed _{\mathcal{L}} \ast H)$,
+hence</p>
+
+\[\begin{aligned}
+\bed _{\mathcal{L}^\ast}  \cdot g =&amp; \bed _{\mathcal{L}^\ast}  \cdot (f \ast h) = (\bed _{\mathcal{L}^\ast} \cdot f) \ast  (\bed _{\mathcal{L}^\ast} \cdot h) = \left( \sum _{\bb{p} \in \mathcal{L}^\ast} f(\bb{p}) \tau _{\bb{p}} \delta \right) \ast 
+ \left( \sum _{\bb{p} \in \mathcal{L}^\ast} h(\bb{p}) \tau _{\bb{p}} \delta \right) \\
+ =&amp; \sum _{\bb{p}, \bb{q} \in \mathcal{L}^\ast} f(\bb{p}) h(\bb{q})  \tau _{\bb{p}+\bb{q}} \delta 
+ = \sum _{\bb{s} \in \mathcal{L}^\ast} \left( \sum _{\bb{p} \in \mathcal{L}^\ast}  f(\bb{p}) h(\bb{s}-\bb{p})  \right) \tau _{\bb{s}} \delta \\
+ =&amp; \sum _{\bb{m} \in \mathbb{Z}^d} \left( \sum _{\bb{n} \in \mathbb{Z}^d }  f(\bb{A}^\ast \bb{n}) h(\bb{A}^\ast(\bb{m}-\bb{n}))  \right) \tau _{\bb{A}^\ast \bb{m}} \delta \\
+ =&amp;  \sum _{\bb{m} \in \mathbb{Z}^d} \left( \sum _{\bb{n} \in \mathbb{Z}^d }  f[ \bb{n}] h[\bb{m}-\bb{n}]  \right) \tau _{\bb{A}^\ast \bb{m}} \delta.\end{aligned}\]
+
+<p>On the other hand,</p>
+
+\[\bed _{\mathcal{L}^\ast}  \cdot g = \sum _{\bb{m} \in \mathbb{Z}^d  } g[\bb{m}] \tau _{\bb{A}^\ast \bb{m}} \delta.\]
+
+<p>Hence, we arrive at a discrete form of convolution</p>
+
+\[g[\bb{n}] = \sum _{\bb{m} \in \mathbb{Z}^d }  f[ \bb{m}] h[\bb{n}-\bb{m}] = (f \ast h)[\bb{n}].\]
+
+<p>It is straightforward to show that convolution is transformed to
+point-wise product in the frequency domain.</p>
+
+<h3 id="kroeneckers-delta">Kroenecker’s delta</h3>
+
+<p>Recall that Dirac’s delta was a distribution that acted like identity
+under convolution. The discrete-domain analog is the <em>Kroenecker delta</em>,
+which is the sequence $\delta[\bb{n}]$ defined as $\delta[\bb{0}]=1$ and
+$\delta[\bb{n}]=0$ for every $\bb{n} \ne \bb{0}$.</p>
+
+<h2 id="decimation">Decimation</h2>
+
+<p>Let $f$ be a signal sampled on the lattice
+$\mathcal{L}^\ast = \bb{A} \mathbb{Z}^d$. From the definition of the
+Fourier transform, the following relation holds between the discrete and
+continuous domains:</p>
+
+\[\begin{aligned}
+F[\bb{n}] = \sum _{ \bb{n} \in \mathbb{Z}^d } f(\bb{A}^\ast  \bb{n})  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{n} } 
+=  \mathrm{vol}\, \mathcal{L} \, \sum _{\bb{n} \in \mathbb{Z}^d } F(\bb{A}   (\bb{\omega} - \bb{n})).\end{aligned}\]
+
+<p>Let $\bb{M}^\ast$ be an integer $d \times d$ matrix such that
+$\mathcal{M}^\ast = \bb{M}^\ast \mathbb{Z}^d \subset \mathbb{Z}^d$ (that
+is, the lattice $\mathcal{M}^\ast$ is has only integer points). We
+denote by $\mathcal{M}^\ast _0$ the (discrete) <em>structural element</em> of
+$\mathcal{M}^\ast$, i.e., the smallest set such that</p>
+
+\[\bigcup _{\bb{p} \in \mathcal{M}^\ast } (\bb{p} + \mathcal{M}^\ast _0)  = \mathbb{Z}^d.\]
+
+<p>Let us <em>sub-sample</em> $f[\bb{n}]$ on $\mathcal{M}^\ast$ creating a new
+discrete signal
+$g[\bb{n}] = f[\bb{M}^\ast\bb{n}] = f(\bb{A}^\ast \bb{M}^\ast \bb{n})$
+(this operation is ofter referred to as <em>compression</em>). Essentially,
+$g[\bb{n}]$ can be thought of $f(\bb{x})$ sampled on the dilated lattice
+$\mathcal{L}^{\prime \ast} = \bb{A}^\ast \bb{M}^\ast \mathbb{Z}^d $
+(with the corresponding dual
+$\mathcal{L}^{\prime} = \bb{A} \bb{M} \mathbb{Z}^d$, where
+$\bb{M}^\ast = \bb{M}^{-\Tr}$). Using definitions and elementary
+algebra, we obtain the following expression for the Fourier transform of
+$g[\bb{n}]$:</p>
+
+\[\begin{aligned}
+G[\bb{\omega}] =&amp; \sum _{ \bb{n} \in \mathbb{Z}^d } f(\bb{A}^\ast \bb{M}^\ast \bb{n})  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{n} } 
+=  \mathrm{vol}\, \mathcal{L}^{\prime} \, \sum _{\bb{n} \in \mathbb{Z}^d } F(\bb{A}  \bb{M}  (\bb{\omega} - \bb{n}))  \\
+=&amp;  \mathrm{vol}\, \mathcal{L} \cdot  \mathrm{vol}\, \mathcal{M}  \, \sum _{\bb{n} \in \mathbb{Z}^d } \sum _{\bb{m} \in \mathcal{M}^\ast _0 } F(\bb{A}  ( \bb{M} (\bb{\omega} - \bb{m} ) -\bb{n} ) ) \\
+=&amp; \mathrm{vol}\, \mathcal{M}    \, \sum _{\bb{m} \in  \mathcal{M}^\ast _0 }  \mathrm{vol}\, \mathcal{L} \, \sum _{\bb{n} \in \mathbb{Z}^d }    F(\bb{A}  ( \bb{M}  (\bb{\omega} - \bb{m} ) -\bb{n} ) ) \\
+=&amp;  \mathrm{vol}\, \mathcal{M}   \, \sum _{\bb{m} \in \mathcal{M}^\ast _0 }  F[\bb{M} (\bb{\omega} - \bb{m}) ].\end{aligned}\]
+
+<p>Firstly, notice that the continous-domain Fourier transform of $f$ does
+not appear in the final expression; $G[\bb{\omega}]$ is entirely
+expressed in terms of the discrete-domain Fourier transform
+$F[\bb{\omega}]$. Therefore, we do not need to assume any underlying
+continuos-domain signal $f(\bb{x})$ (though it can always be obtained at
+least in principle via band-limited interpolation of $f[\bb{n}]$), and
+perform the sub-sampling of $f[\bb{n}]$ entirely in the discrete domain.</p>
+
+<p>Secondly, observe the striking resemblance of the above expression to
+its continuous counterpart. The discrete-domain Fourier transform of the
+signal being sampled is periodized on the dual lattice $\mathcal{M}$
+(recall that sub-sampling is performed on $\mathcal{M}^\ast$). As in the
+continuous case, the support of $F[\bb{\omega}]$ has to be contained
+within the structural element of the dual lattice $\mathcal{M}$ in order
+to avoid aliasing; in other words, $f[\bb{n}]$ has to be
+$\mathcal{M}$-band limited. In that case, the replicas of
+$F[\bb{\omega}]$ will not overlap, and $f[\bb{n}]$ can be recovered
+exactly from $g[\bb{n}]$ by keeping only the main replica of
+$F[\bb{\omega}]$ in $G[\bb{\omega}]$ and suppressing the others.</p>
+
+<h3 id="anti-aliasing">Anti-aliasing</h3>
+
+<p>In general, when the signal is not band-limited and an anti-aliasing
+filter has to be applied <em>before</em> sub-sampling. The frequency response
+of the ideal low-pass filter $H _{\mathcal{M}}[\bb{\omega}]$ has to
+satisfy $\mathrm{supp}(H _{\mathcal{M}}) \subset \mathcal{M} _0$ (of
+course, this is a slightly sloppy notation: $H _{\mathcal{M}}$ is
+periodic, hence the support is replicated on $\mathcal{M}$). Such a
+low-pass filter is achieved by
+$H _{\mathcal{M}}[\bb{\omega}] = \mathrm{box}( \bb{M}^{-1} \bb{\omega} )$
+(again, periodized on $\mathcal{M}$), whose impulse response is
+straightforwardly obtained by invoking the stretching property of the
+Fourier transform</p>
+
+\[h _{\mathcal{M}}[\bb{n}] =  \mathrm{vol}\,\mathcal{M} \cdot \mathrm{sinc}(\bb{M}^\Tr \bb{n}).\]
+
+<p>The combined action of digital anti-aliasing filtering followed by
+sub-sampling is usually referred to as <em>decimation</em>. On block diagrams,
+we will denote sub-sampling as $\downarrow _{\bb{M}^\ast}$ or
+$\bb{M}^\ast : \bb{I}$, followed by a decimation filter
+$H _{\mathcal{M}}$.</p>
+
+<h2 id="interpolation">Interpolation</h2>
+
+<p>Let $f$ be a signal sampled, as before, on $\mathcal{L}^\ast $, and let
+$\bb{N}^\ast$ be a $d \times d$ matrix such that
+$\mathbb{Z}^d \subset \mathcal{N}^\ast = \bb{N}^\ast \mathbb{Z}^d $
+(that is, a sub-sample of the lattice $\mathcal{N}^\ast$ is the integer
+lattice). We define the <em>expansion</em> of $f[\bb{n}]$ to $\mathcal{N}^\ast$
+as</p>
+
+\[g[\bb{n}] = \left\{ \begin{array}{ll} f[\bb{N}^\ast \bb{n}] &amp; : \bb{N}^\ast \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise}.
+\end{array}\right.\]
+
+<p>Substituing $\bb{p} = \bb{N}^\ast \bb{n}$ and,
+inversely, $\bb{n} = \bb{N}^\Tr \bb{p}$, we obtain</p>
+
+\[g[\bb{n}] = \sum _{ \bb{p} \in \mathbb{Z}^d } f[\bb{p}] \delta[\bb{n} - \bb{N}^\Tr \bb{p}].\]
+
+<p>(observe the resemblance to the continuous case). In the frequency
+domain, this translates to</p>
+
+\[\begin{aligned}
+G[\bb{\omega}] =&amp; \sum _{ \bb{n} \in \mathbb{Z}^d } g[\bb{n}]  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{n} } = \sum _{ \bb{p} \in \mathbb{Z}^d } f[\bb{p}]  \, e^{-2\pi \ii \bb{\omega}^\Tr \bb{N}^\Tr \bb{p} } 
+= F[\bb{N}\bb{\omega}].\end{aligned}\]
+
+<p>Since $\mathrm{vol}\, \mathcal{N}^\ast &lt; 1$, the periodic discrete-time
+Fourier transform $F[\bb{\omega}]$ is shrunk, and a few of its periods
+alias to higher frequencies of $G[\bb{\omega}]$. However, unlike the
+case of sub-sampling where information was lost, all the information
+about $f[\bb{n}]$ is still present in $g[\bb{n}]$. In order to fully
+recover it, we just need to remove the superfluous replicas of
+$F[\bb{\omega}]$ outside
+$\bb{N}^{-1} \left[ -\frac{1}{2}, \frac{1}{2} \right]^d$. The frequency
+response of the ideal low-pass filter $H _{\mathcal{N}}[\bb{\omega}]$ has
+to satisfy
+$\mathrm{supp}(H _{\mathcal{N}}) \subset \bb{N}^{-1} \left[ -\frac{1}{2}, \frac{1}{2} \right]^d$.</p>
+
+<p>Denoting $\mathcal{L}^{\prime} = \bb{A} \bb{N} \mathbb{Z}^d$, by
+definition of the discrete-domain Fourier transform,</p>
+
+\[\begin{aligned}
+F[\bb{N}\bb{\omega}] H _{\mathcal{N}}[\bb{\omega}]
+=&amp; \mathrm{vol}\, \mathcal{L} \, \sum _{\bb{n} \in \mathbb{Z}^d } F(\bb{A}   (\bb{N} \bb{\omega} - \bb{n})) H _{\mathcal{N}}[\bb{\omega}] \\
+=&amp; \frac{\mathrm{vol}\, \mathcal{L}'}{\mathrm{vol}\, \mathcal{N}} \, \sum _{\bb{n} \in \mathbb{Z}^d } F(\bb{A} \bb{N}  ( \bb{\omega} - \bb{N}^{-1} \bb{n}))  H _{\mathcal{N}}[\bb{\omega}] \\
+=&amp;  \mathrm{vol}\, \mathcal{L}' \, \sum _{\bb{p} \in \mathbb{Z}^d } F(\bb{A} \bb{N}  ( \bb{\omega} - \bb{p})),
+\end{aligned}\]
+
+<p>since $H _{\mathcal{N}}(\bb{\omega})$ removes all replicas of $F$
+except those with integer $\bb{N}^{-1}\bb{n}$. Note that we also assumed
+that the filter has DC gain of $\mathrm{vol}\, \mathcal{N}$ to make the
+result consistent with the sampling of $f(\bb{x})$ on
+$\mathcal{L}^{\prime \ast}$. Such a filter is achieved by
+$H _{\mathcal{N}}(\bb{\omega}) =  \mathrm{vol}\, \mathcal{N} \, \mathrm{box}( \bb{N} \bb{\omega} )$.
+The corresponding impulse response is</p>
+
+\[h _{\mathcal{N}}[\bb{n}] =  \mathrm{sinc}(\bb{N}^\ast \bb{n}).\]
+
+<p>Convolving $h _{\mathcal{N}}[\bb{n}]$ with $g[\bb{n}]$ yields the
+following identity</p>
+
+\[\begin{aligned}
+f[\bb{n}] =&amp; (g \ast h _{\mathcal{N}})[\bb{n}]  = \sum _{ \bb{p} \in \mathbb{Z}^d } f[\bb{p}] \, h _{\mathcal{N}}[\bb{n} - \bb{N}^\Tr \bb{p}]  =  \sum _{ \bb{m} \in \mathbb{Z}^d } f[\bb{N}^\ast \bb{m}] \, \mathrm{sinc}(\bb{N}^\ast \bb{n} -  \bb{m}).\end{aligned}\]
+
+<p>The combined action of expansion followed by anti-aliasing filtering is
+called <em>interpolation</em>. Note the striking resemblance to the continuous
+case. As in the continuous case, here as well practice mandates the use
+of other interpolation kernels that have finite support, which in the
+frequency domain is translated to non-ideal low-pass filters. On block
+diagrams, we will denote expansion by $\uparrow _{\bb{N}^\ast}$ or
+$\bb{I} : \bb{N}^\ast$, followed by an interpolation filter
+$H _{\mathcal{N}}$.</p>
+
+<h2 id="resampling">Resampling</h2>
+
+<p>Let $f$ be a signal sampled, as before, on $\mathcal{L}^\ast $, and let
+$\mathcal{Q}^\ast = \bb{Q}^\ast \mathbb{Z}^d$ be a new lattice onto
+which we would like to <em>resample</em> $f$ without leaving the digital
+domain. If $\bb{Q}^\ast$ can be factorized into
+$\bb{Q}^\ast = \bb{M}^\ast \bb{N}^\ast$ such that
+$\mathbb{Z}^d \subset  \bb{N}^\ast \mathbb{Z}^d$ and
+$\bb{M}^\ast \mathbb{Z}^d \subset \mathbb{Z}^d$, we can first
+interpolate $f[\bb{n}]$ to $\bb{N}^\ast \mathbb{Z}^d$ and then decimate
+it onto $\bb{M}^\ast \mathbb{Z}^d$ as described above. On block diagrams
+we will denote resamplers as $\bb{M}^\ast : \bb{N}^\ast$. They are
+particularly useful when resampling images to a new grid related to the
+original one by a non-integer (yet, rational) factor.</p>
+
+<p>A few elementary rules can be straightforwardly proved:</p>
+
+<ol>
+  <li>
+    <p><em>Successive sub-sampling cascades can be combined</em>:
+$\downarrow _{\bb{M}^\ast _1} \longrightarrow\, \downarrow _{\bb{M}^\ast _2} \, =\,  \downarrow _{\bb{M} _2^\ast \bb{M} _1^\ast}$</p>
+  </li>
+  <li>
+    <p><em>Successive expansion cascades can be combined</em>:
+$\uparrow _{\bb{N}^\ast _1} \longrightarrow\, \uparrow _{\bb{N}^\ast _2} \, =\, \uparrow _{\bb{N} _2^\ast \bb{N} _1^\ast}$</p>
+  </li>
+  <li>
+    <p><em>Expansion can be exactly inverted</em>:
+$\uparrow _{\bb{N}^\ast} \longrightarrow\, \downarrow _{\bb{N}^{-\ast}} \, =\, \mathrm{id}$</p>
+  </li>
+  <li>
+    <p><em>Sub-sampling cannot usually be exactly inverted</em>:
+$\downarrow _{\bb{M}^\ast} \longrightarrow\, \uparrow _{\bb{M}^{-\ast}} \, \ne \, \mathrm{id}$</p>
+  </li>
+</ol>
+
+<h2 id="noble-identities">Noble identities</h2>
+
+<p>Treating sub-sampling and expansion and discrete-domain systems, let us
+quickly highlight several of their properties.</p>
+
+<h3 id="linearity">Linearity</h3>
+
+<p>Observe that the sub-sampling operation we defined,
+$(\downarrow _{\bb{M}^\ast} f)[\bb{n}] = f[\bb{M}^\ast \bb{n}]$ is
+linear, i.e., it commutes with addition and scaling:</p>
+
+\[(\downarrow _{\bb{M}^\ast} (\alpha f + \beta g))[\bb{n}]  = (\alpha f + \beta g) [\bb{M}^\ast \bb{n}] = \alpha f [\bb{M}^\ast \bb{n}] + \beta g [\bb{M}^\ast \bb{n}] = \alpha (\downarrow _{\bb{M}^\ast} f)[\bb{n}] + \beta (\downarrow _{\bb{M}^\ast} g)[\bb{n}].\]
+
+<p>The same is also true for the expansion operation</p>
+
+\[(\uparrow _{\bb{N}^\ast} f)[\bb{n}] = \left\{ \begin{array}{ll} f[\bb{N}^\ast \bb{n}] &amp; : \bb{N}^\ast \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise},
+\end{array}\right.\]
+
+<p>since</p>
+
+\[\begin{aligned}
+(\uparrow _{\bb{N}^\ast} (\alpha f + \beta g))[\bb{n}] =&amp;  \left\{ \begin{array}{ll} (\alpha f + \beta g)[\bb{N}^\ast \bb{n}] &amp; : \bb{N}^\ast \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise}
+\end{array}\right.  \\
+=&amp; 
+\alpha \left\{ \begin{array}{ll} f [\bb{N}^\ast \bb{n}] &amp; : \bb{N}^\ast \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise}
+\end{array}\right. + \beta \left\{ \begin{array}{ll} g [\bb{N}^\ast \bb{n}] &amp; : \bb{N}^\ast \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise}.
+\end{array}\right. \\
+=&amp;
+\alpha (\uparrow _{\bb{N}^\ast} f)[\bb{n}] + \beta (\uparrow _{\bb{N}^\ast} g)[\bb{n}].\end{aligned}\]
+
+<h3 id="translation">Translation</h3>
+
+<p>When changing the order of translation and sub-sampling, the lattice
+matrix multiplies the translation vector:</p>
+
+\[(\tau _{\bb{p}} \downarrow _{\bb{M}^\ast}  f)[\bb{n}] =   f[\bb{M}^\ast (\bb{n} - \bb{p})] =   f[\bb{M}^\ast \bb{n} - \bb{M}^\ast \bb{p}] = ( \downarrow _{\bb{M}^\ast} \tau _{\bb{M}^\ast \bb{p}}  f)[\bb{n}].\]
+
+<p>Similarly, for the expansion operation,</p>
+
+\[\begin{aligned}
+( \uparrow _{\bb{N}^\ast} \tau _{\bb{p}}  f)[\bb{n}] =&amp;   \left\{ \begin{array}{ll} f[\bb{N}^\ast \bb{n}-\bb{p}] &amp; : \bb{N}^\ast \bb{n}   \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise},
+\end{array}\right.
+=
+ \left\{ \begin{array}{ll} f[\bb{N}^\ast (\bb{n}-\bb{N}^{-\ast} \bb{p})] &amp; : \bb{N}^\ast \bb{n}   \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise},
+\end{array}\right. \\
+=&amp;  \left\{ \begin{array}{ll} f[\bb{N}^\ast (\bb{n}-\bb{N}^{-\ast} \bb{p})] &amp; : \bb{N}^\ast (\bb{n} - \bb{N}^{-\ast} \bb{p})   \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise},
+\end{array}\right. \\
+=&amp; ( \uparrow _{\bb{N}^\ast}   f)[\bb{n} -  \bb{N}^{-\ast} \bb{p}] = (\tau _{ \bb{N}^{-\ast} \bb{p}}  \uparrow _{\bb{N}^\ast}  f)[\bb{n}].\end{aligned}\]
+
+<p>Note that since the translation operator is modified when swapped with
+the sub-sampling/expansion, these systems are linear but <em>not</em> shift
+invariant!</p>
+
+<h3 id="exchanging-sub-sampling-and-filtering">Exchanging sub-sampling and filtering</h3>
+
+<p>Let $\mathcal{H}$ be an LSI system defined by</p>
+
+\[\begin{aligned}
+(\mathcal{H}f)[\bb{n}] =&amp; (h \ast f)[\bb{n}] = \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] f[\bb{n}-\bb{m}]  = \left( \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] \delta[\bb{n}-\bb{m}] \right) \ast f[\bb{n}] \\
+=&amp; \left( \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] \tau _{\bb{m}} \right) f[\bb{n}]\end{aligned}\]
+
+<p>Combining linearity and translation properties of sub-sampling, we
+obtain</p>
+
+\[\begin{aligned}
+ \mathcal{H} \downarrow _{\bb{M}^\ast}  =&amp; \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] ( \tau _{\bb{m}}  \downarrow _{\bb{M}^\ast} )
+= \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}]  (\downarrow _{\bb{M}^\ast} \tau _{\bb{M}^\ast \bb{m}} )  \\
+=&amp; \downarrow _{\bb{M}^\ast}  \left( \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] \tau _{\bb{M}^\ast \bb{m}}   \right) = \downarrow _{\bb{M}^\ast} \mathcal{G}.\end{aligned}\]
+
+<p>In other words, applying the system $\mathcal{H}$ followed by
+sub-sampling on $\mathcal{M}^\ast$ is equivalent to first sub-sampling
+on $\mathcal{M}^\ast$ and then applying the system</p>
+
+\[\mathcal{G} =  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}] \tau _{\bb{M}^\ast \bb{n}} = \sum _{\bb{p} \in \bb{M}^\ast \mathbb{Z}^d} h[\bb{M}^{-\ast}\bb{p}] \tau _{\bb{p}},\]
+
+<p>which can be described by the <em>expanded</em> impulse response</p>
+
+\[g[\bb{n}] = \left\{ \begin{array}{ll} h [\bb{M}^{-\ast} \bb{n}] &amp; : \bb{M}^{-\ast} \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise} 
+\end{array}\right.\]
+
+<p>The frequency response of this equivalent system is
+straightforwardly given by</p>
+
+\[\begin{aligned}
+G[\bb{\omega}] =&amp;   \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}]\, e^{-2\pi \ii \, \bb{\omega}^\Tr \bb{M}^\ast \bb{n}} =  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}]\, e^{-2\pi \ii \, (\bb{M}^{\ast \Tr} \bb{\omega})^\Tr \bb{n}} = H[\bb{M}^{\ast \Tr} \bb{\omega}] = H[\bb{M}^{-1} \bb{\omega}].\end{aligned}\]
+
+<p>This result is usually known as a <em>noble identity</em> and can be summarized
+as</p>
+
+\[\begin{aligned}
+  h \ast (\downarrow _{\bb{M}^\ast} f) \, = \,  \downarrow _{\bb{M}^\ast}  (( \uparrow _{\bb{M}^{-\ast}} h  ) \ast f )   \end{aligned}\]
+
+<p>or, alternatively, as the following informal expression</p>
+
+\[\begin{aligned}
+    H[\bb{\omega}] \downarrow _{\bb{M}^\ast}  \, = \, \downarrow _{\bb{M}^\ast} H[\bb{M}^{-1} \bb{\omega}]   \end{aligned}\]
+
+<p>where with some abuse of notation we represent the action of an LSI
+system by its Fourier transform.</p>
+
+<h3 id="exchanging-expansion-and-filtering">Exchanging expansion and filtering</h3>
+
+<p>Similarly to the previous case, combining linearity and translation
+properties of expansion, we obtain</p>
+
+\[\begin{aligned}
+ \uparrow _{\bb{N}^\ast} \mathcal{H}  =&amp; \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] (\uparrow _{\bb{N}^\ast}  \tau _{\bb{m}}   )
+= \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}]  ( \tau _{\bb{N}^{-\ast} \bb{m}} \uparrow _{\bb{N}^\ast} )  \\
+=&amp;  \left( \sum _{\bb{m} \in \mathbb{Z}^d} h[\bb{m}] \tau _{\bb{N}^{-\ast} \bb{m}}   \right) \uparrow _{\bb{N}^\ast} =  \mathcal{G} \uparrow _{\bb{N}^\ast}.\end{aligned}\]
+
+<p>with</p>
+
+\[\mathcal{G} =  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}] \tau _{\bb{N}^{-\ast} \bb{n}} = \sum _{\bb{p} \in \bb{N}^{-\ast} \mathbb{Z}^d} h[\bb{N}^{\ast}\bb{p}] \tau _{\bb{p}},\]
+
+<p>that can be described by the expanded impulse response</p>
+
+\[g[\bb{n}] = \left\{ \begin{array}{ll} h [\bb{N}^{\ast} \bb{n}] &amp; : \bb{N}^{\ast} \bb{n} \in \bb{Z}^d  \\
+0 &amp; : \mathrm{otherwise} 
+\end{array}\right.\]
+
+<p>The frequency response of this equivalent system is
+straightforwardly given by</p>
+
+\[\begin{aligned}
+G[\bb{\omega}] =&amp;   \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}]\, e^{-2\pi \ii \, \bb{\omega}^\Tr \bb{N}^{-\ast} \bb{n}} =  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}]\, e^{-2\pi \ii \, (\bb{N} \bb{\omega})^\Tr \bb{n}} =  H[\bb{N} \bb{\omega}].\end{aligned}\]
+
+<p>This yields our second <em>noble identity</em> that can be summarized as</p>
+
+\[\begin{aligned}
+  \uparrow _{\bb{N}^\ast} ( h \ast  f) \, = \,   (\uparrow _{\bb{N}^{\ast}} h ) \ast  (\uparrow _{\bb{N}^\ast} f)    \end{aligned}\]
+
+<p>or, alternatively, as the following informal expression</p>
+
+\[\begin{aligned}
+   \uparrow _{\bb{N}^\ast}  H[\bb{\omega}]  \, = \, H[\bb{N} \bb{\omega}] \uparrow _{\bb{N}^\ast}    \end{aligned}\]
+
+<h2 id="polyphase-representation">Polyphase representation</h2>
+
+<p>Let us fix some lattice
+$\mathcal{M}^\ast = \bb{M}^\ast \mathbb{Z}^d \subset \mathbb{Z}^d$ and
+denote by $\mathcal{M}^\ast _0$ its structural element. In this notation,
+we can represent</p>
+
+\[\sum _{\bb{n} \in \mathbb{Z}^d} f[\bb{n}] = \sum _{\bb{m} \in \mathcal{M}^\ast _0 } \sum _{\bb{n} \in \mathbb{Z}^d} f[\bb{M}^\ast \bb{n} + \bb{m}].\]
+
+<p>Let $\mathcal{H}$ be an LSI system with the impulse response $h[\bb{n}]$
+that can be described as</p>
+
+\[\mathcal{H} =  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{n}] \tau _{\bb{n}}.\]
+
+<p>We define the <em>polyphase components</em> of $h[\bb{n}]$ with respect to
+$\mathcal{M}^\ast$ as</p>
+
+\[e _{\bb{m}}[\bb{n}] = h[\bb{M}^\ast \bb{n} + \bb{m}]\]
+
+<p>for every $\bb{m} \in \mathcal{M}^\ast _0$. Each such component can be regarded as
+the impulse response of a system in its own right,</p>
+
+\[\mathcal{E} _{\bb{m}} =  \sum _{\bb{n} \in \mathbb{Z}^d} e _{\bb{m}}[\bb{n}] \tau _{\bb{n}} 
+=  \sum _{\bb{n} \in \mathbb{Z}^d} h[\bb{M}^\ast \bb{n} + \bb{m}] \tau _{\bb{n}}.\]
+
+<p>In these terms, the system $\mathcal{H}$ itself can be expressed as</p>
+
+\[\begin{aligned}
+\mathcal{H} =&amp;   \sum _{\bb{m} \in \mathcal{M}^\ast _0 } \sum _{\bb{n} \in \mathbb{Z}^d}  h[\bb{M}^\ast \bb{n} + \bb{m}] \tau _{\bb{M}^\ast \bb{n} + \bb{m}} =  \sum _{\bb{m} \in \mathcal{M}^\ast } \left( \sum _{\bb{n} \in \mathbb{Z}^d}  e _{\bb{m}}[\bb{n}] \tau _{\bb{M}^\ast \bb{n}} \right) \tau _{\bb{m}}.\end{aligned}\]
+
+<p>Note that the inner sum is just an expanded impulse response of
+$\mathcal{E} _{\bb{m}}$,</p>
+
+\[(h \ast f)[\bb{n}] =  \sum _{\bb{m} \in \mathcal{M}^\ast }  (\uparrow _{\bb{M}^{-\ast}} e _{\bb{m}} ) \ast f[\bb{n}-\bb{m}]\]
+
+<p>which in the frequency domain assumes the form of</p>
+
+\[H[\bb{\omega}] =  \sum _{\bb{m} \in \mathcal{M}^\ast _0 } E _{\bb{m}}[\bb{M}^{-1} \bb{\omega}]  \, e^{-2\pi \ii \, \bb{\omega}^\Tr \bb{m}}.\]
+
+<p>This decomposition of an LSI system in terms of the polyphase components
+is known as the <em>type I polyphase decomposition</em>.</p>
+
+<p>Alternatively, we can define the polyphase sequences
+$r _{\bb{m}}[\bb{n}] = e _{-\bb{m}}[\bb{n}] = h[\bb{M}^\ast \bb{n} - \bb{m}]$,
+yielding the <em>type II polyphase decomposition</em>:</p>
+
+\[\mathcal{H} =  \sum _{\bb{m} \in \mathcal{M}^\ast } \tau _{-\bb{m}}  \left( \sum _{\bb{n} \in \mathbb{Z}^d}  r _{\bb{m}}[\bb{n}] \tau _{\bb{M}^\ast \bb{n}} \right) .\]
+
+<h2 id="efficient-implementation-of-decimators">Efficient implementation of decimators</h2>
+
+<p>When $\mathcal{H}$ is a system implementing a decimation filter, it is
+followed by the sub-sampling $\downarrow _{\bb{M}^\ast}$. Substituting
+type I polyphase decomposition with respect to $\mathcal{M}^\ast$ and
+applying the noble identity yields</p>
+
+\[\begin{aligned}
+\downarrow _{\bb{M}^\ast} (h \ast f) =&amp; \downarrow _{\bb{M}^\ast}  \left( \sum _{\bb{m} \in \mathcal{M}^\ast }   (\uparrow _{\bb{M}^{-\ast}} e _{\bb{m}} ) \ast (\tau _{\bb{m}} f) \right)
+=
+ \sum _{\bb{m} \in \mathcal{M}^\ast }  \downarrow _{\bb{M}^\ast}  (\uparrow _{\bb{M}^{-\ast}} e _{\bb{m}} ) \ast (\tau _{\bb{m}} f)  \\
+ =&amp; 
+  \sum _{\bb{m} \in \mathcal{M}^\ast }  e _{\bb{m}}  \ast ( \downarrow _{\bb{M}^\ast} \tau _{\bb{m}} f) 
+  =
+   \sum _{\bb{m} \in \mathcal{M}^\ast }  \mathcal{E} _{\bb{m}} \downarrow _{\bb{M}^\ast} \tau _{\bb{m}} f.\end{aligned}\]
+
+<p>or in operator writing</p>
+
+\[\begin{aligned}
+\downarrow _{\bb{M}^\ast} \mathcal{H} =\sum _{\bb{m} \in \mathcal{M}^\ast }  \mathcal{E} _{\bb{m}} \downarrow _{\bb{M}^\ast} \tau _{\bb{m}} \end{aligned}\]
+
+<p>Both sides of the identity can be viewed as two different
+implementations of the decimator system.</p>
+
+<p>Let us compare the computational complexity of these two
+implementations. For simplicity, let us assume $\bb{M}^\ast = M \bb{I}$,
+so that $\mathcal{M}^\ast _0 = {0,1,\dots,M-1}^d$, and furthermore, let
+us assume that $h[\bb{n}]$ is supported on the discrete square
+${0,\dots,K-1}^d$, while the input signal is supported on
+${0,\dots,N-1}^d$. To simplify expressions, let us further assume that
+both $N$ and $K$ are divisible by $M$. The first system first calculated
+$N^d$ outputs of the filter $\mathcal{H}$ (containing $K^d$
+coefficients), each of which requiring $K^d$ multiply-and-accumulate
+(MACC) operations. This totals in $(KN)^d$ MACC operations. If the input
+signals are images coming at a rate of one image per second, this
+requires a processor running at $(KN)^d$ hertz. For $d=2$, $M=4$, $K=1$,
+and $N=4000$ (a $16$ megapixel image decimated $\times$ in each axis
+using a $4 \times 4$ bicubic kernel), this amounts to $256$ MHz! Note
+that afterwards, only $1/16$-th of these output samples are retained by
+the sub-sampler; the rest are thrown away.</p>
+
+<p>The second implementation first filters $M^d$ shifted and sub-sampled
+versions of the input signal (containing
+$\displaystyle{ \left(\frac{N}{M}\right)^d }$ samples) with the filters
+$\mathcal{E} _{\bb{m}}$ (containing
+$\displaystyle{ \left(\frac{K}{M}\right)^d }$ coefficients). Each filter
+output sample requires only
+$\displaystyle{ \left(\frac{KN}{M^2}\right)^d }$ MACC operations per
+filter, and
+$\displaystyle{ M^d \left(\frac{KN}{M^2}\right)^d = \left(\frac{KN}{M}\right)^d}$
+MACC operations in total. Note the save up by a factor of $M^d$. For the
+same settings as before, we would need a processor running only at $16$
+MHz. Also note that the $M^d$ filters can be computed in parallel on
+$M^d$ cores running at $M^{-2d}$ the frequency of the core required to
+implement the first system. In our example, if the processor had $16$
+cores, we could run each core at $1$ MHz. Since processor power
+consumption is roughly proportional to $f^3$ (or worse), the second
+system requires roughly $M^{5d}$ less power. In our example, $16$
+$1$-MHz cores would consume about one million times less power. For this
+reason, it is not an exaggeration to say that <em>any</em> ASIC implementing
+signal decimation uses the polyphase implementation.</p>
+
+<h2 id="efficient-implementation-of-interpolators">Efficient implementation of interpolators</h2>
+
+<p>We will now repeat the same analysis for the case when $\mathcal{H}$ is
+an interpolation filter preceding expansion $\uparrow _{\bb{N}^\ast}$.
+Substituting the type II polyphase representation with respect to
+$\mathcal{N}^{-\ast}$ and applying the noble identity yields</p>
+
+\[\begin{aligned}
+ h \ast ( \uparrow _{\bb{N}^\ast} f) =&amp;   \sum _{\bb{m} \in \mathcal{N}^{-\ast} }  \tau _{-\bb{m}}  (\uparrow _{\bb{N}^{\ast}} r _{\bb{m}} ) \ast ( \uparrow _{\bb{N}^\ast} f)   
+=
+ \sum _{\bb{m} \in \mathcal{N}^{-\ast} } \tau _{-\bb{m}}  \uparrow _{\bb{N}^{\ast}} ( r _{\bb{m}} \ast f)  \\
+ =&amp; 
+ \sum _{\bb{m} \in \mathcal{N}^{-\ast} } \tau _{-\bb{m}}  \uparrow _{\bb{N}^{\ast}} \mathcal{R} _{\bb{m}}  f .\end{aligned}\]
+
+<p>or in operator writing</p>
+
+\[\begin{aligned}
+\mathcal{H}  \uparrow _{\bb{N}^\ast} =\sum _{\bb{m} \in \mathcal{N}^{-\ast} }  \tau _{-\bb{m}}  \uparrow _{\bb{N}^{\ast}} \mathcal{R} _{\bb{m}}   \end{aligned}\]
+
+<p>As before, both sides of the identity can be viewed as two different
+implementations of the interpolator system. The second system first
+filters the inputs with the smaller filters $\mathcal{R} _{\bb{m}}$, the
+expands the results and sums their shifted versions.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/cs236860/lecture_notes/lecture_2/" class="pagination--pager" title="Lecture 2: Sampling and Interpolation
+">Previous</a>
+    
+    
+      <a href="/cs236860/lecture_notes/lecture_4/" class="pagination--pager" title="Lecture 4: Random signals
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        
+<!-- Technion and VISTA logos --><script>
+
+var logo_element = '\
+<div class="technion-logo"> \
+    <a href="https://cs.technion.ac.il"> \
+        <img src="/cs236860/assets/images/cs_technion-logo.png" alt="Technion"> \
+    </a> \
+</div> \
+';
+
+document
+    .querySelector('.masthead__inner-wrap')
+    .insertAdjacentHTML('afterbegin', logo_element);
+
+var logo_element = '\
+<div class="vista-logo"> \
+    <a href="https://vista.cs.technion.ac.il" > \
+        <img src="/cs236860/assets/images/vista-logo-bw.png" alt="VISTA"> \
+    </a> \
+</div> \
+';
+
+var footerNodes = document.getElementsByTagName("FOOTER")
+var footerNode = footerNodes[footerNodes.length - 1];
+footerNode.insertAdjacentHTML('afterend', logo_element);
+
+</script>
+<!-- Mathjax support --><!-- see: http://haixing-hu.github.io/programming/2013/09/20/how-to-use-mathjax-in-jekyll-generated-github-pages/ -->
+<!-- also: http://docs.mathjax.org/en/latest/tex.html for defning mathjax macros -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noErrors: { disabled: true },
+      Macros: {
+        // Each def here is an array: [<macro>, <num_params>]
+        // Aviv's defs
+        bold: ["{\\bf #1}",1],
+        m: ["\\boldsymbol {#1}",1],             // matrix
+        mt: ["\\boldsymbol {#1}^\\top",1],      // transposed matrix
+        v: ["\\boldsymbol {#1}",1],             // vector
+        vt: ["\\boldsymbol {#1}^\\top",1],      // transposed vector
+        diag: ["\\mathop{\\mathrm{diag}}"],
+        trace: ["\\mathop{\\mathrm{tr}}"],
+        rank: ["\\mathop{\\mathrm{rank}}"],
+        set: ["\\mathbb {#1}",1],
+        rvar: ["\\mathrm{#1}",1],               // random variable
+        rvec: ["\\boldsymbol{\\mathrm{#1}}",1], // random vector
+
+        // Alex's defs
+        Tr: ["\\mathrm{T}"],
+        RR: ["\\mathbb{R}"],
+        Sym: ["\\mathrm{Sym}"],
+        Conv: ["\\mathrm{Conv}"],
+        trace: ["\\mathrm{tr}"],
+        diag: ["\\mathrm{diag}"],
+        Acal: ["\\mathcal{A}"],
+        Bcal: ["\\mathcal{B}"],
+        Pcal: ["\\mathcal{P}"],
+        Dcal: ["\\mathcal{D}"],
+        Scal: ["\\mathcal{S}"],
+        Ab: ["\\bb{A}"],
+        Bb: ["\\bb{B}"],
+        Pb: ["\\bb{P}"],
+        Qb: ["\\bb{Q}"],
+        Db: ["\\bb{D}"],
+        Fb: ["\\bb{F}"],
+        Gb: ["\\bb{G}"],
+        Hb: ["\\bb{H}"],
+        Xb: ["\\bb{X}"],
+        Ib: ["\\bb{I}"],
+        Ub: ["\\bb{U}"],
+        Rb: ["\\bb{R}"],
+        Eb: ["\\bb{E}"],
+        Nb: ["\\bb{N}"],
+        Mb: ["\\bb{M}"],
+        Sb: ["\\bb{S}"],
+        fb: ["\\bb{f}"],
+        ub: ["\\bb{u}"],
+        qb: ["\\bb{q}"],
+        rb: ["\\bb{r}"],
+        vb: ["\\bb{v}"],
+        cb: ["\\bb{c}"],
+        Pib: ["\\bb{\\Pi}"],
+        Lambdab: ["\\bb{\\Lambda}"],
+        alphab: ["\\bb{\\alpha}"],
+        gammab: ["\\bb{\\gamma}"],
+        Pir: ["\\mathrm{\\Pi}"],
+        Sr: ["\\mathrm{S}"],
+        Dr: ["\\mathrm{D}"],
+        Cr: ["\\mathrm{C}"],
+        dis: ["\\mathrm{dis}"],
+        dim: ["\\mathrm{dim}"],
+        rank: ["\\mathrm{rank}"],
+        vec: ["\\mathrm{vec}"],
+        conv: ["\\mathrm{conv}"],
+        epi: ["\\mathrm{epi}"],
+        sgn: ["\\mathrm{sign}"],
+        prox: ["\\operatorname{prox}"],
+        gradient: ["\\nabla"],
+        argmin: ["\\underset{#1}{\operatorname{argmin}}",1],
+        argmax: ["\\underset{#1}{\operatorname{argmax}}",1],
+        mypara: ["\\noindent \\bf{#1. }",1],
+        st: ["\,\,\,\, \\mathrm{s.t.}\,\,"],
+        ii: ["i"],
+        fff: ["\\,\\,\\displaystyle{\\longleftrightarrow}^{\\mathcal{F}}\\,\\"],
+
+        bm: ["{\\bf #1}",1],
+        bb: ["{\\bf{\\mathrm{#1}}}",1],
+        spn: ["\\mathrm{span}\\left\\{ {#1} \\right\\}",1],
+
+        vec: ["\\mathrm{vec}"],
+        dx:  ["\\bb{dx}"], dX:  ["\\bb{dX}"], dy:  ["\\bb{dy}"], du:  ["\\bb{du}"],
+        df:  ["\\bb{df}"], dg:  ["\\bb{dg}"],
+        dphi:  ["\\bb{d\\varphi}"],
+        Tr: ["\\top"],
+        RR: ["\\set{R}"],
+        mathpzc: ["\\rvar{#1}", 1],
+        mathpzcb: ["\\rvec{#1}", 1],
+        mathbbl: ["{\\bf{\\mathrm{#1}}}",1],
+        ind: ["\\unicode{x1D7D9}"],
+        bed: ["\\mathrm{III}"]
+      }
+    },
+
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
+    processEscapes: true,
+  },
+
+  "HTML-CSS": {
+     fonts: ["TeX"]
+  },
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Copyright notice support on single pages -->
+<script>
+var copyright_element = '\
+    <p class="page__meta" style="margin-top: -0.5em;"> \
+    <i class="far fa-copyright"></i> \
+    Prof. Alex Bronstein \
+    </p> \
+';
+
+first_header = document.getElementsByTagName('header')[0]
+first_header.insertAdjacentHTML('beforeend', copyright_element);
+</script>
+
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://vista.cs.technion.ac.il"><i class="fas fa-fw fa-link" aria-hidden="true"></i> VISTA Lab</a></li>
+        
+      
+        
+          <li><a href="https://github.com/vistalab-technion"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/cs236860/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 VISTA Lab. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/cs236860/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+<script src="/cs236860/assets/js/lunr/lunr.min.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-store.js"></script>
+<script src="/cs236860/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>
