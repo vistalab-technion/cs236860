@@ -50,9 +50,9 @@ By enrolling in this course, you agree that you will strictly follow our collabo
 
 ## Detailed Syllabus
 
-The lectures will follow a flipped-classroom approach. Students will be requested to watch recorded lecture videos as a **mandatory** course requirement. We provide videos and written material on the course [Lectures](../lectures/) page to facilitate self-learning of the core topics. THe in-class lectures will be short, optional, and cover more adavanced material. In addition, any questions from the lecture videos will be addressed.
+The lectures will follow a flipped-classroom approach. Students will be requested to watch recorded lecture videos as a **mandatory** course requirement. We provide videos and written material on the course [Lectures](../lectures/) page to facilitate self-learning of the core topics. The in-class lectures will be short, optional, and cover more adavanced material. In addition, any questions from the lecture videos will be addressed.
 
-The [Tutorials](../tutorials) are based on detailed and self-contained Jupyter notebooks, which will guide you through full implementation of the concepts learned in the lecture. The in-class tutorials will cover all the material, no pre-requisite viewing is required.
+The [Tutorials](../tutorials) are based on detailed and self-contained Jupyter notebooks, which will guide you through full implementation of the concepts learned in the lecture. There are no in-person tutorials in Winter 2022-23. The students are required to watch the [pre-recorded tutorials](/cs236860/tutorials/recordings). 
 
 The course includes hands-on homework assignments in which you'll derive and implement different image processing algorithms.
 
@@ -61,16 +61,16 @@ The course also includes a small research project that will require reading and 
 
 | # | Date | Pre-requisite | Lecture | Tutorial | Homework |
 | --- | --- | ---  | --- | --- | --- |
-| 1 | `28/10/2021` | | Introduction | Math background | |
-| 2 | `04/10/2021` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
-| 3 | `11/11/2021` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
-| 4 | `18/11/2021` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
-| 5 | `25/11/2021` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
-| 6 | `02/11/2021` | Lecture 5a | Introduction to random signals | Inverse filtering | |
-| 7 | `09/12/2021` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
-| 8 | `16/12/2021` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
-| 9 | `23/12/2021` | Lecture 7 | Sparsity-based priors | PatchMatch | |
-| 10 | `30/12/2021` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
-| 11 | `06/01/2022` | Lecture 9 | Learning image priors | Dictionary learning | |
-| 12 | `13/01/2022` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
-| 13 | `20/01/2022` | Lecture 11 | Computational imaging | Deep learning (part 2) | HW3 |
+| 1 | `27/10/2022` | | Introduction | Math background | |
+| 2 | `03/11/2022` | Lecture 2 | Signals & systems, Fourier | Convolutions | |
+| 3 | `10/11/2022` | Lecture 3 (until Poisson summation) | Adjoint, Dirac's delta, Poisson summation | Fourier transform | |
+| 4 | `17/11/2022` | Lecture 3 (the rest) | Sampling & interpolation | Computerized tomography | |
+| 5 | `24/11/2022` | Lecture 4 | Discrete domain signals & systems | Sampling & iterpolation | HW1 |
+| 6 | `01/11/2022` | Lecture 5a | Introduction to random signals | Inverse filtering | |
+| 7 | `08/12/2022` | Lecture 5b | Inverse problems & statistical estimation | ML vs. MAP | |
+| 8 | `15/12/2022` | Lecture 6 | Patch-based priors | Bilateral filters, NLM | HW2 |
+| 9 | `22/12/2022` | Lecture 7 | Sparsity-based priors | PatchMatch | |
+| 10 | `29/12/2022` | Lecture 8 | Structured-based priors | Sparse coding, BM3D | |
+| 11 | `05/01/2023` | Lecture 9 | Learning image priors | Dictionary learning | |
+| 12 | `12/01/2023` | Lecture 10 | Sampling & sensing | Deep learning (part 1) | |
+| 13 | `19/01/2023` | Lecture 11 | Computational imaging | Deep learning (part 2) | HW3 |

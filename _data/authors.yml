@@ -11,15 +11,15 @@ alex:
       url: "https://www.cs.technion.ac.il/~bron/"
 
 
-sanketh:
-  name: Sanketh Vedula
-  bio: TA
-  avatar: "/assets/images/bio-photo-sanketh.jpg"
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:sanketh@cs.technion.ac.il"
-    - label: "Web"
-      icon: "fas fa-fw fa-link"
-      url: "https://vista.cs.technion.ac.il/people/?pn=171"
+# sanketh:
+#   name: Sanketh Vedula
+#   bio: TA
+#   avatar: "/assets/images/bio-photo-sanketh.jpg"
+#   links:
+#     - label: "Email"
+#       icon: "fas fa-fw fa-envelope-square"
+#       url: "mailto:sanketh@cs.technion.ac.il"
+#     - label: "Web"
+#       icon: "fas fa-fw fa-link"
+#       url: "https://vista.cs.technion.ac.il/people/?pn=171"
 

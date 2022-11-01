@@ -14,4 +14,3 @@ A guide for running the notebooks on your local machine can be found [here](work
 
 Additionally, the notebooks can be viewed in your browser by using
 [nbviewer](https://nbviewer.jupyter.org/github/vistalab-technion/cs236860-tutorials/tree/master/).
-
