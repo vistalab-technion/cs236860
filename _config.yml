@@ -313,14 +313,14 @@ defaults:
       share: false
       read_time: true
   # _assignments
-  # - scope:
-  #     path: ""
-  #     type: assignments
-  #   values:
-  #     layout: single
-  #     author_profile: false
-  #     share: false
-  #     read_time: true
+  - scope:
+      path: ""
+      type: assignments
+    values:
+      layout: single
+      author_profile: false
+      share: false
+      read_time: true
   # _lecture_notes
   - scope:
       path: ""
