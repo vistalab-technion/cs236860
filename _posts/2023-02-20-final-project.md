@@ -1,0 +1,9 @@
+---
+ title: Final project guidelines
+ author: sanketh
+ ---
+
+ The final project guidelines have been published in the assignment section.
+
+ Please follow the instructions to claim a paper from the list.
+ 
